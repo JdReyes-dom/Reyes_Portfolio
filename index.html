@@ -1,0 +1,1935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internship Portfolio · Jherwin D. Reyes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ----- RESET & GLOBAL ----- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #22d3ee;
+      --primary-soft: rgba(34, 211, 238, 0.12);
+      --accent: #a855f7;
+      --text-dark: #f1f5f9;
+      --text-body: #cbd5e1;
+      --text-muted: #94a3b8;
+      --border-soft: rgba(148, 163, 184, 0.15);
+      --border-hover: rgba(34, 211, 238, 0.45);
+      --card-bg: rgba(15, 23, 42, 0.72);
+      --card-hover: rgba(15, 23, 42, 0.95);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: #060917;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(34, 211, 238, 0.12), transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(168, 85, 247, 0.12), transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(59, 130, 246, 0.10), transparent 50%),
+        linear-gradient(180deg, #060917 0%, #0a1024 40%, #060917 100%);
+      background-attachment: fixed;
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ================================================================
+       ===== LIGHTWEIGHT BACKGROUND =====
+       ================================================================ */
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      z-index: -2;
+      pointer-events: none;
+      filter: blur(70px);
+      opacity: 0.5;
+      will-change: transform;
+    }
+
+    .bg-orb.one {
+      width: 480px; height: 480px;
+      top: -120px; left: -120px;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.5) 0%, transparent 70%);
+      animation: roam1 30s ease-in-out infinite;
+    }
+    .bg-orb.two {
+      width: 420px; height: 420px;
+      top: 30%; right: -150px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.45) 0%, transparent 70%);
+      animation: roam2 34s ease-in-out infinite;
+    }
+    .bg-orb.three {
+      width: 380px; height: 380px;
+      bottom: -100px; left: 35%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+      animation: roam3 28s ease-in-out infinite reverse;
+    }
+
+    @keyframes roam1 {
+      0%   { transform: translate(0, 0); }
+      50%  { transform: translate(60px, 100px); }
+      100% { transform: translate(0, 0); }
+    }
+    @keyframes roam2 {
+      0%   { transform: translate(0, 0); }
+      50%  { transform: translate(-80px, -50px); }
+      100% { transform: translate(0, 0); }
+    }
+    @keyframes roam3 {
+      0%   { transform: translate(0, 0); }
+      50%  { transform: translate(50px, -90px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* ================================================================
+       ===== PAGE WRAPPER =====
+       ================================================================ */
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section { margin-bottom: 4rem; }
+
+    /* ----- HEADER ----- */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1.5px dashed rgba(34, 211, 238, 0.25);
+    }
+
+    .avatar {
+      flex-shrink: 0;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(34, 211, 238, 0.15), rgba(168, 85, 247, 0.15));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.3), 0 0 40px -8px rgba(34, 211, 238, 0.5);
+      border: 2px solid rgba(34, 211, 238, 0.4);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+    }
+
+    .avatar::after {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      animation: avatarRing 3s ease-in-out infinite;
+    }
+
+    @keyframes avatarRing {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50%      { transform: scale(1.06); opacity: 0.2; }
+    }
+
+    .avatar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.6), 0 0 60px -4px rgba(34, 211, 238, 0.7);
+    }
+
+    .avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .intro h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      background: linear-gradient(90deg, #f1f5f9 0%, #22d3ee 60%, #a855f7 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .intro .badge {
+      display: inline-block;
+      background: rgba(34, 211, 238, 0.12);
+      color: var(--primary);
+      border: 1px solid rgba(34, 211, 238, 0.35);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.35rem 1.1rem;
+      border-radius: 50px;
+      margin-top: 0.6rem;
+      box-shadow: 0 0 20px -6px rgba(34, 211, 238, 0.5);
+    }
+
+    .intro p {
+      margin-top: 0.85rem;
+      font-size: 1.05rem;
+      color: var(--text-body);
+      max-width: 600px;
+    }
+
+    /* ----- SECTION TITLES ----- */
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-title i {
+      color: var(--primary);
+      font-size: 1.5rem;
+      width: 2rem;
+      filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.6));
+    }
+
+    .section-title span {
+      border-bottom: 4px solid transparent;
+      border-image: linear-gradient(90deg, #22d3ee, #a855f7) 1;
+      padding-bottom: 0.25rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+      padding-left: 2.75rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    /* ----- INFO CARDS ----- */
+    .info-card {
+      background: var(--card-bg);
+      border-radius: 22px;
+      padding: 1.5rem 1.5rem 1.75rem;
+      border: 1px solid var(--border-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .info-card:hover {
+      border-color: var(--border-hover);
+      background: var(--card-hover);
+      box-shadow: 0 20px 40px -20px rgba(34, 211, 238, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .info-card:hover::before { transform: scaleX(1); }
+
+    .info-card .card-icon {
+      font-size: 1.6rem;
+      color: var(--primary);
+      margin-bottom: 0.9rem;
+      transition: transform 0.35s ease;
+      display: inline-block;
+    }
+
+    .info-card:hover .card-icon { transform: scale(1.15) rotate(-6deg); }
+
+    .info-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .info-card p, .info-card ul { color: var(--text-body); font-size: 0.98rem; }
+
+    .info-card ul { list-style: none; margin-top: 0.5rem; }
+    .info-card ul li {
+      margin-bottom: 0.45rem;
+      display: flex; gap: 0.6rem;
+      align-items: flex-start;
+    }
+    .info-card ul li i {
+      color: var(--primary); font-size: 0.9rem;
+      margin-top: 0.3rem; width: 1.1rem; flex-shrink: 0;
+    }
+
+    .info-card p i.fas { color: var(--primary) !important; }
+
+    /* ================================================================
+       ===== INTERNSHIP CARD =====
+       ================================================================ */
+    .internship-wrap {
+      position: relative;
+      border-radius: 24px;
+      padding: 2px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #22d3ee, #a855f7, #3b82f6, #22d3ee);
+      background-size: 300% 300%;
+      animation: gradientMove 8s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .internship-card {
+      border-radius: 22px;
+      padding: 1.75rem 1.75rem 1.5rem;
+      background: linear-gradient(160deg, #0a1024 0%, #0f172a 60%, #0d1330 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .internship-header h3 {
+      color: var(--text-dark);
+      font-size: 1.35rem;
+      font-weight: 800;
+      position: relative;
+      z-index: 1;
+    }
+
+    .internship-header h3 .company {
+      background: linear-gradient(90deg, #22d3ee, #a855f7, #3b82f6);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+    }
+
+    .internship-header p {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 90%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .internship-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.3), transparent);
+      border: none;
+      margin: 1rem 0 1.15rem;
+    }
+
+    .internship-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      list-style: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .internship-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.55rem 0.85rem;
+      border-radius: 12px;
+      background: rgba(34, 211, 238, 0.05);
+      border: 1px solid rgba(34, 211, 238, 0.08);
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .internship-list li:hover {
+      background: rgba(34, 211, 238, 0.12);
+      transform: translateX(5px);
+    }
+
+    .internship-list .check {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: linear-gradient(135deg, #22d3ee, #a855f7);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .internship-list .check svg { width: 0.85rem; height: 0.85rem; fill: #0a1024; }
+
+    .internship-list .list_text {
+      font-size: 0.92rem;
+      color: var(--text-body);
+      overflow-wrap: anywhere;
+    }
+
+    .internship-list .list_text strong { color: var(--primary); font-weight: 700; }
+
+    /* ================================================================
+       ===== PROJECT CARDS =====
+       ================================================================ */
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--card-bg);
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      position: relative;
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      height: 3px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--pc-from, #22d3ee), var(--pc-to, #a855f7));
+      transform: scaleX(0.35);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+      z-index: 3;
+    }
+
+    .project-card:hover::before { transform: scaleX(1); }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--pc-from, #22d3ee);
+      background: var(--card-hover);
+      box-shadow: 0 25px 50px -22px var(--pc-shadow, rgba(34, 211, 238, 0.5));
+    }
+
+    .project-card .preview {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--pc-from, #22d3ee) 18%, #0a1024) 0%,
+        color-mix(in srgb, var(--pc-to, #a855f7) 22%, #0a1024) 100%);
+    }
+
+    .project-card .preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+      opacity: 0.9;
+    }
+
+    .project-card:hover .preview img { transform: scale(1.05); opacity: 1; }
+
+    .project-card .preview .preview-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(10, 16, 36, 0.75);
+      color: #ffffff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 2;
+    }
+
+    .project-card .preview .click-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(34, 211, 238, 0.85);
+      color: #0a1024;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .project-card:hover .preview .click-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-card .pc-body {
+      padding: 1.6rem 1.6rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      flex: 1;
+    }
+
+    .project-card .pc-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 0.2rem;
+    }
+
+    .project-card .pc-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--pc-from, #22d3ee), var(--pc-to, #a855f7));
+      color: #0a1024;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 20px -4px var(--pc-shadow, rgba(34, 211, 238, 0.6));
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover .pc-icon { transform: rotate(-8deg) scale(1.08); }
+
+    .project-card .pc-icon svg { width: 26px; height: 26px; fill: #0a1024; }
+
+    .project-card .pc-date {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--pc-from, #22d3ee);
+      background: color-mix(in srgb, var(--pc-from, #22d3ee) 12%, transparent);
+      padding: 0.3rem 0.85rem;
+      border-radius: 50px;
+      white-space: nowrap;
+      border: 1px solid color-mix(in srgb, var(--pc-from, #22d3ee) 30%, transparent);
+    }
+
+    .project-card h4 {
+      font-size: 1.22rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .project-card .pc-supervisor {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: -0.3rem;
+    }
+
+    .project-card .pc-supervisor i { color: var(--pc-from, #22d3ee); }
+
+    .project-card .para {
+      font-size: 0.93rem;
+      line-height: 1.6;
+      color: var(--text-body);
+      flex: 1;
+    }
+
+    .project-card .tag-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .project-card .tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.28rem 0.75rem;
+      border-radius: 50px;
+      background: color-mix(in srgb, var(--pc-from, #22d3ee) 10%, transparent);
+      color: var(--pc-from, #22d3ee);
+      border: 1px solid color-mix(in srgb, var(--pc-from, #22d3ee) 25%, transparent);
+    }
+
+    .project-card .pc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--pc-from, #22d3ee);
+      margin-top: 0.2rem;
+      transition: gap 0.3s ease;
+    }
+
+    .project-card:hover .pc-link { gap: 0.75rem; }
+
+    .project-card .pc-link i { font-size: 0.8rem; transition: transform 0.3s ease; }
+    .project-card:hover .pc-link i { transform: translateX(2px); }
+
+    /* Color variants */
+    .project-card.v1 { --pc-from: #22d3ee; --pc-to: #06b6d4; --pc-shadow: rgba(34, 211, 238, 0.6); }
+    .project-card.v2 { --pc-from: #a855f7; --pc-to: #d946ef; --pc-shadow: rgba(168, 85, 247, 0.6); }
+    .project-card.v3 { --pc-from: #10b981; --pc-to: #22d3ee; --pc-shadow: rgba(16, 185, 129, 0.6); }
+    .project-card.v4 { --pc-from: #f59e0b; --pc-to: #fbbf24; --pc-shadow: rgba(245, 158, 11, 0.55); }
+    .project-card.v5 { --pc-from: #ef4444; --pc-to: #f43f5e; --pc-shadow: rgba(239, 68, 68, 0.55); }
+    .project-card.v6 { --pc-from: #3b82f6; --pc-to: #22d3ee; --pc-shadow: rgba(59, 130, 246, 0.6); }
+
+    /* ================================================================
+       ===== CONNECT SECTION (merged) =====
+       ================================================================ */
+    .connect-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .socials-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .social-card {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border-radius: 26px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .social-card:hover { transform: translateY(-8px) rotate(-1.5deg); }
+
+    .social-card.email { background: linear-gradient(135deg, #22d3ee 0%, #0e7490 100%); }
+    .social-card.linkedin { background: linear-gradient(135deg, #0a66c2 0%, #04376b 100%); }
+    .social-card.phone { background: linear-gradient(135deg, #10b981 0%, #065f46 100%); }
+
+    .social-card .circles .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      transition: transform 0.5s ease;
+    }
+    .social-card .circles .c1 { width: 160px; height: 160px; top: -50px; right: -50px; }
+    .social-card .circles .c2 { width: 120px; height: 120px; top: -30px; right: -30px; }
+    .social-card .circles .c3 { width: 80px;  height: 80px;  top: -10px; right: -10px; }
+
+    .social-card:hover .circles .c1 { transform: translate(-8px, 8px); }
+    .social-card:hover .circles .c2 { transform: translate(-14px, 14px); }
+    .social-card:hover .circles .c3 { transform: translate(-20px, 20px); }
+
+    .social-card .main-icon {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      color: white;
+      font-size: 3.2rem;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: transform 0.4s ease;
+    }
+
+    .social-card:hover .main-icon { transform: translate(-50%, -50%) scale(1.14); }
+
+    .social-card .label {
+      position: absolute;
+      bottom: 16px;
+      left: 0; right: 0;
+      text-align: center;
+      color: white;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      z-index: 2;
+      opacity: 0.9;
+      transition: letter-spacing 0.4s ease;
+    }
+
+    .social-card:hover .label { letter-spacing: 4px; opacity: 1; }
+
+    .social-card .handle-tag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      border-radius: 50px;
+      z-index: 3;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .social-card:hover .handle-tag { opacity: 1; transform: translateY(0); }
+
+    /* CTA card */
+    .contact-card {
+      background: var(--card-bg);
+      border-radius: 22px;
+      padding: 2rem 2rem;
+      border: 1px solid var(--border-soft);
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-hover);
+      box-shadow: 0 20px 40px -20px rgba(168, 85, 247, 0.4);
+    }
+
+    .contact-card:hover::before { transform: scaleX(1); }
+
+    .contact-card .contact-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(168, 85, 247, 0.15));
+      border: 1px solid rgba(34, 211, 238, 0.25);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      transition: transform 0.35s ease;
+    }
+
+    .contact-card:hover .contact-icon { transform: rotate(-8deg) scale(1.08); }
+
+    .contact-card h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-card p {
+      color: var(--text-body);
+      font-size: 0.98rem;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    /* ----- FOOTER ----- */
+    .footer-note {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1.5px dashed rgba(34, 211, 238, 0.2);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .footer-note i { color: var(--primary); margin: 0 0.3rem; }
+
+    /* ================================================================
+       ===== MODAL / POPUP — FIXED, NON-SCROLLABLE CAROUSEL =====
+       ================================================================ */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 6, 18, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      overflow: hidden;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1.5px solid rgba(34, 211, 238, 0.5);
+      color: var(--primary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1100;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      flex-shrink: 0;
+    }
+
+    .modal-close:hover {
+      background: var(--primary);
+      color: #0a1024;
+      transform: rotate(90deg) scale(1.08);
+    }
+
+    .modal-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 1000px;
+      max-height: 100%;
+      gap: 1rem;
+      padding-top: 3rem;
+    }
+
+    .modal-header {
+      text-align: center;
+      max-width: 800px;
+      flex-shrink: 0;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .modal-backdrop.open .modal-header {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.1s;
+    }
+
+    .modal-header .modal-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 0.7rem;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+    }
+
+    .modal-header h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #f1f5f9 0%, #22d3ee 60%, #a855f7 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .modal-header p {
+      font-size: 0.98rem;
+      color: var(--text-body);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .carousel-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      flex-shrink: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .modal-backdrop.open .carousel-wrap {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.2s;
+    }
+
+    .carousel-viewport {
+      overflow: hidden;
+      padding: 0.5rem 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.34, 1.05, 0.64, 1);
+      will-change: transform;
+      align-items: stretch;
+    }
+
+    .carousel-slide {
+      flex: 0 0 70%;
+      padding: 0 0.6rem;
+      box-sizing: border-box;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      opacity: 0.35;
+      transform: scale(0.92);
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .carousel-card {
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(34, 211, 238, 0.22);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 45px -20px rgba(0, 0, 0, 0.8);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .carousel-card .window-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1rem;
+      background: rgba(10, 16, 36, 0.95);
+      border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+    }
+
+    .carousel-card .window-bar .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .carousel-card .window-bar .dot.red { background: #ff5f57; }
+    .carousel-card .window-bar .dot.yellow { background: #febc2e; }
+    .carousel-card .window-bar .dot.green { background: #28c840; }
+
+    .carousel-card .window-bar .window-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-left: 0.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .carousel-card .window-bar .window-num {
+      margin-left: auto;
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--primary);
+      background: rgba(34, 211, 238, 0.15);
+      padding: 0.15rem 0.6rem;
+      border-radius: 50px;
+    }
+
+    .carousel-card .window-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #060917;
+      position: relative;
+      border-bottom: 1px solid rgba(34, 211, 238, 0.12);
+    }
+
+    .carousel-card .window-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-card .window-img .img-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
+      pointer-events: none;
+    }
+
+    .carousel-card .window-text {
+      padding: 1.2rem 1.3rem 1.4rem;
+      flex: 1;
+    }
+
+    .carousel-card .window-text h5 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+      line-height: 1.35;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .carousel-card .window-text h5 i {
+      color: var(--primary);
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+      flex-shrink: 0;
+    }
+
+    .carousel-card .window-text p {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text-body);
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1.5px solid rgba(34, 211, 238, 0.4);
+      color: var(--primary);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .carousel-btn:hover {
+      background: var(--primary);
+      color: #0a1024;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-btn.prev { left: -10px; }
+    .carousel-btn.next { right: -10px; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .carousel-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(148, 163, 184, 0.3);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+
+    .carousel-dot.active {
+      background: var(--primary);
+      transform: scale(1.3);
+    }
+
+    .carousel-dot:hover:not(.active) {
+      background: rgba(148, 163, 184, 0.6);
+    }
+
+    body.modal-open { overflow: hidden; }
+
+    /* ================================================================
+       ===== SCROLL REVEAL =====
+       ================================================================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ================================================================
+       ===== RESPONSIVE =====
+       ================================================================ */
+    @media (max-width: 1100px) {
+      .carousel-slide { flex: 0 0 78%; }
+      .carousel-btn.prev { left: 4px; }
+      .carousel-btn.next { right: 4px; }
+    }
+
+    @media (max-width: 700px) {
+      .page { padding: 2rem 1rem 3rem; }
+      .header { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+      .intro h1 { font-size: 2rem; }
+      .avatar { width: 110px; height: 110px; font-size: 3rem; }
+      .section-title { font-size: 1.4rem; }
+      .section-subtitle { padding-left: 0; }
+      .socials-wrapper { gap: 1.25rem; }
+      .social-card { width: 160px; height: 160px; }
+      .social-card .main-icon { font-size: 2.6rem; }
+      .social-card .label { font-size: 0.7rem; letter-spacing: 2px; }
+      .bg-orb { opacity: 0.35; }
+      .project-card .pc-icon { width: 48px; height: 48px; font-size: 1.3rem; }
+      .project-card .pc-icon svg { width: 22px; height: 22px; }
+      .project-card .pc-body { padding: 1.35rem 1.35rem 1.2rem; }
+
+      .modal-backdrop { padding: 0.5rem; }
+      .modal-inner { padding-top: 3.5rem; gap: 0.75rem; }
+      .modal-close {
+        top: 12px; right: 12px; width: 42px; height: 42px;
+      }
+      .modal-header { margin-bottom: 0.5rem; }
+      .modal-header h2 { font-size: 1.4rem; }
+      .modal-header p { font-size: 0.88rem; }
+
+      .carousel-slide {
+        flex: 0 0 88%;
+        padding: 0 0.4rem;
+        opacity: 0.25;
+        transform: scale(0.95);
+      }
+      .carousel-slide.active {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .carousel-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 0.85rem;
+      }
+      .carousel-btn.prev { left: 0; }
+      .carousel-btn.next { right: 0; }
+
+      .carousel-card .window-text { padding: 1rem 1.1rem 1.2rem; }
+      .carousel-card .window-text h5 { font-size: 0.95rem; }
+      .carousel-card .window-text p { font-size: 0.82rem; }
+
+      .contact-card { padding: 1.75rem 1.5rem; }
+    }
+
+    @media (max-width: 450px) {
+      .intro h1 { font-size: 1.75rem; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .socials-wrapper { flex-direction: column; gap: 1.5rem; }
+      .social-card { width: 200px; height: 200px; }
+
+      .carousel-slide { flex: 0 0 92%; }
+      .carousel-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 0.75rem;
+      }
+
+      .contact-card h3 { font-size: 1.2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg-orb, .internship-wrap, .avatar::after { animation: none !important; }
+      .fade-in { opacity: 1; transform: none; }
+      .carousel-track { transition: none !important; }
+      * { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient orbs -->
+  <div class="bg-orb one"></div>
+  <div class="bg-orb two"></div>
+  <div class="bg-orb three"></div>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <header class="header fade-in">
+      <div class="avatar" id="avatarContainer">
+        <img src="MY_PHOTO.jpg" alt="Jherwin D. Reyes" />
+      </div>
+      <div class="intro">
+        <h1>Jherwin D. Reyes</h1>
+        <div class="badge">
+          <i class="fas fa-briefcase"></i> OJT · LDX Intern at CloudSwyft
+        </div>
+        <p>
+          An aspiring BSIT student Web Developer with a curious and creative mind
+          for technology. I enjoy building web tools that turn everyday tasks into
+          efficient, professional workflows.
+        </p>
+      </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section class="section fade-in">
+      <div class="section-title">
+        <i class="fas fa-id-card"></i>
+        <span>About me</span>
+      </div>
+      <div class="grid-2">
+        <div class="info-card">
+          <div class="card-icon"><i class="fas fa-user"></i></div>
+          <h3>Personal</h3>
+          <p><i class="fas fa-map-pin"></i> San Pedro, Laguna</p>
+          <p><i class="fas fa-envelope"></i> reyesjherwin14@gmail.com</p>
+          <p><i class="fas fa-phone-alt"></i> 0961 782 1747</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h3>Education</h3>
+          <p><strong>BS Information Technology</strong></p>
+          <p>Major in Game Development</p>
+          <p>University of Perpetual Help System Laguna</p>
+          <p style="color:var(--text-muted); font-size:0.9rem;">4th Year · Expected graduation: 2026</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>Technical skills</h3>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Web Dev (HTML, CSS, JS) — <strong>Intermediate</strong></li>
+            <li><i class="fas fa-check-circle"></i> Python Programming — <strong>Intermediate</strong></li>
+            <li><i class="fas fa-check-circle"></i> Figma / Axure (UI/UX) — <strong>Intermediate</strong></li>
+            <li><i class="fas fa-check-circle"></i> Graphics Design — <strong>Intermediate</strong></li>
+            <li><i class="fas fa-check-circle"></i> Unity Game Engine — <strong>Beginner</strong></li>
+            <li><i class="fas fa-check-circle"></i> Blender 3D Modeling — <strong>Beginner</strong></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERNSHIP DETAILS -->
+    <section class="section fade-in">
+      <div class="section-title">
+        <i class="fas fa-building"></i>
+        <span>Internship details</span>
+      </div>
+      <div class="internship-wrap">
+        <div class="internship-card">
+          <div class="internship-header">
+            <h3><span class="company">CloudSwyft</span> · LDX Intern</h3>
+            <p>
+              Currently interning as a Learning Experience Developer, crafting
+              interactive assessments and digital learning tools for learners.
+            </p>
+          </div>
+          <hr class="internship-divider" />
+          <ul class="internship-list">
+            <li>
+              <span class="check">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+              <span class="list_text"><strong>Role:</strong> Learning Experience Developer (LDX)</span>
+            </li>
+            <li>
+              <span class="check">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+              <span class="list_text"><strong>Duration:</strong> July 7, 2026 – October 30, 2026 (tentative)</span>
+            </li>
+            <li>
+              <span class="check">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+              <span class="list_text"><strong>Supervisor:</strong> Sheilan May Villafranca</span>
+            </li>
+            <li>
+              <span class="check">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353 4.493-6.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+              <span class="list_text"><strong>Focus:</strong> Interactive assessments &amp; digital learning content</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERNSHIP PROJECTS -->
+    <section class="section fade-in">
+      <div class="section-title">
+        <i class="fas fa-briefcase"></i>
+        <span>Internship Projects</span>
+      </div>
+      <p class="section-subtitle">Projects I built during my internship at CloudSwyft. Click a card to open the gallery.</p>
+
+      <div class="grid-2">
+        <div class="project-card v1" onclick="openGallery('frs')">
+          <div class="pc-body">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 9V5H4V9H20ZM20 11H4V19H20V11ZM3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM5 12H8V17H5V12ZM5 6H7V8H5V6ZM9 6H11V8H9V6Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> Sept 2026</span>
+            </div>
+            <h4>FRS Assessment Page</h4>
+            <div class="pc-supervisor"><i class="fas fa-user-tie"></i> Sheilan May Villafranca</div>
+            <p class="para">
+              An assessment page that recommends a learning track for learners
+              aligned with CloudSwyft's FRS offerings. Features content protection,
+              a Likert-style test with dynamic scoring, and automated email +
+              result logging via EmailJS and Google Apps Script.
+            </p>
+            <div class="tag-list">
+              <span class="tag">VS Code</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Apps Script</span>
+              <span class="tag">EmailJS</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <div class="preview">
+            <span class="preview-tag">Preview</span>
+            <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+            <img src="Proj1.png" alt="FRS Assessment Page preview" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="project-card v2" onclick="openGallery('ebook')">
+          <div class="pc-body">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 2C4.34315 2 3 3.34315 3 5V19C3 20.6569 4.34315 22 6 22H18C19.6569 22 21 20.6569 21 19V5C21 3.34315 19.6569 2 18 2H6ZM6 4H18C18.5523 4 19 4.44772 19 5V19C19 19.5523 18.5523 20 18 20H6C5.44772 20 5 19.5523 5 19V5C5 4.44772 5.44772 4 6 4ZM8 7V9H16V7H8ZM8 11V13H16V11H8ZM8 15V17H13V15H8Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> Sept 2026</span>
+            </div>
+            <h4>Digital Values eBook: Discretion</h4>
+            <div class="pc-supervisor"><i class="fas fa-user-tie"></i> Sheilan May Villafranca</div>
+            <p class="para">
+              An animated eBook for a young audience teaching the value of
+              discretion. Features English and Tagalog voiceovers, scene-by-scene
+              transitions, simple interactive animations, and audio integration.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Folio</span>
+              <span class="tag">HTML</span>
+              <span class="tag">Animation</span>
+              <span class="tag">Audio</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <div class="preview">
+            <span class="preview-tag">Preview</span>
+            <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+            <img src="screenshot/ebook-story1.png" alt="Digital Values eBook preview" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="project-card v3" onclick="openGallery('assessment')">
+          <div class="pc-body">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4ZM11 7V13.5858L8.70711 11.2929L7.29289 12.7071L12 17.4142L16.7071 12.7071L15.2929 11.2929L13 13.5858V7H11Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> Sept 2026</span>
+            </div>
+            <h4>Digital Values Assessment</h4>
+            <div class="pc-supervisor"><i class="fas fa-user-tie"></i> Sheilan May Villafranca</div>
+            <p class="para">
+              An assessment to test Grade 1–7 students on the Digital Values
+              eBooks. Features 10 multiple-choice questions, a dynamic mascot
+              animation on the results page, a message-delivering cutscene, and
+              automatic attempt logging via Google Apps Script.
+            </p>
+            <div class="tag-list">
+              <span class="tag">VS Code</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Apps Script</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <div class="preview">
+            <span class="preview-tag">Preview</span>
+            <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+            <img src="screenshot/ebook-1.png" alt="Digital Values Assessment preview" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACADEMIC PROJECTS (4 items) -->
+    <section class="section fade-in">
+      <div class="section-title">
+        <i class="fas fa-graduation-cap"></i>
+        <span>Academic Projects</span>
+      </div>
+      <p class="section-subtitle">Projects I built as part of my BSIT coursework. Click a card to open the gallery.</p>
+
+      <div class="grid-2">
+        <div class="project-card v4" onclick="openGallery('acad1')">
+          <div class="pc-body">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 6H3C1.897 6 1 6.897 1 8V16C1 17.103 1.897 18 3 18H6L8 21H16L18 18H21C22.103 18 23 17.103 23 16V8C23 6.897 22.103 6 21 6ZM12 15C10.343 15 9 13.657 9 12C9 10.343 10.343 9 12 9C13.657 9 15 10.343 15 12C15 13.657 13.657 15 12 15ZM19 10H17V12H19V10ZM7 10H5V12H7V10Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2024</span>
+            </div>
+            <h4>Game Design Prototypes</h4>
+            <p class="para">
+              A collection of hands-on game design exercises in Unity covering
+              core gameplay systems, UI design, and 2D environment building.
+              Includes a math-based platformer, a side-scrolling endless runner,
+              and tile-based level design.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Unity</span>
+              <span class="tag">C#</span>
+              <span class="tag">Design</span>
+              <span class="tag">Animation</span>
+              <span class="tag">UI/UX</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <div class="preview">
+            <span class="preview-tag">Preview</span>
+            <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+            <img src="screenshot/acad1_game_design.png" alt="Game Design Prototype preview" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="project-card v4" onclick="openGallery('acad2')">
+          <div class="pc-body">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 9H9V2H7V9H5V2H3V9C3 11.12 4.34 12.92 6.28 13.57C6.13 13.96 6 14.35 6 14.76C6 16.2 7.12 17.38 8.5 17.45V22H10.5V17.45C11.88 17.38 13 16.2 13 14.76C13 14.35 12.87 13.96 12.72 13.57C14.66 12.92 16 11.12 16 9V2H14V9H13Z"></path>
+                  <path d="M16 6V2H18V6C18 8.21 16.79 10.17 15 11.28V22H13V11.28C11.21 10.17 10 8.21 10 6Z" opacity="0.5"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>Food Ordering System</h4>
+            <p class="para">
+              A web-based food ordering platform with separate user and admin
+              roles. Users can browse the menu, add items to a cart, and go
+              through a sample payment flow, while admins manage products and
+              accounts.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Website</span>
+              <span class="tag">PHP</span>
+              <span class="tag">Database</span>
+              <span class="tag">UI/UX</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <div class="preview">
+            <span class="preview-tag">Preview</span>
+            <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+            <img src="screenshot/acad2_food_ordering.png" alt="Food ordering system preview" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="project-card v4" onclick="openGallery('acad3')">
+          <div class="pc-body">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7L12 12L22 7L12 2ZM2 17L12 22L22 17L12 12L2 17Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>Blender 3D Modeling Projects</h4>
+            <p class="para">
+              A compilation of 3D modeling and animation work in Blender.
+              Includes character creation from primitive meshes, texturing and
+              material rendering, simple game-ready assets, keyframe animation,
+              and scene composition.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Blender</span>
+              <span class="tag">Game Assets</span>
+              <span class="tag">Animation</span>
+              <span class="tag">Design</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <div class="preview">
+            <span class="preview-tag">Preview</span>
+            <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+            <img src="screenshot/acad3_blender.png" alt="Blender 3D model preview" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="project-card v4" onclick="openGallery('acad4')">
+          <div class="pc-body">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2024</span>
+            </div>
+            <h4>AI Travel &amp; Tour Assistant</h4>
+            <p class="para">
+              A travel and tour website featuring an AI assistant that
+              recommends personalized itineraries based on location, budget, and
+              trip duration. Includes an admin panel for processing travel
+              requests and a log of AI recommendations.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Python</span>
+              <span class="tag">AI Calculations</span>
+              <span class="tag">Data Arrays</span>
+              <span class="tag">VS Code</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <div class="preview">
+            <span class="preview-tag">Preview</span>
+            <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+            <img src="screenshot/acad4_ai_travel.png" alt="AI travel assistant preview" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONNECT (merged: cards + CTA) -->
+    <section class="section fade-in">
+      <div class="section-title">
+        <i class="fas fa-share-alt"></i>
+        <span>Connect with me</span>
+      </div>
+      <p class="section-subtitle">Open to collaborations, opportunities, and conversations. Let's build something great together.</p>
+
+      <div class="connect-section">
+        <!-- Contact cards -->
+        <div class="socials-wrapper">
+          <a href="mailto:reyesjherwin14@gmail.com" class="social-card email" title="Email">
+            <div class="circles"><span class="circle c1"></span><span class="circle c2"></span><span class="circle c3"></span></div>
+            <span class="handle-tag">reyesjherwin14@gmail.com</span>
+            <i class="fas fa-envelope main-icon"></i>
+            <span class="label">Email</span>
+          </a>
+          <a href="https://www.linkedin.com/in/jherwin-reyes-63a28133b" target="_blank" rel="noopener noreferrer" class="social-card linkedin" title="LinkedIn">
+            <div class="circles"><span class="circle c1"></span><span class="circle c2"></span><span class="circle c3"></span></div>
+            <span class="handle-tag">jherwin-reyes</span>
+            <i class="fab fa-linkedin-in main-icon"></i>
+            <span class="label">LinkedIn</span>
+          </a>
+          <a href="tel:+639617821747" class="social-card phone" title="Phone">
+            <div class="circles"><span class="circle c1"></span><span class="circle c2"></span><span class="circle c3"></span></div>
+            <span class="handle-tag">0961 782 1747</span>
+            <i class="fas fa-phone-alt main-icon"></i>
+            <span class="label">Phone</span>
+          </a>
+        </div>
+
+        <!-- CTA card -->
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-paper-plane"></i></div>
+          <h3>Open to Opportunities</h3>
+          <p>
+            I'm always excited to collaborate on new projects, learn from
+            others, and explore opportunities in web development, game design,
+            and UI/UX. Feel free to reach out — let's build something great
+            together.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="footer-note">
+      <i class="fas fa-heart"></i>
+      Jherwin Reyes Portfolio · 2025
+      <i class="fas fa-heart"></i>
+    </div>
+
+  </div>
+
+  <!-- ================================================================
+       ===== MODAL / POPUP — FIXED, NON-SCROLLABLE CAROUSEL =====
+       ================================================================ -->
+  <div class="modal-backdrop" id="projectModal" onclick="closeGalleryOnBackdrop(event)">
+    <button class="modal-close" onclick="closeGallery()" aria-label="Close gallery">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="modal-inner">
+      <div class="modal-header">
+        <span class="modal-eyebrow" id="modalEyebrow">Project Gallery</span>
+        <h2 id="modalTitle">Project Title</h2>
+        <p id="modalSubtitle">A walkthrough of the key features.</p>
+      </div>
+
+      <div class="carousel-wrap" id="carouselWrap">
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="carouselTrack"></div>
+        </div>
+        <button class="carousel-btn prev" onclick="carouselPrev()" aria-label="Previous slide">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-btn next" onclick="carouselNext()" aria-label="Next slide">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ================================================================
+    // SCROLL REVEAL + IMAGE FALLBACK
+    // ================================================================
+    (function() {
+      const els = document.querySelectorAll('.fade-in');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(el => el.classList.add('visible'));
+      } else {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        els.forEach(el => observer.observe(el));
+      }
+
+      document.querySelectorAll('.project-card .preview img').forEach(img => {
+        img.addEventListener('error', () => { img.style.display = 'none'; });
+      });
+    })();
+
+    // ================================================================
+    // PROJECT GALLERY DATA
+    // ================================================================
+    const GALLERY_DATA = {
+      frs: {
+        eyebrow: 'CloudSwyft · Internship Project',
+        title: 'FRS Assessment Page',
+        subtitle: 'A guided assessment that recommends a learning track for CloudSwyft\'s FRS offerings.',
+        windows: [
+          { title: 'Landing & Intro', desc: 'Clean entry page introducing the assessment, explaining the FRS tracks, and setting expectations before the learner begins.', image:"screenshot/frs-1.png"},
+          { title: 'Likert-Style Test', desc: 'A Likert-scale questionnaire where each answer dynamically contributes to the final track recommendation using a weighted scoring system.', image: 'screenshot/frs-2.png' },
+          { title: 'Dynamic Scoring Engine', desc: 'Real-time scoring as the learner answers. Each response updates the recommendation model behind the scenes for instant results.', image: 'screenshot/frs-3.png' },
+          { title: 'Content Protection', desc: 'Built-in safeguards that disable text selection, copying, and screenshot attempts to protect proprietary assessment content.', image: 'screenshot/frs-4.png' },
+          { title: 'Automated Result Logging', desc: 'Results are emailed via EmailJS and simultaneously logged to a Google Sheet using Apps Script for review and reporting.', image: 'screenshot/frs-5.png' }
+        ]
+      },
+      ebook: {
+        eyebrow: 'CloudSwyft · Internship Project',
+        title: 'Digital Values eBook: Discretion',
+        subtitle: 'An animated, bilingual eBook teaching discretion to a young audience.',
+        windows: [
+          { title: 'Cover & Intro Scene', desc: 'An inviting animated cover that introduces the value of discretion through colorful visuals suited for young learners.', image: 'screenshot/ebook-story1.png' },
+          { title: 'Scene-by-Scene Story', desc: 'Story pages that transition smoothly from scene to scene, keeping children engaged throughout the narrative.', image: 'screenshot/ebook-story2.png' },
+          { title: 'English & Tagalog Voiceovers', desc: 'Each scene features clear bilingual narration in both English and Tagalog, making the story accessible to Filipino children.', image: 'screenshot/ebook-story3.png' },
+          { title: 'Interactive Animations', desc: 'Simple interactions and micro-animations that respond to taps and clicks, turning reading into an engaging experience.', image: 'screenshot/ebook-story4.png' },
+          { title: 'Audio Integration', desc: 'Background music and sound effects tied to scene transitions, creating an immersive, storybook-like atmosphere.', image: 'screenshot/ebook-story5.png' }
+        ]
+      },
+      assessment: {
+        eyebrow: 'CloudSwyft · Internship Project',
+        title: 'Digital Values Assessment',
+        subtitle: 'A fun quiz that tests what Grade 1–7 students learned from the Digital Values eBooks.',
+        windows: [
+          { title: 'Welcome Screen', desc: 'A warm, kid-friendly landing page that greets the student and prepares them for the 10-question quiz.', image: 'screenshot/ebook-1.png' },
+          { title: 'Multiple-Choice Questions', desc: '10 interactive multiple-choice questions covering the digital values taught in the eBooks.', image: 'screenshot/ebook-2.png' },
+          { title: 'Dynamic Mascot Animation', desc: 'A friendly animated mascot that reacts to the learner\'s score, celebrating wins and encouraging retries.', image: 'screenshot/ebook-3.png' },
+          { title: 'Message Cutscene', desc: 'A short cutscene that delivers an uplifting message to the student based on their results, reinforcing the value taught.', image: 'screenshot/ebook-4.png' },
+          { title: 'Google Sheets Logging', desc: 'Every completed attempt is automatically logged to a Google Sheet via Apps Script for teacher-side tracking and analytics.', image: 'screenshot/ebook-5.png' }
+        ]
+      },
+      acad1: {
+        eyebrow: 'Academic · Game Design',
+        title: 'Game Design Prototypes',
+        subtitle: 'Hands-on Unity prototypes exploring core game mechanics, UI, and 2D environment design.',
+        windows: [
+          { title: 'Math Platformer Game', desc: 'A simple platformer where players collect coins that trigger math questions — answering correctly is required to collect the coin.', image: 'screenshot/acad1_game_design.png' },
+          { title: 'Game UI Sample', desc: 'A side-scrolling endless runner inspired by Chrome\'s dinosaur game, featuring a whale character in an underwater setting.', image: 'screenshot/acad1_game_design2.png' },
+          { title: 'Game Environment Designing', desc: 'A simple 2D tile-based game environment built in Unity, demonstrating level layout, asset placement, and scene composition.', image: 'screenshot/acad1_game_design3.png' }
+        ]
+      },
+      acad2: {
+        eyebrow: 'Academic · Software Engineering',
+        title: 'Food Ordering System',
+        subtitle: 'A web-based ordering platform with user and admin roles, cart, and sample payment flow.',
+        windows: [
+          { title: 'User Interface', desc: 'Users can browse the menu, view item details, and add available food items to their cart.', image: 'screenshot/acad2_food_ordering.png' },
+          { title: 'Admin Interface Control', desc: 'Admins can adjust product details such as price, stock, and description, and manage user accounts.', image: 'screenshot/acad2_food_ordering2.png' },
+          { title: 'Sample Payment Method', desc: 'A simple sample payment flow that walks the user through checkout for their order.', image: 'screenshot/acad2_food_ordering3.png' },
+          { title: 'Cart Feature', desc: 'An add-to-cart feature that keeps track of items the user is interested in ordering.', image: 'screenshot/acad2_food_ordering4.png' },
+          { title: 'Automated Price Calculation', desc: 'Automatically calculates the total sum of selected food items so the user can review before ordering.', image: 'screenshot/acad2_food_ordering5.png' }
+        ]
+      },
+      acad3: {
+        eyebrow: 'Academic · 3D Modeling',
+        title: 'Blender 3D Modeling Projects',
+        subtitle: 'A compilation of Blender work covering character creation, texturing, animation, and scene building.',
+        windows: [
+          { title: 'Snowman Character Creation', desc: 'A snowman character built from simple primitives like spheres, cylinders, and torus meshes.', image: 'screenshot/acad3_blender.png' },
+          { title: 'Material and Texture', desc: 'Applied textures and materials to mesh objects to give them a more realistic look.', image: 'screenshot/acad3_blender2.png' },
+          { title: 'Simple Game Object Asset', desc: 'A barrel asset created from simple meshes and finished with textures and materials.', image: 'screenshot/acad3_blender3.png' },
+          { title: 'Animation of Character', desc: 'Animated the snowman character using Blender\'s timeline and keyframe tools.', image: 'screenshot/acad3_blender4.png' },
+          { title: 'Create a Scene', desc: 'Composed a simple scene combining objects, environment pieces, and a character.', image: 'screenshot/acad3_blender5.png' }
+        ]
+      },
+      acad4: {
+        eyebrow: 'Academic · AI / Python',
+        title: 'AI Travel & Tour Assistant',
+        subtitle: 'A travel and tour website with an AI assistant that recommends itineraries based on user input.',
+        windows: [
+          { title: 'Website Creation', desc: 'Built the website using an app.py file to serve the travel and tour company\'s pages.', image: 'screenshot/acad4_ai_travel.png' },
+          { title: 'Travel & Tour Itinerary AI Assistant', desc: 'An AI assistant shortcut that simplifies interaction with the website\'s itinerary features.', image: 'screenshot/acad4_ai_travel2.png' },
+          { title: 'Dynamic Results of Recommendation', desc: 'The AI uses an array of data to calculate recommended destinations along with helpful tips for the user.', image: 'screenshot/acad4_ai_travel3.png' },
+          { title: 'Results Log', desc: 'Collects records of the AI assistant\'s recommendations for future reference by users.', image: 'screenshot/acad4_ai_travel4.png' },
+          { title: 'Admin Panel', desc: 'Admins can view AI recommendations for users and process travel requests through an admin-user interaction flow.', image: 'screenshot/acad4_ai_travel5.png' }
+        ]
+      }
+    };
+
+    // ================================================================
+    // CAROUSEL STATE
+    // ================================================================
+    let currentSlide = 0;
+    let totalSlides = 0;
+    let lastFocusedElement = null;
+
+    function renderCarousel(windows) {
+      const track = document.getElementById('carouselTrack');
+      const dotsContainer = document.getElementById('carouselDots');
+      track.innerHTML = '';
+      dotsContainer.innerHTML = '';
+      totalSlides = windows.length;
+      currentSlide = 0;
+
+      windows.forEach((win, idx) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide' + (idx === 0 ? ' active' : '');
+
+        const card = document.createElement('div');
+        card.className = 'carousel-card';
+        const windowNum = String(idx + 1).padStart(2, '0');
+
+        card.innerHTML = `
+          <div class="window-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="window-title">${escapeHtml(win.title)}</span>
+            <span class="window-num">${windowNum} / ${String(totalSlides).padStart(2, '0')}</span>
+          </div>
+          <div class="window-img">
+            ${win.image
+              ? `<img src="${escapeHtml(win.image)}" alt="${escapeHtml(win.title)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />`
+              : ''}
+            <div class="img-placeholder" style="${win.image ? 'display:none;' : ''}">
+              <i class="fas fa-image"></i>
+              <span>Screenshot</span>
+            </div>
+          </div>
+          <div class="window-text">
+            <h5><i class="fas fa-star"></i> ${escapeHtml(win.title)}</h5>
+            <p>${escapeHtml(win.desc)}</p>
+          </div>
+        `;
+
+        slide.appendChild(card);
+        track.appendChild(slide);
+
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (idx === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Go to slide ${idx + 1}`);
+        dot.addEventListener('click', () => goToSlide(idx));
+        dotsContainer.appendChild(dot);
+      });
+
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      const track = document.getElementById('carouselTrack');
+      const slides = track.querySelectorAll('.carousel-slide');
+      const viewportWidth = track.parentElement.offsetWidth;
+      const slideWidth = slides[0].offsetWidth;
+
+      const offset = (viewportWidth - slideWidth) / 2 - (currentSlide * slideWidth);
+
+      track.style.transform = `translateX(${offset}px)`;
+
+      slides.forEach((slide, idx) => {
+        slide.classList.toggle('active', idx === currentSlide);
+      });
+
+      const dots = document.querySelectorAll('.carousel-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentSlide);
+      });
+    }
+
+    function goToSlide(idx) {
+      if (idx < 0) idx = totalSlides - 1;
+      if (idx >= totalSlides) idx = 0;
+      currentSlide = idx;
+      updateCarousel();
+    }
+
+    function carouselPrev() { goToSlide(currentSlide - 1); }
+    function carouselNext() { goToSlide(currentSlide + 1); }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const modal = document.getElementById('projectModal');
+        if (modal && modal.classList.contains('open')) {
+          updateCarousel();
+        }
+      }, 150);
+    });
+
+    // ================================================================
+    // GALLERY FUNCTIONS
+    // ================================================================
+    function openGallery(projectKey) {
+      const data = GALLERY_DATA[projectKey];
+      if (!data) return;
+
+      lastFocusedElement = document.activeElement;
+
+      document.getElementById('modalEyebrow').textContent = data.eyebrow;
+      document.getElementById('modalTitle').textContent = data.title;
+      document.getElementById('modalSubtitle').textContent = data.subtitle;
+
+      renderCarousel(data.windows);
+
+      const modal = document.getElementById('projectModal');
+      modal.classList.add('open');
+      document.body.classList.add('modal-open');
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          updateCarousel();
+        });
+      });
+
+      setTimeout(() => {
+        const closeBtn = modal.querySelector('.modal-close');
+        if (closeBtn) closeBtn.focus();
+      }, 600);
+    }
+
+    function closeGallery() {
+      const modal = document.getElementById('projectModal');
+      modal.classList.remove('open');
+      document.body.classList.remove('modal-open');
+
+      setTimeout(() => {
+        document.getElementById('carouselTrack').innerHTML = '';
+        document.getElementById('carouselDots').innerHTML = '';
+      }, 400);
+
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
+      }
+    }
+
+    function closeGalleryOnBackdrop(event) {
+      if (event.target.id === 'projectModal') closeGallery();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('projectModal');
+      if (!modal || !modal.classList.contains('open')) return;
+
+      if (e.key === 'Escape') {
+        closeGallery();
+      } else if (e.key === 'ArrowLeft') {
+        carouselPrev();
+      } else if (e.key === 'ArrowRight') {
+        carouselNext();
+      }
+    });
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+  </script>
+</body>
+</html>
