@@ -20,6 +20,11 @@
       --border-hover: rgba(34, 211, 238, 0.45);
       --card-bg: rgba(15, 23, 42, 0.72);
       --card-hover: rgba(15, 23, 42, 0.95);
+
+      /* motion tokens */
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --tilt-perspective: 1000px;
+      --dur-reveal: 640ms;
     }
 
     html { scroll-behavior: smooth; }
@@ -134,7 +139,7 @@
       inset: -6px;
       border-radius: 50%;
       border: 1px solid rgba(34, 211, 238, 0.2);
-      animation: avatarRing 3s ease-in-out infinite;
+      animation: avatarRing 8s ease-in-out infinite;
     }
 
     @keyframes avatarRing {
@@ -229,7 +234,7 @@
       border-radius: 22px;
       padding: 1.5rem 1.5rem 1.75rem;
       border: 1px solid var(--border-soft);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      transition: translate 0.3s var(--ease-out), box-shadow 0.3s ease, border-color 0.3s ease;
       position: relative;
       overflow: hidden;
     }
@@ -245,24 +250,22 @@
       transition: transform 0.4s ease;
     }
 
-    .info-card:hover {
+    .info-card:is(:hover, .is-hot) {
       border-color: var(--border-hover);
       background: var(--card-hover);
       box-shadow: 0 20px 40px -20px rgba(34, 211, 238, 0.4);
-      transform: translateY(-4px);
+      translate: 0 -4px;
     }
 
-    .info-card:hover::before { transform: scaleX(1); }
+    .info-card:is(:hover, .is-hot)::before { transform: scaleX(1); }
 
     .info-card .card-icon {
       font-size: 1.6rem;
       color: var(--primary);
       margin-bottom: 0.9rem;
-      transition: transform 0.35s ease;
       display: inline-block;
     }
-
-    .info-card:hover .card-icon { transform: scale(1.15) rotate(-6deg); }
+    /* icon gestures live in the MOTION SYSTEM block below */
 
     .info-card h3 {
       font-size: 1.2rem;
@@ -296,7 +299,7 @@
       overflow: hidden;
       background: linear-gradient(135deg, #22d3ee, #a855f7, #3b82f6, #22d3ee);
       background-size: 300% 300%;
-      animation: gradientMove 8s ease infinite;
+      animation: gradientMove 14s ease infinite;
     }
 
     @keyframes gradientMove {
@@ -402,7 +405,7 @@
       overflow: hidden;
       border: 1px solid var(--border-soft);
       position: relative;
-      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      transition: translate 0.35s var(--ease-out), scale 0.2s ease, box-shadow 0.35s ease, border-color 0.35s ease;
       height: 100%;
       cursor: pointer;
     }
@@ -420,10 +423,10 @@
       z-index: 3;
     }
 
-    .project-card:hover::before { transform: scaleX(1); }
+    .project-card:is(:hover, .is-hot)::before { transform: scaleX(1); }
 
-    .project-card:hover {
-      transform: translateY(-8px);
+    .project-card:is(:hover, .is-hot) {
+      translate: 0 -8px;
       border-color: var(--pc-from, #22d3ee);
       background: var(--card-hover);
       box-shadow: 0 25px 50px -22px var(--pc-shadow, rgba(34, 211, 238, 0.5));
@@ -444,11 +447,11 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.5s ease;
+      transition: scale 0.5s var(--ease-out), opacity 0.5s ease;
       opacity: 0.9;
     }
 
-    .project-card:hover .preview img { transform: scale(1.05); opacity: 1; }
+    .project-card:is(:hover, .is-hot) .preview img { scale: 1.05; opacity: 1; }
 
     .project-card .preview .preview-tag {
       position: absolute;
@@ -484,7 +487,7 @@
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    .project-card:hover .preview .click-hint {
+    .project-card:is(:hover, .is-hot) .preview .click-hint {
       opacity: 1;
       transform: translateY(0);
     }
@@ -517,10 +520,14 @@
       font-size: 1.5rem;
       flex-shrink: 0;
       box-shadow: 0 0 20px -4px var(--pc-shadow, rgba(34, 211, 238, 0.6));
-      transition: transform 0.4s ease;
+      transition: rotate 0.4s var(--ease-out), scale 0.4s var(--ease-out), box-shadow 0.4s ease;
     }
 
-    .project-card:hover .pc-icon { transform: rotate(-8deg) scale(1.08); }
+    .project-card:is(:hover, .is-hot) .pc-icon {
+      rotate: -6deg;
+      scale: 1.08;
+      box-shadow: 0 0 30px -2px var(--pc-shadow, rgba(34, 211, 238, 0.7));
+    }
 
     .project-card .pc-icon svg { width: 26px; height: 26px; fill: #0a1024; }
 
@@ -580,13 +587,11 @@
       font-weight: 700;
       color: var(--pc-from, #22d3ee);
       margin-top: 0.2rem;
-      transition: gap 0.3s ease;
     }
 
-    .project-card:hover .pc-link { gap: 0.75rem; }
-
-    .project-card .pc-link i { font-size: 0.8rem; transition: transform 0.3s ease; }
-    .project-card:hover .pc-link i { transform: translateX(2px); }
+    /* arrow slides on transform-only motion (replaces the old animated flex gap) */
+    .project-card .pc-link i { font-size: 0.8rem; transition: translate 0.3s var(--ease-out); }
+    .project-card:is(:hover, .is-hot) .pc-link i { translate: 7px 0; }
 
     /* Color variants */
     .project-card.v1 { --pc-from: #22d3ee; --pc-to: #06b6d4; --pc-shadow: rgba(34, 211, 238, 0.6); }
@@ -623,11 +628,11 @@
       text-decoration: none;
       display: block;
       cursor: pointer;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transition: translate 0.4s var(--ease-out), rotate 0.4s var(--ease-out), scale 0.2s ease, box-shadow 0.4s ease;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .social-card:hover { transform: translateY(-8px) rotate(-1.5deg); }
+    .social-card:is(:hover, .is-hot) { translate: 0 -8px; rotate: -1.5deg; }
 
     .social-card.email { background: linear-gradient(135deg, #22d3ee 0%, #0e7490 100%); }
     .social-card.linkedin { background: linear-gradient(135deg, #0a66c2 0%, #04376b 100%); }
@@ -643,22 +648,22 @@
     .social-card .circles .c2 { width: 120px; height: 120px; top: -30px; right: -30px; }
     .social-card .circles .c3 { width: 80px;  height: 80px;  top: -10px; right: -10px; }
 
-    .social-card:hover .circles .c1 { transform: translate(-8px, 8px); }
-    .social-card:hover .circles .c2 { transform: translate(-14px, 14px); }
-    .social-card:hover .circles .c3 { transform: translate(-20px, 20px); }
+    .social-card:is(:hover, .is-hot) .circles .c1 { transform: translate(-8px, 8px); }
+    .social-card:is(:hover, .is-hot) .circles .c2 { transform: translate(-14px, 14px); }
+    .social-card:is(:hover, .is-hot) .circles .c3 { transform: translate(-20px, 20px); }
 
     .social-card .main-icon {
       position: absolute;
       top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
+      translate: -50% -50%;   /* centring on `translate` so hover gestures can use scale/rotate cleanly */
       z-index: 2;
       color: white;
       font-size: 3.2rem;
       text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-      transition: transform 0.4s ease;
+      transition: translate 0.4s var(--ease-out), rotate 0.4s var(--ease-out), scale 0.4s var(--ease-out), text-shadow 0.4s ease;
     }
 
-    .social-card:hover .main-icon { transform: translate(-50%, -50%) scale(1.14); }
+    /* per-icon gestures: see MOTION SYSTEM block */
 
     .social-card .label {
       position: absolute;
@@ -675,7 +680,7 @@
       transition: letter-spacing 0.4s ease;
     }
 
-    .social-card:hover .label { letter-spacing: 4px; opacity: 1; }
+    .social-card:is(:hover, .is-hot) .label { letter-spacing: 4px; opacity: 1; }
 
     .social-card .handle-tag {
       position: absolute;
@@ -694,7 +699,7 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    .social-card:hover .handle-tag { opacity: 1; transform: translateY(0); }
+    .social-card:is(:hover, .is-hot) .handle-tag { opacity: 1; transform: translateY(0); }
 
     /* CTA card */
     .contact-card {
@@ -705,7 +710,7 @@
       text-align: center;
       max-width: 600px;
       width: 100%;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      transition: translate 0.35s var(--ease-out), box-shadow 0.35s ease;
       position: relative;
       overflow: hidden;
     }
@@ -721,13 +726,13 @@
       transition: transform 0.4s ease;
     }
 
-    .contact-card:hover {
-      transform: translateY(-5px);
+    .contact-card:is(:hover, .is-hot) {
+      translate: 0 -5px;
       border-color: var(--border-hover);
       box-shadow: 0 20px 40px -20px rgba(168, 85, 247, 0.4);
     }
 
-    .contact-card:hover::before { transform: scaleX(1); }
+    .contact-card:is(:hover, .is-hot)::before { transform: scaleX(1); }
 
     .contact-card .contact-icon {
       width: 56px;
@@ -741,10 +746,7 @@
       color: var(--primary);
       font-size: 1.4rem;
       margin-bottom: 1rem;
-      transition: transform 0.35s ease;
     }
-
-    .contact-card:hover .contact-icon { transform: rotate(-8deg) scale(1.08); }
 
     .contact-card h3 {
       font-size: 1.4rem;
@@ -1099,14 +1101,146 @@
     body.modal-open { overflow: hidden; }
 
     /* ================================================================
-       ===== SCROLL REVEAL =====
+       ===== LIVING MOTION SYSTEM =====
+       Level 1  Ambient      orbs, border gradient, avatar ring     8-34s
+       Level 2  Interaction  tilt, spotlight, depth, icon gestures  150-400ms, pointer-driven
+       Level 3  Discovery    staggered reveal, heading wipes, modal 400-800ms, plays once
+
+       Composition rule: hover lift / press / icon gestures use the individual
+       `translate`, `rotate`, `scale` properties. Pointer tilt owns `transform`.
+       They multiply together, so no effect overwrites another.
        ================================================================ */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+
+    /* ---- Level 1: ambient. Paused while the gallery covers the page. ---- */
+    body.modal-open .bg-orb,
+    body.modal-open .internship-wrap,
+    body.modal-open .avatar::after { animation-play-state: paused; }
+
+    /* ---- Level 3: discovery. Staggered reveal (delays come from JS as --rv-delay) ---- */
+    @keyframes rv-rise { from { opacity: 0; translate: 0 24px; } }
+    @keyframes rv-icon { from { opacity: 0; scale: 0.6; rotate: -14deg; } }
+    @keyframes rv-wipe {
+      from { opacity: 0; clip-path: inset(100% 0 0 0); translate: 0 0.35em; }
+      to   { opacity: 1; clip-path: inset(-0.3em -0.2em -0.3em -0.2em); translate: 0 0; }
     }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    .rv:not(.in) { opacity: 0; }
+    .rv.in { animation: rv-rise var(--dur-reveal) var(--ease-out) var(--rv-delay, 0ms) backwards; }
+    .internship-wrap.rv.in {
+      animation:
+        gradientMove 14s ease infinite,
+        rv-rise var(--dur-reveal) var(--ease-out) var(--rv-delay, 0ms) backwards;
+    }
+
+    /* heading wipes: real, selectable text revealed upward through a clip */
+    .rv-wipe.in { animation: rv-wipe 800ms var(--ease-out) var(--rv-delay, 0ms) backwards; }
+    .rv-title.in { animation: none; }
+    .rv-title.in i { animation: rv-icon 520ms var(--ease-out) var(--rv-delay, 0ms) backwards; }
+    .rv-title.in span { animation: rv-wipe 720ms var(--ease-out) calc(var(--rv-delay, 0ms) + 70ms) backwards; }
+
+    /* modal title wipes in each time the gallery opens */
+    .modal-backdrop.open .modal-header h2 { animation: rv-wipe 700ms var(--ease-out) 220ms backwards; }
+
+    /* ---- Level 2: interaction. Tilt + spotlight + depth (driven by one JS engine) ---- */
+    [data-tilt] { --rx: 0deg; --ry: 0deg; }
+    [data-tilt].is-tilting {
+      transform: perspective(var(--tilt-perspective)) rotateX(var(--rx)) rotateY(var(--ry));
+      will-change: transform;   /* only while a card is actually being tilted */
+    }
+
+    [data-spotlight] {
+      --spot-a: rgba(34, 211, 238, 0.13);
+      --spot-b: rgba(168, 85, 247, 0.07);
+      --spot-size: 380px;
+    }
+    .project-card[data-spotlight] {
+      --spot-a: color-mix(in srgb, var(--pc-from, #22d3ee) 16%, transparent);
+      --spot-b: color-mix(in srgb, var(--pc-to, #a855f7) 8%, transparent);
+    }
+    .social-card[data-spotlight] {
+      --spot-a: rgba(255, 255, 255, 0.24);
+      --spot-b: rgba(255, 255, 255, 0.07);
+      --spot-size: 240px;
+    }
+    [data-spotlight]::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(
+        circle var(--spot-size) at var(--mx, 50%) var(--my, 50%),
+        var(--spot-a) 0%, var(--spot-b) 40%, transparent 72%);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+    [data-spotlight].is-hot::after { opacity: 1; }
+
+    /* project depth layers: image sinks, badge and icon float (px/py are -1..1, depth is 0..1) */
+    [data-depth] .preview img {
+      translate: calc(var(--px, 0) * var(--depth, 0) * -3px) calc(var(--py, 0) * var(--depth, 0) * -3px);
+    }
+    [data-depth] .preview-tag {
+      translate: calc(var(--px, 0) * var(--depth, 0) * 3px) calc(var(--py, 0) * var(--depth, 0) * 3px);
+    }
+    [data-depth] .pc-icon {
+      translate: calc(var(--px, 0) * var(--depth, 0) * 5px) calc(var(--py, 0) * var(--depth, 0) * 5px);
+    }
+
+    /* press feedback (works for mouse and touch) */
+    .project-card:active { scale: 0.985; }
+    .social-card:active { scale: 0.97; }
+
+    /* ---- Level 2: context-aware icon gestures (150-400ms, one job per icon) ---- */
+    .info-card .card-icon i {
+      display: inline-block;
+      transition: translate 0.3s var(--ease-out), rotate 0.3s var(--ease-out), scale 0.3s var(--ease-out), filter 0.3s ease;
+    }
+    .info-card:is(:hover, .is-hot) .card-icon i { filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.65)); }
+    .info-card:is(:hover, .is-hot) .card-icon .fa-user { translate: 0 -3px; scale: 1.08; }                 /* person: lifts */
+    .info-card:is(:hover, .is-hot) .card-icon .fa-graduation-cap { rotate: -10deg; translate: 0 -2px; }    /* cap: tips */
+    .info-card:is(:hover, .is-hot) .card-icon .fa-laptop-code { animation: icon-pulse 0.4s var(--ease-out); } /* laptop: one pulse */
+
+    .info-card ul li i { transition: scale 0.2s var(--ease-out), filter 0.2s ease; }
+    .info-card ul li:hover i { scale: 1.22; filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.7)); }       /* skills: glow */
+
+    .info-card p i.fas { display: inline-block; }
+    .info-card p:hover .fa-map-pin { animation: pin-drop 0.42s var(--ease-out); }
+    .info-card p:hover .fa-envelope { animation: mail-nudge 0.4s var(--ease-out); }
+    .info-card p:hover .fa-phone-alt { animation: phone-buzz 0.4s ease-in-out; }
+
+    .social-card.email:is(:hover, .is-hot) .main-icon { translate: -50% calc(-50% - 5px); rotate: -6deg; scale: 1.1; }
+    .social-card.linkedin:is(:hover, .is-hot) .main-icon { scale: 1.16; text-shadow: 0 0 22px rgba(255, 255, 255, 0.6), 0 4px 15px rgba(0, 0, 0, 0.5); }
+    .social-card.phone:is(:hover, .is-hot) .main-icon { scale: 1.1; animation: phone-buzz 0.42s ease-in-out; }
+
+    .contact-card .contact-icon { transition: scale 0.35s var(--ease-out), box-shadow 0.35s ease; }
+    .contact-card .contact-icon i { display: inline-block; transition: translate 0.4s var(--ease-out); }
+    .contact-card:is(:hover, .is-hot) .contact-icon { scale: 1.07; box-shadow: 0 0 24px -4px rgba(34, 211, 238, 0.55); }
+    .contact-card:is(:hover, .is-hot) .contact-icon i { translate: 3px -3px; }                            /* plane: glides off */
+
+    .carousel-btn i { display: inline-block; transition: translate 0.25s var(--ease-out); }
+    .carousel-btn.prev:hover i { translate: -2px 0; }
+    .carousel-btn.next:hover i { translate: 2px 0; }
+
+    @keyframes icon-pulse { 40% { scale: 1.18; } }
+    @keyframes pin-drop {
+      35% { translate: 0 -4px; }
+      65% { translate: 0 0; }
+      80% { translate: 0 -1.5px; }
+    }
+    @keyframes mail-nudge { 40% { translate: 2px -2px; rotate: -8deg; } }
+    @keyframes phone-buzz {
+      20% { rotate: -14deg; }
+      40% { rotate: 12deg; }
+      60% { rotate: -8deg; }
+      80% { rotate: 5deg; }
+    }
+
+    /* touch / no-hover devices: no cursor glow */
+    @media (hover: none), (pointer: coarse) {
+      [data-spotlight]::after { display: none; }
+    }
 
     /* ================================================================
        ===== RESPONSIVE =====
@@ -1185,10 +1319,34 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
       .bg-orb, .internship-wrap, .avatar::after { animation: none !important; }
-      .fade-in { opacity: 1; transform: none; }
+
+      /* everything visible immediately; animations collapse to their end state */
+      .rv, .rv:not(.in) { opacity: 1 !important; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
+      }
       .carousel-track { transition: none !important; }
-      * { transition-duration: 0.01ms !important; }
+
+      /* no tilt, spotlight or parallax (JS also never starts them) */
+      [data-tilt].is-tilting { transform: none !important; will-change: auto; }
+      [data-spotlight]::after { display: none; }
+      [data-depth] .preview img,
+      [data-depth] .preview-tag,
+      [data-depth] .pc-icon { translate: none; }
+
+      /* icons keep their glow, drop their movement */
+      .info-card .card-icon i, .info-card ul li i, .info-card p i,
+      .project-card .pc-icon, .pc-link i,
+      .contact-card .contact-icon, .contact-card .contact-icon i,
+      .carousel-btn i { translate: none !important; rotate: none !important; scale: none !important; }
+      .social-card .main-icon { translate: -50% -50% !important; rotate: none !important; scale: none !important; }
+      .project-card:active, .social-card:active { scale: none; }
     }
   </style>
 </head>
@@ -1202,7 +1360,7 @@
   <div class="page">
 
     <!-- HEADER -->
-    <header class="header fade-in">
+    <header class="header" data-reveal-group>
       <div class="avatar" id="avatarContainer">
         <img src="MY_PHOTO.jpg" alt="Jherwin D. Reyes" />
       </div>
@@ -1220,20 +1378,20 @@
     </header>
 
     <!-- ABOUT -->
-    <section class="section fade-in">
+    <section class="section" data-reveal-group>
       <div class="section-title">
         <i class="fas fa-id-card"></i>
         <span>About me</span>
       </div>
       <div class="grid-2">
-        <div class="info-card">
+        <div class="info-card" data-tilt="5" data-spotlight>
           <div class="card-icon"><i class="fas fa-user"></i></div>
           <h3>Personal</h3>
           <p><i class="fas fa-map-pin"></i> San Pedro, Laguna</p>
           <p><i class="fas fa-envelope"></i> reyesjherwin14@gmail.com</p>
           <p><i class="fas fa-phone-alt"></i> 0961 782 1747</p>
         </div>
-        <div class="info-card">
+        <div class="info-card" data-tilt="5" data-spotlight>
           <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
           <h3>Education</h3>
           <p><strong>BS Information Technology</strong></p>
@@ -1241,7 +1399,7 @@
           <p>University of Perpetual Help System Laguna</p>
           <p style="color:var(--text-muted); font-size:0.9rem;">4th Year · Expected graduation: 2026</p>
         </div>
-        <div class="info-card">
+        <div class="info-card" data-tilt="5" data-spotlight>
           <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
           <h3>Technical skills</h3>
           <ul>
@@ -1257,12 +1415,12 @@
     </section>
 
     <!-- INTERNSHIP DETAILS -->
-    <section class="section fade-in">
+    <section class="section" data-reveal-group>
       <div class="section-title">
         <i class="fas fa-building"></i>
         <span>Internship details</span>
       </div>
-      <div class="internship-wrap">
+      <div class="internship-wrap" data-tilt="4" data-spotlight>
         <div class="internship-card">
           <div class="internship-header">
             <h3><span class="company">CloudSwyft</span> · LDX Intern</h3>
@@ -1311,7 +1469,7 @@
     </section>
 
     <!-- INTERNSHIP PROJECTS -->
-    <section class="section fade-in">
+    <section class="section" data-reveal-group>
       <div class="section-title">
         <i class="fas fa-briefcase"></i>
         <span>Internship Projects</span>
@@ -1319,7 +1477,7 @@
       <p class="section-subtitle">Projects I built during my internship at CloudSwyft. Click a card to open the gallery.</p>
 
       <div class="grid-2">
-        <div class="project-card v1" onclick="openGallery('frs')">
+        <div class="project-card v1" data-tilt="5" data-spotlight data-depth onclick="openGallery('frs')">
           <div class="pc-body">
             <div class="pc-top">
               <div class="pc-icon">
@@ -1354,7 +1512,7 @@
           </div>
         </div>
 
-        <div class="project-card v2" onclick="openGallery('ebook')">
+        <div class="project-card v2" data-tilt="5" data-spotlight data-depth onclick="openGallery('ebook')">
           <div class="pc-body">
             <div class="pc-top">
               <div class="pc-icon">
@@ -1386,7 +1544,7 @@
           </div>
         </div>
 
-        <div class="project-card v3" onclick="openGallery('assessment')">
+        <div class="project-card v3" data-tilt="5" data-spotlight data-depth onclick="openGallery('assessment')">
           <div class="pc-body">
             <div class="pc-top">
               <div class="pc-icon">
@@ -1423,7 +1581,7 @@
     </section>
 
     <!-- ACADEMIC PROJECTS (4 items) -->
-    <section class="section fade-in">
+    <section class="section" data-reveal-group>
       <div class="section-title">
         <i class="fas fa-graduation-cap"></i>
         <span>Academic Projects</span>
@@ -1431,7 +1589,7 @@
       <p class="section-subtitle">Projects I built as part of my BSIT coursework. Click a card to open the gallery.</p>
 
       <div class="grid-2">
-        <div class="project-card v4" onclick="openGallery('acad1')">
+        <div class="project-card v4" data-tilt="5" data-spotlight data-depth onclick="openGallery('acad1')">
           <div class="pc-body">
             <div class="pc-top">
               <div class="pc-icon">
@@ -1464,7 +1622,7 @@
           </div>
         </div>
 
-        <div class="project-card v4" onclick="openGallery('acad2')">
+        <div class="project-card v4" data-tilt="5" data-spotlight data-depth onclick="openGallery('acad2')">
           <div class="pc-body">
             <div class="pc-top">
               <div class="pc-icon">
@@ -1497,7 +1655,7 @@
           </div>
         </div>
 
-        <div class="project-card v4" onclick="openGallery('acad3')">
+        <div class="project-card v4" data-tilt="5" data-spotlight data-depth onclick="openGallery('acad3')">
           <div class="pc-body">
             <div class="pc-top">
               <div class="pc-icon">
@@ -1529,7 +1687,7 @@
           </div>
         </div>
 
-        <div class="project-card v4" onclick="openGallery('acad4')">
+        <div class="project-card v4" data-tilt="5" data-spotlight data-depth onclick="openGallery('acad4')">
           <div class="pc-body">
             <div class="pc-top">
               <div class="pc-icon">
@@ -1564,7 +1722,7 @@
     </section>
 
     <!-- CONNECT (merged: cards + CTA) -->
-    <section class="section fade-in">
+    <section class="section" data-reveal-group>
       <div class="section-title">
         <i class="fas fa-share-alt"></i>
         <span>Connect with me</span>
@@ -1574,19 +1732,19 @@
       <div class="connect-section">
         <!-- Contact cards -->
         <div class="socials-wrapper">
-          <a href="mailto:reyesjherwin14@gmail.com" class="social-card email" title="Email">
+          <a href="mailto:reyesjherwin14@gmail.com" class="social-card email" data-tilt="7" data-spotlight title="Email">
             <div class="circles"><span class="circle c1"></span><span class="circle c2"></span><span class="circle c3"></span></div>
             <span class="handle-tag">reyesjherwin14@gmail.com</span>
             <i class="fas fa-envelope main-icon"></i>
             <span class="label">Email</span>
           </a>
-          <a href="https://www.linkedin.com/in/jherwin-reyes-63a28133b" target="_blank" rel="noopener noreferrer" class="social-card linkedin" title="LinkedIn">
+          <a href="https://www.linkedin.com/in/jherwin-reyes-63a28133b" target="_blank" rel="noopener noreferrer" class="social-card linkedin" data-tilt="7" data-spotlight title="LinkedIn">
             <div class="circles"><span class="circle c1"></span><span class="circle c2"></span><span class="circle c3"></span></div>
             <span class="handle-tag">jherwin-reyes</span>
             <i class="fab fa-linkedin-in main-icon"></i>
             <span class="label">LinkedIn</span>
           </a>
-          <a href="tel:+639617821747" class="social-card phone" title="Phone">
+          <a href="tel:+639617821747" class="social-card phone" data-tilt="7" data-spotlight title="Phone">
             <div class="circles"><span class="circle c1"></span><span class="circle c2"></span><span class="circle c3"></span></div>
             <span class="handle-tag">0961 782 1747</span>
             <i class="fas fa-phone-alt main-icon"></i>
@@ -1595,7 +1753,7 @@
         </div>
 
         <!-- CTA card -->
-        <div class="contact-card">
+        <div class="contact-card" data-tilt="4" data-spotlight>
           <div class="contact-icon"><i class="fas fa-paper-plane"></i></div>
           <h3>Open to Opportunities</h3>
           <p>
@@ -1648,23 +1806,254 @@
 
   <script>
     // ================================================================
-    // SCROLL REVEAL + IMAGE FALLBACK
+    // LIVING MOTION SYSTEM
+    //   initializeTextReveal()      tags headings for the clip wipe (CSS does the motion)
+    //   initializeStaggeredReveal() tags items, then reveals them with IntersectionObserver
+    //   initializePointerEffects()  ONE engine for tilt + spotlight + depth layers
+    // Icon gestures are pure CSS (see MOTION SYSTEM in the stylesheet).
     // ================================================================
-    (function() {
-      const els = document.querySelectorAll('.fade-in');
-      if (!('IntersectionObserver' in window)) {
-        els.forEach(el => el.classList.add('visible'));
-      } else {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.12 });
-        els.forEach(el => observer.observe(el));
+    (function () {
+      'use strict';
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+      const listen = (mq, fn) => (mq.addEventListener ? mq.addEventListener('change', fn) : mq.addListener(fn));
+
+      function tag(el, delay, extraClass) {
+        if (!el) return;
+        el.classList.add('rv');
+        if (extraClass) el.classList.add(extraClass);
+        el.dataset.rvDelay = String(delay);
       }
+
+      // ---------- Text reveal: tag only headings, never body copy ----------
+      function initializeTextReveal() {
+        document.querySelectorAll('[data-reveal-group] .section-title').forEach(el => tag(el, 0, 'rv-title'));
+        tag(document.querySelector('.intro h1'), 80, 'rv-wipe');
+      }
+
+      // ---------- Staggered reveal: title 0 > subtitle 80 > items 140 + 80n ----------
+      function initializeStaggeredReveal() {
+        const header = document.querySelector('header[data-reveal-group]');
+        if (header) {
+          tag(header.querySelector('.avatar'), 0);
+          tag(header.querySelector('.badge'), 190);
+          tag(header.querySelector('.intro p'), 260);
+        }
+        document.querySelectorAll('section[data-reveal-group]').forEach(group => {
+          tag(group.querySelector('.section-subtitle'), 80);
+          let n = 0;
+          group.querySelectorAll('.grid-2 > *, .internship-wrap, .socials-wrapper > *, .contact-card')
+            .forEach(el => tag(el, 140 + Math.min(n++, 5) * 80));
+        });
+
+        const items = document.querySelectorAll('.rv');
+        const show = (el, delay) => {
+          el.style.setProperty('--rv-delay', delay + 'ms');
+          el.classList.add('in');
+        };
+        if (!('IntersectionObserver' in window)) { items.forEach(el => show(el, 0)); return; }
+
+        const groupClock = new WeakMap();   // when each group's first item appeared
+        const io = new IntersectionObserver((entries) => {
+          const now = performance.now();
+          entries
+            .filter(e => e.isIntersecting)
+            .sort((a, b) => (a.target.compareDocumentPosition(b.target) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))
+            .forEach((entry, i) => {
+              const el = entry.target;
+              const base = parseInt(el.dataset.rvDelay, 10) || 0;
+              const group = el.closest('[data-reveal-group]') || document.body;
+              const started = groupClock.get(group);
+              let delay;
+              if (started === undefined) { groupClock.set(group, now); delay = base; }
+              else if (now - started < 700) delay = Math.max(0, base - (now - started));  // same entrance: keep the cascade
+              else delay = Math.min(i, 3) * 70;                                            // late arrivals: short cascade
+              show(el, Math.round(delay));
+              io.unobserve(el);
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        items.forEach(el => io.observe(el));
+      }
+
+      // ---------- Pointer effects: tilt + spotlight + depth in one rAF loop ----------
+      function initializePointerEffects() {
+        const SELECTOR = '[data-tilt], [data-spotlight], [data-depth]';
+        const VARS = ['--rx', '--ry', '--mx', '--my', '--px', '--py', '--depth'];
+        const states = new Map();     // card element -> state
+        const running = new Set();    // states that still need frames
+        let active = null, frame = 0, lastTime = 0, enabled = false;
+
+        const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+        const shape = (n) => Math.sign(n) * Math.pow(Math.abs(n), 1.5);   // flat near the centre, firmer at edges
+        const near = (r, x, y, m) => x > r.left - m && x < r.right + m && y > r.top - m && y < r.bottom + m;
+
+        function stateFor(el) {
+          let s = states.get(el);
+          if (!s) {
+            s = {
+              el, rect: null, hot: false, fresh: false,
+              tilt: el.hasAttribute('data-tilt'),
+              spot: el.hasAttribute('data-spotlight'),
+              layers: el.hasAttribute('data-depth'),
+              max: clamp(parseFloat(el.dataset.tilt) || 5, 0, 7),    // never more than 7deg
+              tx: 0, ty: 0, x: 0, y: 0,                               // tilt target / eased (-1..1)
+              tmx: 0, tmy: 0, mx: 0, my: 0,                           // spotlight target / eased (px)
+              depth: 0
+            };
+            states.set(el, s);
+          }
+          return s;
+        }
+
+        function engage(el) {
+          const s = stateFor(el);
+          s.rect = el.getBoundingClientRect();   // measured once per hover, not per move
+          s.hot = true;
+          s.fresh = true;
+          el.classList.add('is-hot');
+          if (s.tilt) el.classList.add('is-tilting');
+          active = s;
+        }
+
+        function release() {
+          if (!active) return;
+          const s = active;
+          active = null;
+          s.hot = false; s.tx = 0; s.ty = 0;
+          s.el.classList.remove('is-hot');
+          running.add(s);
+          wake();
+        }
+
+        function aim(s, x, y) {
+          const r = s.rect;
+          if (!r.width || !r.height) return;
+          s.tx = shape(clamp(((x - r.left) / r.width) * 2 - 1, -1, 1));
+          s.ty = shape(clamp(((y - r.top) / r.height) * 2 - 1, -1, 1));
+          s.tmx = x - r.left;
+          s.tmy = y - r.top;
+          if (s.fresh) { s.mx = s.tmx; s.my = s.tmy; s.fresh = false; }   // glow starts under the cursor
+        }
+
+        function write(s) {
+          const st = s.el.style;
+          if (s.tilt) {
+            st.setProperty('--rx', (-s.y * s.max).toFixed(3) + 'deg');   // cursor low -> top edge leans toward you
+            st.setProperty('--ry', (s.x * s.max).toFixed(3) + 'deg');
+          }
+          if (s.spot) {
+            st.setProperty('--mx', s.mx.toFixed(1) + 'px');
+            st.setProperty('--my', s.my.toFixed(1) + 'px');
+          }
+          if (s.layers) {
+            st.setProperty('--px', s.x.toFixed(3));
+            st.setProperty('--py', s.y.toFixed(3));
+            st.setProperty('--depth', s.depth.toFixed(3));
+          }
+        }
+
+        function clear(s) {
+          VARS.forEach(v => s.el.style.removeProperty(v));
+          s.el.classList.remove('is-tilting');
+        }
+
+        // one eased step; returns true while more frames are needed
+        function step(s, dt) {
+          const depthTarget = s.hot ? 1 : 0;
+          const moving =
+            Math.abs(s.tx - s.x) > 0.001 || Math.abs(s.ty - s.y) > 0.001 ||
+            Math.abs(s.tmx - s.mx) > 0.1 || Math.abs(s.tmy - s.my) > 0.1 ||
+            Math.abs(depthTarget - s.depth) > 0.002;
+
+          if (!moving) {
+            if (!s.hot) { s.x = s.y = s.depth = 0; clear(s); }
+            return false;
+          }
+          const kTilt = 1 - Math.exp(-dt / (s.hot ? 0.09 : 0.18));   // quick to follow, slower settle home
+          const kSpot = 1 - Math.exp(-dt / 0.06);
+          const kDepth = 1 - Math.exp(-dt / 0.2);
+          s.x += (s.tx - s.x) * kTilt;
+          s.y += (s.ty - s.y) * kTilt;
+          s.mx += (s.tmx - s.mx) * kSpot;
+          s.my += (s.tmy - s.my) * kSpot;
+          s.depth += (depthTarget - s.depth) * kDepth;
+          write(s);
+          return true;
+        }
+
+        function tick(now) {
+          frame = 0;
+          const dt = clamp((now - lastTime) / 1000, 0.001, 0.05);
+          lastTime = now;
+          running.forEach(s => { if (!step(s, dt)) running.delete(s); });
+          if (running.size) frame = requestAnimationFrame(tick);
+        }
+
+        function wake() {
+          if (frame || !running.size) return;
+          lastTime = performance.now();
+          frame = requestAnimationFrame(tick);
+        }
+
+        // pointermove only records intent; the rAF loop does the styling
+        function onMove(e) {
+          if (e.pointerType === 'touch') return;
+          if (document.body.classList.contains('modal-open')) { release(); return; }
+          let el = e.target.closest ? e.target.closest(SELECTOR) : null;
+          // hysteresis: a tilted card's edge recedes a few px, so don't drop it on the rim
+          if (!el && active && near(active.rect, e.clientX, e.clientY, 14)) el = active.el;
+          if (!active || active.el !== el) {
+            release();
+            if (el) engage(el);
+          }
+          if (active) {
+            aim(active, e.clientX, e.clientY);
+            running.add(active);
+            wake();
+          }
+        }
+
+        function enable() {
+          if (enabled) return;
+          enabled = true;
+          document.addEventListener('pointermove', onMove, { passive: true });
+          document.documentElement.addEventListener('pointerleave', release);
+          window.addEventListener('scroll', release, { passive: true });   // cached rect would be stale
+          window.addEventListener('resize', release);
+          window.addEventListener('blur', release);
+        }
+
+        function disable() {
+          if (!enabled) return;
+          enabled = false;
+          document.removeEventListener('pointermove', onMove);
+          document.documentElement.removeEventListener('pointerleave', release);
+          window.removeEventListener('scroll', release);
+          window.removeEventListener('resize', release);
+          window.removeEventListener('blur', release);
+          if (active) { active.el.classList.remove('is-hot'); active = null; }
+          running.clear();
+          states.forEach(clear);
+          if (frame) { cancelAnimationFrame(frame); frame = 0; }
+        }
+
+        // desktop pointer + motion allowed only; reacts live if either setting changes
+        const sync = () => (finePointer.matches && !reduceMotion.matches ? enable() : disable());
+        sync();
+        listen(finePointer, sync);
+        listen(reduceMotion, sync);
+      }
+
+      // ---------- boot ----------
+      try {
+        initializeTextReveal();
+        initializeStaggeredReveal();
+      } catch (err) {
+        console.warn('Reveal setup failed; showing content immediately.', err);
+        document.querySelectorAll('.rv').forEach(el => el.classList.add('in'));
+      }
+      initializePointerEffects();
 
       document.querySelectorAll('.project-card .preview img').forEach(img => {
         img.addEventListener('error', () => { img.style.display = 'none'; });
