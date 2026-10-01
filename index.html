@@ -21,7 +21,6 @@
       --card-bg: rgba(15, 23, 42, 0.72);
       --card-hover: rgba(15, 23, 42, 0.95);
 
-      /* motion tokens */
       --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
       --tilt-perspective: 1000px;
       --dur-reveal: 640ms;
@@ -214,6 +213,23 @@
       padding-bottom: 0.25rem;
     }
 
+    .subsection-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding-left: 2.75rem;
+    }
+
+    .subsection-title i {
+      color: var(--primary);
+      font-size: 1.05rem;
+      filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.5));
+    }
+
     .section-subtitle {
       font-size: 0.95rem;
       color: var(--text-muted);
@@ -265,7 +281,6 @@
       margin-bottom: 0.9rem;
       display: inline-block;
     }
-    /* icon gestures live in the MOTION SYSTEM block below */
 
     .info-card h3 {
       font-size: 1.2rem;
@@ -278,16 +293,52 @@
 
     .info-card ul { list-style: none; margin-top: 0.5rem; }
     .info-card ul li {
-      margin-bottom: 0.45rem;
-      display: flex; gap: 0.6rem;
-      align-items: flex-start;
-    }
-    .info-card ul li i {
-      color: var(--primary); font-size: 0.9rem;
-      margin-top: 0.3rem; width: 1.1rem; flex-shrink: 0;
+      margin-bottom: 0.5rem;
+      display: flex; gap: 0.65rem;
+      align-items: center;
     }
 
-    .info-card p i.fas { color: var(--primary) !important; }
+    /* ================================================================
+       ===== MINI APP ICONS FOR TECHNICAL SKILLS =====
+       ================================================================ */
+    .skill-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.72rem;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-icon::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.18) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .info-card ul li:hover .skill-icon {
+      transform: scale(1.15) rotate(-5deg);
+      box-shadow: 0 3px 10px rgba(34, 211, 238, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    .skill-icon.html { background: linear-gradient(135deg, #e34f26, #b53a1a); }
+    .skill-icon.css  { background: linear-gradient(135deg, #264de4, #1a35a0); }
+    .skill-icon.js   { background: linear-gradient(135deg, #f7df1e, #d4be10); color: #0a1024; }
+    .skill-icon.python { background: linear-gradient(135deg, #3776ab, #ffd43b); }
+    .skill-icon.figma  { background: linear-gradient(135deg, #f24e1e, #a259ff); }
+    .skill-icon.axure  { background: linear-gradient(135deg, #6c5ce7, #4834d4); }
+    .skill-icon.graphics { background: linear-gradient(135deg, #ec4899, #8b5cf6); }
+    .skill-icon.unity  { background: linear-gradient(135deg, #222c37, #0a0f14); }
+    .skill-icon.blender { background: linear-gradient(135deg, #ea7600, #f5792a); }
+    .skill-icon.canva  { background: linear-gradient(135deg, #00c4cc, #7d2ae8); }
+    .skill-icon.github { background: linear-gradient(135deg, #24292e, #0d1117); }
+    .skill-icon.wordpress { background: linear-gradient(135deg, #21759b, #0f3d52); }
 
     /* ================================================================
        ===== INTERNSHIP CARD =====
@@ -589,7 +640,6 @@
       margin-top: 0.2rem;
     }
 
-    /* arrow slides on transform-only motion (replaces the old animated flex gap) */
     .project-card .pc-link i { font-size: 0.8rem; transition: translate 0.3s var(--ease-out); }
     .project-card:is(:hover, .is-hot) .pc-link i { translate: 7px 0; }
 
@@ -600,9 +650,169 @@
     .project-card.v4 { --pc-from: #f59e0b; --pc-to: #fbbf24; --pc-shadow: rgba(245, 158, 11, 0.55); }
     .project-card.v5 { --pc-from: #ef4444; --pc-to: #f43f5e; --pc-shadow: rgba(239, 68, 68, 0.55); }
     .project-card.v6 { --pc-from: #3b82f6; --pc-to: #22d3ee; --pc-shadow: rgba(59, 130, 246, 0.6); }
+    .project-card.v7 { --pc-from: #ec4899; --pc-to: #f472b6; --pc-shadow: rgba(236, 72, 153, 0.55); }
+    .project-card.v8 { --pc-from: #8b5cf6; --pc-to: #a78bfa; --pc-shadow: rgba(139, 92, 246, 0.55); }
 
     /* ================================================================
-       ===== CONNECT SECTION (merged) =====
+       ===== INLINE PHOTOGRAPHY CAROUSEL =====
+       ================================================================ */
+    .photo-carousel {
+      position: relative;
+      max-width: 820px;
+      margin: 0 auto;
+      border-radius: 22px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      padding: 1.25rem;
+      overflow: hidden;
+      transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .photo-carousel:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 25px 50px -22px rgba(236, 72, 153, 0.45);
+    }
+
+    .photo-viewport {
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .photo-track {
+      display: flex;
+      transition: transform 0.55s cubic-bezier(0.34, 1.05, 0.64, 1);
+      will-change: transform;
+    }
+
+    .photo-slide {
+      flex: 0 0 100%;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .photo-card {
+      background: rgba(10, 16, 36, 0.6);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(236, 72, 153, 0.18);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .photo-card .photo-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.12), rgba(139, 92, 246, 0.12));
+    }
+
+    .photo-card .photo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;   /* photos shown fully, no cropping */
+      display: block;
+      background: #060917;
+    }
+
+    .photo-card .photo-img .photo-count {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(10, 16, 36, 0.8);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.3rem 0.75rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(6px);
+      letter-spacing: 0.5px;
+    }
+
+    .photo-card .photo-info {
+      padding: 1.1rem 1.3rem 1.3rem;
+    }
+
+    .photo-card .photo-info h5 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .photo-card .photo-info h5 i {
+      color: #ec4899;
+      font-size: 0.85rem;
+      filter: drop-shadow(0 0 6px rgba(236, 72, 153, 0.6));
+    }
+
+    .photo-card .photo-info p {
+      font-size: 0.9rem;
+      color: var(--text-body);
+      line-height: 1.55;
+    }
+
+    .photo-btn {
+      position: absolute;
+      top: 42%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1.5px solid rgba(236, 72, 153, 0.45);
+      color: #ec4899;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+    .photo-btn:hover {
+      background: #ec4899;
+      color: #0a1024;
+      transform: translateY(-50%) scale(1.1);
+    }
+    .photo-btn i { display: inline-block; transition: translate 0.25s var(--ease-out); }
+    .photo-btn.photo-prev { left: 1.6rem; }
+    .photo-btn.photo-next { right: 1.6rem; }
+    .photo-btn.photo-prev:hover i { translate: -2px 0; }
+    .photo-btn.photo-next:hover i { translate: 2px 0; }
+
+    .photo-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.45rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .photo-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(148, 163, 184, 0.3);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+    .photo-dot.active {
+      background: #ec4899;
+      transform: scale(1.35);
+    }
+    .photo-dot:hover:not(.active) {
+      background: rgba(236, 72, 153, 0.55);
+    }
+
+    /* ================================================================
+       ===== CONNECT SECTION =====
        ================================================================ */
     .connect-section {
       display: flex;
@@ -655,15 +865,13 @@
     .social-card .main-icon {
       position: absolute;
       top: 50%; left: 50%;
-      translate: -50% -50%;   /* centring on `translate` so hover gestures can use scale/rotate cleanly */
+      translate: -50% -50%;
       z-index: 2;
       color: white;
       font-size: 3.2rem;
       text-shadow: 0 4px 15px rgba(0,0,0,0.5);
       transition: translate 0.4s var(--ease-out), rotate 0.4s var(--ease-out), scale 0.4s var(--ease-out), text-shadow 0.4s ease;
     }
-
-    /* per-icon gestures: see MOTION SYSTEM block */
 
     .social-card .label {
       position: absolute;
@@ -701,7 +909,6 @@
 
     .social-card:is(:hover, .is-hot) .handle-tag { opacity: 1; transform: translateY(0); }
 
-    /* CTA card */
     .contact-card {
       background: var(--card-bg);
       border-radius: 22px;
@@ -775,12 +982,12 @@
     .footer-note i { color: var(--primary); margin: 0 0.3rem; }
 
     /* ================================================================
-       ===== MODAL / POPUP — FIXED, NON-SCROLLABLE CAROUSEL =====
+       ===== MODAL / POPUP — images shown fully (contain) =====
        ================================================================ */
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(3, 6, 18, 0.92);
+      background: rgba(3, 6, 18, 0.94);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       z-index: 1000;
@@ -988,11 +1195,13 @@
       border-bottom: 1px solid rgba(34, 211, 238, 0.12);
     }
 
+    /* full image visible, letterboxed within the frame */
     .carousel-card .window-img img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
+      background: #060917;
     }
 
     .carousel-card .window-img .img-placeholder {
@@ -1102,21 +1311,11 @@
 
     /* ================================================================
        ===== LIVING MOTION SYSTEM =====
-       Level 1  Ambient      orbs, border gradient, avatar ring     8-34s
-       Level 2  Interaction  tilt, spotlight, depth, icon gestures  150-400ms, pointer-driven
-       Level 3  Discovery    staggered reveal, heading wipes, modal 400-800ms, plays once
-
-       Composition rule: hover lift / press / icon gestures use the individual
-       `translate`, `rotate`, `scale` properties. Pointer tilt owns `transform`.
-       They multiply together, so no effect overwrites another.
        ================================================================ */
-
-    /* ---- Level 1: ambient. Paused while the gallery covers the page. ---- */
     body.modal-open .bg-orb,
     body.modal-open .internship-wrap,
     body.modal-open .avatar::after { animation-play-state: paused; }
 
-    /* ---- Level 3: discovery. Staggered reveal (delays come from JS as --rv-delay) ---- */
     @keyframes rv-rise { from { opacity: 0; translate: 0 24px; } }
     @keyframes rv-icon { from { opacity: 0; scale: 0.6; rotate: -14deg; } }
     @keyframes rv-wipe {
@@ -1132,20 +1331,17 @@
         rv-rise var(--dur-reveal) var(--ease-out) var(--rv-delay, 0ms) backwards;
     }
 
-    /* heading wipes: real, selectable text revealed upward through a clip */
     .rv-wipe.in { animation: rv-wipe 800ms var(--ease-out) var(--rv-delay, 0ms) backwards; }
     .rv-title.in { animation: none; }
     .rv-title.in i { animation: rv-icon 520ms var(--ease-out) var(--rv-delay, 0ms) backwards; }
     .rv-title.in span { animation: rv-wipe 720ms var(--ease-out) calc(var(--rv-delay, 0ms) + 70ms) backwards; }
 
-    /* modal title wipes in each time the gallery opens */
     .modal-backdrop.open .modal-header h2 { animation: rv-wipe 700ms var(--ease-out) 220ms backwards; }
 
-    /* ---- Level 2: interaction. Tilt + spotlight + depth (driven by one JS engine) ---- */
     [data-tilt] { --rx: 0deg; --ry: 0deg; }
     [data-tilt].is-tilting {
       transform: perspective(var(--tilt-perspective)) rotateX(var(--rx)) rotateY(var(--ry));
-      will-change: transform;   /* only while a card is actually being tilted */
+      will-change: transform;
     }
 
     [data-spotlight] {
@@ -1177,7 +1373,6 @@
     }
     [data-spotlight].is-hot::after { opacity: 1; }
 
-    /* project depth layers: image sinks, badge and icon float (px/py are -1..1, depth is 0..1) */
     [data-depth] .preview img {
       translate: calc(var(--px, 0) * var(--depth, 0) * -3px) calc(var(--py, 0) * var(--depth, 0) * -3px);
     }
@@ -1188,22 +1383,17 @@
       translate: calc(var(--px, 0) * var(--depth, 0) * 5px) calc(var(--py, 0) * var(--depth, 0) * 5px);
     }
 
-    /* press feedback (works for mouse and touch) */
     .project-card:active { scale: 0.985; }
     .social-card:active { scale: 0.97; }
 
-    /* ---- Level 2: context-aware icon gestures (150-400ms, one job per icon) ---- */
     .info-card .card-icon i {
       display: inline-block;
       transition: translate 0.3s var(--ease-out), rotate 0.3s var(--ease-out), scale 0.3s var(--ease-out), filter 0.3s ease;
     }
     .info-card:is(:hover, .is-hot) .card-icon i { filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.65)); }
-    .info-card:is(:hover, .is-hot) .card-icon .fa-user { translate: 0 -3px; scale: 1.08; }                 /* person: lifts */
-    .info-card:is(:hover, .is-hot) .card-icon .fa-graduation-cap { rotate: -10deg; translate: 0 -2px; }    /* cap: tips */
-    .info-card:is(:hover, .is-hot) .card-icon .fa-laptop-code { animation: icon-pulse 0.4s var(--ease-out); } /* laptop: one pulse */
-
-    .info-card ul li i { transition: scale 0.2s var(--ease-out), filter 0.2s ease; }
-    .info-card ul li:hover i { scale: 1.22; filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.7)); }       /* skills: glow */
+    .info-card:is(:hover, .is-hot) .card-icon .fa-user { translate: 0 -3px; scale: 1.08; }
+    .info-card:is(:hover, .is-hot) .card-icon .fa-graduation-cap { rotate: -10deg; translate: 0 -2px; }
+    .info-card:is(:hover, .is-hot) .card-icon .fa-laptop-code { animation: icon-pulse 0.4s var(--ease-out); }
 
     .info-card p i.fas { display: inline-block; }
     .info-card p:hover .fa-map-pin { animation: pin-drop 0.42s var(--ease-out); }
@@ -1217,7 +1407,7 @@
     .contact-card .contact-icon { transition: scale 0.35s var(--ease-out), box-shadow 0.35s ease; }
     .contact-card .contact-icon i { display: inline-block; transition: translate 0.4s var(--ease-out); }
     .contact-card:is(:hover, .is-hot) .contact-icon { scale: 1.07; box-shadow: 0 0 24px -4px rgba(34, 211, 238, 0.55); }
-    .contact-card:is(:hover, .is-hot) .contact-icon i { translate: 3px -3px; }                            /* plane: glides off */
+    .contact-card:is(:hover, .is-hot) .contact-icon i { translate: 3px -3px; }
 
     .carousel-btn i { display: inline-block; transition: translate 0.25s var(--ease-out); }
     .carousel-btn.prev:hover i { translate: -2px 0; }
@@ -1237,7 +1427,6 @@
       80% { rotate: 5deg; }
     }
 
-    /* touch / no-hover devices: no cursor glow */
     @media (hover: none), (pointer: coarse) {
       [data-spotlight]::after { display: none; }
     }
@@ -1257,6 +1446,7 @@
       .intro h1 { font-size: 2rem; }
       .avatar { width: 110px; height: 110px; font-size: 3rem; }
       .section-title { font-size: 1.4rem; }
+      .subsection-title { padding-left: 0; }
       .section-subtitle { padding-left: 0; }
       .socials-wrapper { gap: 1.25rem; }
       .social-card { width: 160px; height: 160px; }
@@ -1300,6 +1490,14 @@
       .carousel-card .window-text p { font-size: 0.82rem; }
 
       .contact-card { padding: 1.75rem 1.5rem; }
+
+      .photo-carousel { padding: 0.85rem; }
+      .photo-btn { width: 36px; height: 36px; font-size: 0.8rem; }
+      .photo-btn.photo-prev { left: 1.1rem; }
+      .photo-btn.photo-next { right: 1.1rem; }
+      .photo-card .photo-info { padding: 0.95rem 1.1rem 1.15rem; }
+      .photo-card .photo-info h5 { font-size: 0.95rem; }
+      .photo-card .photo-info p { font-size: 0.83rem; }
     }
 
     @media (max-width: 450px) {
@@ -1316,13 +1514,16 @@
       }
 
       .contact-card h3 { font-size: 1.2rem; }
+
+      .photo-btn { width: 32px; height: 32px; font-size: 0.72rem; }
+      .photo-btn.photo-prev { left: 0.85rem; }
+      .photo-btn.photo-next { right: 0.85rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .bg-orb, .internship-wrap, .avatar::after { animation: none !important; }
 
-      /* everything visible immediately; animations collapse to their end state */
       .rv, .rv:not(.in) { opacity: 1 !important; }
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1331,20 +1532,18 @@
         transition-duration: 0.01ms !important;
         transition-delay: 0s !important;
       }
-      .carousel-track { transition: none !important; }
+      .carousel-track, .photo-track { transition: none !important; }
 
-      /* no tilt, spotlight or parallax (JS also never starts them) */
       [data-tilt].is-tilting { transform: none !important; will-change: auto; }
       [data-spotlight]::after { display: none; }
       [data-depth] .preview img,
       [data-depth] .preview-tag,
       [data-depth] .pc-icon { translate: none; }
 
-      /* icons keep their glow, drop their movement */
       .info-card .card-icon i, .info-card ul li i, .info-card p i,
       .project-card .pc-icon, .pc-link i,
       .contact-card .contact-icon, .contact-card .contact-icon i,
-      .carousel-btn i { translate: none !important; rotate: none !important; scale: none !important; }
+      .carousel-btn i, .photo-btn i { translate: none !important; rotate: none !important; scale: none !important; }
       .social-card .main-icon { translate: -50% -50% !important; rotate: none !important; scale: none !important; }
       .project-card:active, .social-card:active { scale: none; }
     }
@@ -1389,7 +1588,7 @@
           <h3>Personal</h3>
           <p><i class="fas fa-map-pin"></i> San Pedro, Laguna</p>
           <p><i class="fas fa-envelope"></i> reyesjherwin14@gmail.com</p>
-          <p><i class="fas fa-phone-alt"></i> 0961 782 1747</p>
+          <p><i class="fas fa-phone-alt"></i> 096* *** *747</p>
         </div>
         <div class="info-card" data-tilt="5" data-spotlight>
           <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
@@ -1403,12 +1602,15 @@
           <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
           <h3>Technical skills</h3>
           <ul>
-            <li><i class="fas fa-check-circle"></i> Web Dev (HTML, CSS, JS) — <strong>Intermediate</strong></li>
-            <li><i class="fas fa-check-circle"></i> Python Programming — <strong>Intermediate</strong></li>
-            <li><i class="fas fa-check-circle"></i> Figma / Axure (UI/UX) — <strong>Intermediate</strong></li>
-            <li><i class="fas fa-check-circle"></i> Graphics Design — <strong>Intermediate</strong></li>
-            <li><i class="fas fa-check-circle"></i> Unity Game Engine — <strong>Beginner</strong></li>
-            <li><i class="fas fa-check-circle"></i> Blender 3D Modeling — <strong>Beginner</strong></li>
+            <li><span class="skill-icon html"><i class="fab fa-html5"></i></span> Web Dev (HTML, CSS, JS) — <strong>Intermediate</strong></li>
+            <li><span class="skill-icon python"><i class="fab fa-python"></i></span> Python Programming — <strong>Intermediate</strong></li>
+            <li><span class="skill-icon figma"><i class="fab fa-figma"></i></span> Figma / Axure (UI/UX) — <strong>Intermediate</strong></li>
+            <li><span class="skill-icon graphics"><i class="fas fa-palette"></i></span> Graphics Design — <strong>Intermediate</strong></li>
+            <li><span class="skill-icon unity"><i class="fab fa-unity"></i></span> Unity Game Engine — <strong>Beginner</strong></li>
+            <li><span class="skill-icon blender"><i class="fas fa-cube"></i></span> Blender 3D Modeling — <strong>Beginner</strong></li>
+            <li><span class="skill-icon canva"><i class="fas fa-paint-brush"></i></span> Canva Design — <strong>Intermediate</strong></li>
+            <li><span class="skill-icon github"><i class="fab fa-github"></i></span> GitHub Version Control — <strong>Beginner</strong></li>
+            <li><span class="skill-icon wordpress"><i class="fab fa-wordpress"></i></span> WordPress — <strong>Beginner</strong></li>
           </ul>
         </div>
       </div>
@@ -1721,6 +1923,80 @@
       </div>
     </section>
 
+    <!-- ================================================================
+         ===== HABITS SECTION =====
+         Sub-section 1: Barkada Hub (project card style, 10 windows)
+         Sub-section 2: Photography Habit (inline carousel, 10 photos)
+         ================================================================ -->
+    <section class="section" data-reveal-group>
+      <div class="section-title">
+        <i class="fas fa-heart"></i>
+        <span>Habits &amp; Side Projects</span>
+      </div>
+      <p class="section-subtitle">Things I do outside of coursework and internship — hobbies and personal builds.</p>
+
+      <!-- Sub-section 1: Barkada Hub -->
+      <div class="subsection-title">
+        <i class="fas fa-users"></i>
+        <span>Barkada Hub · Friends-Only Website</span>
+      </div>
+      <p class="section-subtitle" style="padding-left:2.75rem;">A private, invite-only website built for my high school friend group. Click the card to view all 10 screens.</p>
+
+      <div class="grid-2" style="margin-bottom:2.5rem;">
+        <div class="project-card v8" data-tilt="5" data-spotlight data-depth onclick="openGallery('habit_barkada')">
+          <div class="pc-body">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 11C17.66 11 18.99 9.66 18.99 8C18.99 6.34 17.66 5 16 5C14.34 5 13 6.34 13 8C13 9.66 14.34 11 16 11ZM8 11C9.66 11 10.99 9.66 10.99 8C10.99 6.34 9.66 5 8 5C6.34 5 5 6.34 5 8C5 9.66 6.34 11 8 11ZM8 13C5.67 13 1 14.17 1 16.5V19H15V16.5C15 14.17 10.33 13 8 13ZM16 13C15.71 13 15.38 13.02 15.03 13.05C16.19 13.89 17 15.02 17 16.5V19H23V16.5C23 14.17 18.33 13 16 13Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>Barkada Hub</h4>
+            <div class="pc-supervisor"><i class="fas fa-user"></i> Self-directed · Personal project</div>
+            <p class="para">
+              A private, invite-only website built for my high school friend group
+              (our "barkada"). A shared space for updates, photo dumps, event
+              planning, and inside jokes — away from public social media.
+            </p>
+            <div class="tag-list">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Firebase</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+          <div class="preview">
+            <span class="preview-tag">Side Project</span>
+            <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+            <img src="screenshot/habit_barkada.png" alt="Barkada Hub preview" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-section 2: Photography Carousel (10 photos) -->
+      <div class="subsection-title">
+        <i class="fas fa-camera"></i>
+        <span>Photography Habit</span>
+      </div>
+      <p class="section-subtitle" style="padding-left:2.75rem;">Capturing everyday moments, landscapes, and street scenes — 10 shots from my personal collection.</p>
+
+      <div class="photo-carousel" data-tilt="3" data-spotlight>
+        <div class="photo-viewport">
+          <div class="photo-track" id="photoTrack"></div>
+        </div>
+        <button class="photo-btn photo-prev" onclick="photoPrev()" aria-label="Previous photo">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="photo-btn photo-next" onclick="photoNext()" aria-label="Next photo">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="photo-dots" id="photoDots"></div>
+      </div>
+    </section>
+
     <!-- CONNECT (merged: cards + CTA) -->
     <section class="section" data-reveal-group>
       <div class="section-title">
@@ -1746,7 +2022,7 @@
           </a>
           <a href="tel:+639617821747" class="social-card phone" data-tilt="7" data-spotlight title="Phone">
             <div class="circles"><span class="circle c1"></span><span class="circle c2"></span><span class="circle c3"></span></div>
-            <span class="handle-tag">0961 782 1747</span>
+            <span class="handle-tag">096* *** *747</span>
             <i class="fas fa-phone-alt main-icon"></i>
             <span class="label">Phone</span>
           </a>
@@ -1776,7 +2052,7 @@
   </div>
 
   <!-- ================================================================
-       ===== MODAL / POPUP — FIXED, NON-SCROLLABLE CAROUSEL =====
+       ===== MODAL / POPUP =====
        ================================================================ -->
   <div class="modal-backdrop" id="projectModal" onclick="closeGalleryOnBackdrop(event)">
     <button class="modal-close" onclick="closeGallery()" aria-label="Close gallery">
@@ -1807,10 +2083,6 @@
   <script>
     // ================================================================
     // LIVING MOTION SYSTEM
-    //   initializeTextReveal()      tags headings for the clip wipe (CSS does the motion)
-    //   initializeStaggeredReveal() tags items, then reveals them with IntersectionObserver
-    //   initializePointerEffects()  ONE engine for tilt + spotlight + depth layers
-    // Icon gestures are pure CSS (see MOTION SYSTEM in the stylesheet).
     // ================================================================
     (function () {
       'use strict';
@@ -1826,13 +2098,11 @@
         el.dataset.rvDelay = String(delay);
       }
 
-      // ---------- Text reveal: tag only headings, never body copy ----------
       function initializeTextReveal() {
         document.querySelectorAll('[data-reveal-group] .section-title').forEach(el => tag(el, 0, 'rv-title'));
         tag(document.querySelector('.intro h1'), 80, 'rv-wipe');
       }
 
-      // ---------- Staggered reveal: title 0 > subtitle 80 > items 140 + 80n ----------
       function initializeStaggeredReveal() {
         const header = document.querySelector('header[data-reveal-group]');
         if (header) {
@@ -1843,7 +2113,7 @@
         document.querySelectorAll('section[data-reveal-group]').forEach(group => {
           tag(group.querySelector('.section-subtitle'), 80);
           let n = 0;
-          group.querySelectorAll('.grid-2 > *, .internship-wrap, .socials-wrapper > *, .contact-card')
+          group.querySelectorAll('.grid-2 > *, .internship-wrap, .socials-wrapper > *, .contact-card, .photo-carousel')
             .forEach(el => tag(el, 140 + Math.min(n++, 5) * 80));
         });
 
@@ -1854,7 +2124,7 @@
         };
         if (!('IntersectionObserver' in window)) { items.forEach(el => show(el, 0)); return; }
 
-        const groupClock = new WeakMap();   // when each group's first item appeared
+        const groupClock = new WeakMap();
         const io = new IntersectionObserver((entries) => {
           const now = performance.now();
           entries
@@ -1867,8 +2137,8 @@
               const started = groupClock.get(group);
               let delay;
               if (started === undefined) { groupClock.set(group, now); delay = base; }
-              else if (now - started < 700) delay = Math.max(0, base - (now - started));  // same entrance: keep the cascade
-              else delay = Math.min(i, 3) * 70;                                            // late arrivals: short cascade
+              else if (now - started < 700) delay = Math.max(0, base - (now - started));
+              else delay = Math.min(i, 3) * 70;
               show(el, Math.round(delay));
               io.unobserve(el);
             });
@@ -1876,16 +2146,15 @@
         items.forEach(el => io.observe(el));
       }
 
-      // ---------- Pointer effects: tilt + spotlight + depth in one rAF loop ----------
       function initializePointerEffects() {
         const SELECTOR = '[data-tilt], [data-spotlight], [data-depth]';
         const VARS = ['--rx', '--ry', '--mx', '--my', '--px', '--py', '--depth'];
-        const states = new Map();     // card element -> state
-        const running = new Set();    // states that still need frames
+        const states = new Map();
+        const running = new Set();
         let active = null, frame = 0, lastTime = 0, enabled = false;
 
         const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
-        const shape = (n) => Math.sign(n) * Math.pow(Math.abs(n), 1.5);   // flat near the centre, firmer at edges
+        const shape = (n) => Math.sign(n) * Math.pow(Math.abs(n), 1.5);
         const near = (r, x, y, m) => x > r.left - m && x < r.right + m && y > r.top - m && y < r.bottom + m;
 
         function stateFor(el) {
@@ -1896,9 +2165,9 @@
               tilt: el.hasAttribute('data-tilt'),
               spot: el.hasAttribute('data-spotlight'),
               layers: el.hasAttribute('data-depth'),
-              max: clamp(parseFloat(el.dataset.tilt) || 5, 0, 7),    // never more than 7deg
-              tx: 0, ty: 0, x: 0, y: 0,                               // tilt target / eased (-1..1)
-              tmx: 0, tmy: 0, mx: 0, my: 0,                           // spotlight target / eased (px)
+              max: clamp(parseFloat(el.dataset.tilt) || 5, 0, 7),
+              tx: 0, ty: 0, x: 0, y: 0,
+              tmx: 0, tmy: 0, mx: 0, my: 0,
               depth: 0
             };
             states.set(el, s);
@@ -1908,7 +2177,7 @@
 
         function engage(el) {
           const s = stateFor(el);
-          s.rect = el.getBoundingClientRect();   // measured once per hover, not per move
+          s.rect = el.getBoundingClientRect();
           s.hot = true;
           s.fresh = true;
           el.classList.add('is-hot');
@@ -1933,13 +2202,13 @@
           s.ty = shape(clamp(((y - r.top) / r.height) * 2 - 1, -1, 1));
           s.tmx = x - r.left;
           s.tmy = y - r.top;
-          if (s.fresh) { s.mx = s.tmx; s.my = s.tmy; s.fresh = false; }   // glow starts under the cursor
+          if (s.fresh) { s.mx = s.tmx; s.my = s.tmy; s.fresh = false; }
         }
 
         function write(s) {
           const st = s.el.style;
           if (s.tilt) {
-            st.setProperty('--rx', (-s.y * s.max).toFixed(3) + 'deg');   // cursor low -> top edge leans toward you
+            st.setProperty('--rx', (-s.y * s.max).toFixed(3) + 'deg');
             st.setProperty('--ry', (s.x * s.max).toFixed(3) + 'deg');
           }
           if (s.spot) {
@@ -1958,7 +2227,6 @@
           s.el.classList.remove('is-tilting');
         }
 
-        // one eased step; returns true while more frames are needed
         function step(s, dt) {
           const depthTarget = s.hot ? 1 : 0;
           const moving =
@@ -1970,7 +2238,7 @@
             if (!s.hot) { s.x = s.y = s.depth = 0; clear(s); }
             return false;
           }
-          const kTilt = 1 - Math.exp(-dt / (s.hot ? 0.09 : 0.18));   // quick to follow, slower settle home
+          const kTilt = 1 - Math.exp(-dt / (s.hot ? 0.09 : 0.18));
           const kSpot = 1 - Math.exp(-dt / 0.06);
           const kDepth = 1 - Math.exp(-dt / 0.2);
           s.x += (s.tx - s.x) * kTilt;
@@ -1996,12 +2264,10 @@
           frame = requestAnimationFrame(tick);
         }
 
-        // pointermove only records intent; the rAF loop does the styling
         function onMove(e) {
           if (e.pointerType === 'touch') return;
           if (document.body.classList.contains('modal-open')) { release(); return; }
           let el = e.target.closest ? e.target.closest(SELECTOR) : null;
-          // hysteresis: a tilted card's edge recedes a few px, so don't drop it on the rim
           if (!el && active && near(active.rect, e.clientX, e.clientY, 14)) el = active.el;
           if (!active || active.el !== el) {
             release();
@@ -2019,7 +2285,7 @@
           enabled = true;
           document.addEventListener('pointermove', onMove, { passive: true });
           document.documentElement.addEventListener('pointerleave', release);
-          window.addEventListener('scroll', release, { passive: true });   // cached rect would be stale
+          window.addEventListener('scroll', release, { passive: true });
           window.addEventListener('resize', release);
           window.addEventListener('blur', release);
         }
@@ -2038,14 +2304,12 @@
           if (frame) { cancelAnimationFrame(frame); frame = 0; }
         }
 
-        // desktop pointer + motion allowed only; reacts live if either setting changes
         const sync = () => (finePointer.matches && !reduceMotion.matches ? enable() : disable());
         sync();
         listen(finePointer, sync);
         listen(reduceMotion, sync);
       }
 
-      // ---------- boot ----------
       try {
         initializeTextReveal();
         initializeStaggeredReveal();
@@ -2145,11 +2409,44 @@
           { title: 'Results Log', desc: 'Collects records of the AI assistant\'s recommendations for future reference by users.', image: 'screenshot/acad4_ai_travel4.png' },
           { title: 'Admin Panel', desc: 'Admins can view AI recommendations for users and process travel requests through an admin-user interaction flow.', image: 'screenshot/acad4_ai_travel5.png' }
         ]
+      },
+      habit_barkada: {
+        eyebrow: 'Habit · Side Project',
+        title: 'Barkada Hub · Friends-Only Website',
+        subtitle: 'A private, invite-only website built for my high school friend group — a shared space for updates, photos, and plans.',
+        windows: [
+          { title: 'Landing Page', desc: 'The squad\'s home base — featuring member highlights, favorite hangout spots, shared activities, and the full Barkada roster.', image: 'screenshot/habit_barkada.png' },
+          { title: 'Calendar', desc: 'A shared calendar that tracks squad member birthdays and upcoming events, so no celebration is ever missed.', image: 'screenshot/habit_barkada2.png' },
+          { title: 'Squad Profile', desc: 'A dedicated profile section where members can view and edit their personal information and details.', image: 'screenshot/habit_barkada3.png' },
+          { title: 'Dashboard', desc: 'The main hub for users — upload highlights, check member statuses, and jump into group chats, all in one place.', image: 'screenshot/habit_barkada4.png' },
+          { title: 'Activity Log Checker', desc: 'An activity log section that lets members view recent user activity across the site — posts, edits, and engagement.', image: 'screenshot/habit_barkada5.png' },
+          { title: 'Theme Appearance', desc: 'Predefined theme selection so the squad can switch up the look and match the hub to the group\'s personality.', image: 'screenshot/habit_barkada6.png' },
+          { title: 'Admin Panel', desc: 'An admin panel for managing the website, moderating content, and monitoring what goes on inside the hub.', image: 'screenshot/habit_barkada7.png' },
+          { title: 'Group Chat', desc: 'A lightweight messaging space where the barkada can chat in real time, plan hangouts, and keep the inside jokes alive.', image: 'screenshot/habit_barkada8.png' },
+          { title: 'Photo Dumps', desc: 'A shared photo album for uploading throwback photos, event recaps, and random moments worth keeping.', image: 'screenshot/habit_barkada9.png' },
+          { title: 'Mobile View', desc: 'A fully responsive layout so the barkada can stay connected on the go — same features, optimized for phones.', image: 'screenshot/habit_barkada10.png' }
+        ]
       }
     };
 
     // ================================================================
-    // CAROUSEL STATE
+    // PHOTOGRAPHY CAROUSEL DATA (10 photos)
+    // ================================================================
+    const PHOTO_DATA = [
+      { title: 'Picture Perfect Sunset', desc: 'Captures the symmetry of nature\'s beautiful way of ending a day.', image: 'screenshot/photo1.png' },
+      { title: 'Maroon Rays', desc: 'A dark and elegant representation of shadow and light contrast.', image: 'screenshot/photo2.png' },
+      { title: 'Starry Night Sky', desc: 'Captures the heavenly bodies that appear in the absence of Luna.', image: 'screenshot/photo3.png' },
+      { title: 'My First Ever Cat', desc: 'Features my cute and very relaxed ginger cat on a lovely morning.', image: 'screenshot/photo4.png' },
+      { title: 'My Upbringing', desc: 'Captures my high school days — memories framed in a picture-perfect angle of the campus.', image: 'screenshot/photo5.png' },
+      { title: 'Morning Drizzle', desc: 'Captures the essence of water droplets resting still on a flower\'s petal, giving it a natural glow.', image: 'screenshot/photo6.png' },
+      { title: 'Nature\'s Harmony', desc: 'Captures the beauty of a butterfly feeding on a flower\'s nectar.', image: 'screenshot/photo7.png' },
+      { title: 'The Blue Sea and Sky', desc: 'A perfect summer day — clear blue ocean water and bright skies, framing a magnificent rock formation.', image: 'screenshot/photo8.png' },
+      { title: 'Night Walk', desc: 'A photo taken during a quiet, nicely lit evening walk.', image: 'screenshot/photo9.png' },
+      { title: 'Light-Focused Exposure', desc: 'A well-lit lamp in a restaurant, shot with low exposure to showcase the beauty of its design.', image: 'screenshot/photo10.png' }
+    ];
+
+    // ================================================================
+    // MODAL CAROUSEL STATE
     // ================================================================
     let currentSlide = 0;
     let totalSlides = 0;
@@ -2210,6 +2507,7 @@
     function updateCarousel() {
       const track = document.getElementById('carouselTrack');
       const slides = track.querySelectorAll('.carousel-slide');
+      if (!slides.length) return;
       const viewportWidth = track.parentElement.offsetWidth;
       const slideWidth = slides[0].offsetWidth;
 
@@ -2245,11 +2543,12 @@
         if (modal && modal.classList.contains('open')) {
           updateCarousel();
         }
+        updatePhotoCarousel();
       }, 150);
     });
 
     // ================================================================
-    // GALLERY FUNCTIONS
+    // GALLERY (MODAL) FUNCTIONS
     // ================================================================
     function openGallery(projectKey) {
       const data = GALLERY_DATA[projectKey];
@@ -2309,6 +2608,83 @@
       } else if (e.key === 'ArrowRight') {
         carouselNext();
       }
+    });
+
+    // ================================================================
+    // PHOTOGRAPHY CAROUSEL (inline, 10 photos)
+    // ================================================================
+    let photoIndex = 0;
+
+    function renderPhotoCarousel() {
+      const track = document.getElementById('photoTrack');
+      const dots = document.getElementById('photoDots');
+      if (!track || !dots) return;
+      track.innerHTML = '';
+      dots.innerHTML = '';
+      const total = PHOTO_DATA.length;
+
+      PHOTO_DATA.forEach((photo, idx) => {
+        const slide = document.createElement('div');
+        slide.className = 'photo-slide';
+        const num = String(idx + 1).padStart(2, '0');
+
+        slide.innerHTML = `
+          <div class="photo-card">
+            <div class="photo-img">
+              ${photo.image
+                ? `<img src="${escapeHtml(photo.image)}" alt="${escapeHtml(photo.title)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />`
+                : ''}
+              <div class="img-placeholder" style="${photo.image ? 'display:none;' : ''}; display:${photo.image ? 'none' : 'flex'};">
+                <i class="fas fa-image"></i>
+                <span>Photo</span>
+              </div>
+              <span class="photo-count">${num} / ${total}</span>
+            </div>
+            <div class="photo-info">
+              <h5><i class="fas fa-camera"></i> ${escapeHtml(photo.title)}</h5>
+              <p>${escapeHtml(photo.desc)}</p>
+            </div>
+          </div>
+        `;
+        track.appendChild(slide);
+
+        const dot = document.createElement('button');
+        dot.className = 'photo-dot' + (idx === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Go to photo ${idx + 1}`);
+        dot.addEventListener('click', () => photoGoTo(idx));
+        dots.appendChild(dot);
+      });
+
+      photoIndex = 0;
+      updatePhotoCarousel();
+    }
+
+    function updatePhotoCarousel() {
+      const track = document.getElementById('photoTrack');
+      if (!track) return;
+      const slides = track.querySelectorAll('.photo-slide');
+      if (!slides.length) return;
+      const slideWidth = slides[0].offsetWidth;
+      track.style.transform = `translateX(${-photoIndex * slideWidth}px)`;
+
+      const dots = document.querySelectorAll('.photo-dot');
+      dots.forEach((dot, idx) => dot.classList.toggle('active', idx === photoIndex));
+    }
+
+    function photoGoTo(idx) {
+      const total = PHOTO_DATA.length;
+      if (idx < 0) idx = total - 1;
+      if (idx >= total) idx = 0;
+      photoIndex = idx;
+      updatePhotoCarousel();
+    }
+    function photoPrev() { photoGoTo(photoIndex - 1); }
+    function photoNext() { photoGoTo(photoIndex + 1); }
+
+    renderPhotoCarousel();
+
+    window.addEventListener('load', () => {
+      requestAnimationFrame(updatePhotoCarousel);
     });
 
     function escapeHtml(str) {
