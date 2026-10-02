@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#060917">
   <title>Internship Portfolio · Jherwin D. Reyes</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,6 +28,9 @@
       --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
       --tilt-perspective: 1000px;
       --dur-reveal: 640ms;
+
+      --display: 'Syne', 'Segoe UI', system-ui, sans-serif;
+      --rule: linear-gradient(90deg, rgba(34, 211, 238, 0.65), rgba(168, 85, 247, 0.35), transparent);
     }
 
     html { scroll-behavior: smooth; }
@@ -44,10 +48,12 @@
       line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
     }
 
     /* ================================================================
-       ===== LIGHTWEIGHT BACKGROUND =====
+       BACKGROUND ORBS
        ================================================================ */
     .bg-orb {
       position: fixed;
@@ -56,9 +62,7 @@
       pointer-events: none;
       filter: blur(70px);
       opacity: 0.5;
-      will-change: transform;
     }
-
     .bg-orb.one {
       width: 480px; height: 480px;
       top: -120px; left: -120px;
@@ -77,31 +81,13 @@
       background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
       animation: roam3 28s ease-in-out infinite reverse;
     }
-
-    @keyframes roam1 {
-      0%   { transform: translate(0, 0); }
-      50%  { transform: translate(60px, 100px); }
-      100% { transform: translate(0, 0); }
-    }
-    @keyframes roam2 {
-      0%   { transform: translate(0, 0); }
-      50%  { transform: translate(-80px, -50px); }
-      100% { transform: translate(0, 0); }
-    }
-    @keyframes roam3 {
-      0%   { transform: translate(0, 0); }
-      50%  { transform: translate(50px, -90px); }
-      100% { transform: translate(0, 0); }
-    }
+    @keyframes roam1 { 0%,100% { transform: translate(0,0);} 50% { transform: translate(60px,100px);} }
+    @keyframes roam2 { 0%,100% { transform: translate(0,0);} 50% { transform: translate(-80px,-50px);} }
+    @keyframes roam3 { 0%,100% { transform: translate(0,0);} 50% { transform: translate(50px,-90px);} }
 
     /* ================================================================
-       ===== EDITORIAL LAYOUT =====
+       EDITORIAL LAYOUT
        ================================================================ */
-    :root {
-      --display: 'Syne', 'Segoe UI', system-ui, sans-serif;
-      --rule: linear-gradient(90deg, rgba(34, 211, 238, 0.65), rgba(168, 85, 247, 0.35), transparent);
-    }
-
     .page {
       max-width: 1100px;
       margin: 0 auto;
@@ -109,10 +95,8 @@
       position: relative;
       z-index: 1;
     }
-
     .section { margin-bottom: 9rem; position: relative; scroll-margin-top: 3rem; }
 
-    /* ---- section titles ---- */
     .section-title {
       display: flex;
       align-items: center;
@@ -134,11 +118,13 @@
       color: var(--primary);
       align-self: flex-start;
       margin-top: 0.4em;
+      flex-shrink: 0;
     }
     .section-title i {
       color: var(--primary);
       font-size: 0.45em;
       filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.6));
+      flex-shrink: 0;
     }
     .section-title span { padding-bottom: 0.12em; }
     .section-title::after {
@@ -158,7 +144,6 @@
       max-width: 56ch;
       margin-bottom: 3.5rem;
     }
-
     .subsection-title {
       display: flex;
       align-items: center;
@@ -170,18 +155,13 @@
       color: var(--text-dark);
       margin-bottom: 0.6rem;
     }
-    .subsection-title::before { content: ""; width: 3rem; height: 1px; background: var(--primary); }
-    .subsection-title i { color: var(--primary); font-size: 0.7em; filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.5)); }
+    .subsection-title::before { content: ""; width: 3rem; height: 1px; background: var(--primary); flex-shrink: 0; }
+    .subsection-title i { color: var(--primary); font-size: 0.7em; filter: drop-shadow(0 0 6px rgba(34, 211, 238, 0.5)); flex-shrink: 0; }
 
     /* ================================================================
-       01  HERO
+       HERO
        ================================================================ */
-    .hero {
-      position: relative;
-      margin-bottom: 8rem;
-      scroll-margin-top: 0;
-    }
-
+    .hero { position: relative; margin-bottom: 8rem; scroll-margin-top: 0; }
     .hero-inner {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
@@ -189,13 +169,7 @@
       align-items: center;
       padding: 2rem 0 4rem;
     }
-
-    .hero-text {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
+    .hero-text { display: flex; flex-direction: column; gap: 1.5rem; }
     .hero-eyebrow {
       display: flex;
       align-items: center;
@@ -205,12 +179,7 @@
       text-transform: uppercase;
       color: var(--text-muted);
     }
-    .hero-eyebrow::before {
-      content: "";
-      width: 2.5rem;
-      height: 1px;
-      background: var(--primary);
-    }
+    .hero-eyebrow::before { content: ""; width: 2.5rem; height: 1px; background: var(--primary); flex-shrink: 0; }
 
     .hero-name {
       font-family: var(--display);
@@ -235,7 +204,6 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
     .hero-role {
       display: flex;
       flex-wrap: wrap;
@@ -251,7 +219,6 @@
       border-radius: 50px;
       background: rgba(15, 23, 42, 0.5);
     }
-
     .hero-intro {
       max-width: 36rem;
       font-size: 1.05rem;
@@ -259,12 +226,7 @@
       padding-left: 1.2rem;
       border-left: 2px solid rgba(34, 211, 238, 0.45);
     }
-
-    .hero-photo {
-      width: clamp(160px, 18vw, 220px);
-      flex-shrink: 0;
-    }
-
+    .hero-photo { width: clamp(160px, 18vw, 220px); flex-shrink: 0; }
     .avatar {
       width: 100%;
       aspect-ratio: 4 / 5;
@@ -276,16 +238,10 @@
       overflow: hidden;
       transition: box-shadow 0.4s ease;
     }
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .avatar:hover {
       box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.35), 0 20px 55px -12px rgba(34, 211, 238, 0.6);
     }
-
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -299,11 +255,12 @@
       font-size: 0.82rem;
       font-weight: 600;
       white-space: nowrap;
+      align-self: flex-start;
     }
     .hero-badge i { font-size: 0.9rem; }
 
     /* ================================================================
-       02  ABOUT
+       ABOUT
        ================================================================ */
     .about-grid {
       display: grid;
@@ -312,12 +269,7 @@
       margin-top: 1rem;
       align-items: start;
     }
-
-    .about-col {
-      display: flex;
-      flex-direction: column;
-    }
-
+    .about-col { display: flex; flex-direction: column; }
     .info-block h3 {
       font-family: var(--display);
       font-size: clamp(1.6rem, 3vw, 2.2rem);
@@ -330,12 +282,7 @@
       border-bottom: 1px solid var(--border-soft);
     }
     .info-block .card-icon { font-size: 1.2rem; color: var(--primary); margin-bottom: 0.8rem; display: block; }
-    .info-block p {
-      color: var(--text-body);
-      font-size: 1.05rem;
-      overflow-wrap: anywhere;
-    }
-
+    .info-block p { color: var(--text-body); font-size: 1.05rem; overflow-wrap: anywhere; }
     .personal p {
       display: flex;
       align-items: center;
@@ -345,7 +292,6 @@
     }
     .personal p:last-child { border-bottom: none; }
     .personal p i { color: var(--primary); width: 1.1rem; text-align: center; flex-shrink: 0; }
-
     .education p { margin-bottom: 0.5rem; }
     .education p:last-child { margin-bottom: 0; }
     .education p strong {
@@ -357,15 +303,9 @@
       color: var(--text-dark);
       margin-bottom: 0.4rem;
     }
-    .education .edu-meta {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-top: 0.6rem;
-    }
+    .education .edu-meta { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.6rem; }
 
-    .skills {
-      margin-top: 5rem;
-    }
+    .skills { margin-top: 5rem; }
     .skills h3 {
       font-family: var(--display);
       font-size: clamp(1.6rem, 3vw, 2.2rem);
@@ -410,7 +350,6 @@
       font-size: 0.75rem;
       color: #ffffff;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-      transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease;
       position: relative;
       overflow: hidden;
     }
@@ -419,10 +358,6 @@
       position: absolute; inset: 0;
       background: linear-gradient(160deg, rgba(255, 255, 255, 0.18) 0%, transparent 55%);
       pointer-events: none;
-    }
-    .skills li:hover .skill-icon {
-      transform: scale(1.15) rotate(-5deg);
-      box-shadow: 0 3px 10px rgba(34, 211, 238, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
     .skill-icon.html { background: linear-gradient(135deg, #e34f26, #b53a1a); }
     .skill-icon.css  { background: linear-gradient(135deg, #264de4, #1a35a0); }
@@ -438,7 +373,7 @@
     .skill-icon.wordpress { background: linear-gradient(135deg, #21759b, #0f3d52); }
 
     /* ================================================================
-       03  INTERNSHIP
+       INTERNSHIP
        ================================================================ */
     .story {
       display: grid;
@@ -448,7 +383,6 @@
       margin-top: 2rem;
     }
     .story-lead { position: sticky; top: 5rem; min-width: 0; }
-
     .story-lead .role-line {
       font-family: var(--display);
       font-weight: 700;
@@ -458,7 +392,6 @@
       margin-bottom: 0.6rem;
       line-height: 1.4;
     }
-
     .story-lead .company {
       display: block;
       font-family: var(--display);
@@ -489,12 +422,7 @@
       padding-left: 1.2rem;
       border-left: 1px solid rgba(34, 211, 238, 0.45);
     }
-
-    .internship-list {
-      list-style: none;
-      position: relative;
-      padding-top: 0.3rem;
-    }
+    .internship-list { list-style: none; position: relative; padding-top: 0.3rem; }
     .internship-list::before,
     .internship-list::after {
       content: "";
@@ -505,10 +433,7 @@
       z-index: 0;
       pointer-events: none;
     }
-    .internship-list::before {
-      width: 1px;
-      background: rgba(148, 163, 184, 0.22);
-    }
+    .internship-list::before { width: 1px; background: rgba(148, 163, 184, 0.22); }
     .internship-list::after {
       left: calc(0.75rem - 0.5px);
       width: 2px;
@@ -545,9 +470,7 @@
       align-items: center;
       background: linear-gradient(135deg, #22d3ee, #a855f7);
       border-radius: 50%;
-      box-shadow:
-        0 0 0 5px #060917,
-        0 0 18px -2px rgba(34, 211, 238, 0.7);
+      box-shadow: 0 0 0 5px #060917, 0 0 18px -2px rgba(34, 211, 238, 0.7);
       isolation: isolate;
     }
     .internship-list .check svg { width: 0.85rem; height: 0.85rem; fill: #0a1024; }
@@ -569,9 +492,12 @@
     }
 
     /* ================================================================
-       SHARED PROJECT CARD STYLES
+       PROJECT CARDS (shared)
        ================================================================ */
-    .project-card { position: relative; cursor: pointer; }
+    .project-card {
+      position: relative;
+      cursor: pointer;
+    }
     .pframe { position: relative; border-radius: 22px; transition: scale 0.2s ease; }
     .pframe:active { scale: 0.985; }
 
@@ -592,13 +518,16 @@
       background: linear-gradient(to top, rgba(6, 9, 23, 0.78), transparent 48%);
       pointer-events: none;
     }
-    .preview img {
+    .preview img,
+    .preview video {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
       opacity: 0.92;
       transition: scale 0.5s var(--ease-out), opacity 0.5s ease;
     }
+    .preview video { background: #060917; }
     .project-card:hover .preview img { scale: 1.05; opacity: 1; }
+    .project-card:hover .preview video { opacity: 1; }
 
     .preview .preview-tag {
       position: absolute; top: 14px; left: 14px; z-index: 2;
@@ -633,13 +562,11 @@
       color: #0a1024;
       flex-shrink: 0;
       box-shadow: 0 0 20px -4px var(--pc-shadow, rgba(34, 211, 238, 0.6));
-      transition: rotate 0.4s var(--ease-out), scale 0.4s var(--ease-out), box-shadow 0.4s ease;
+      transition: rotate 0.4s var(--ease-out), scale 0.4s var(--ease-out);
     }
     .pc-icon svg { width: 24px; height: 24px; fill: #0a1024; }
-    .project-card:hover .pc-icon {
-      rotate: -6deg; scale: 1.08;
-      box-shadow: 0 0 30px -2px var(--pc-shadow, rgba(34, 211, 238, 0.7));
-    }
+    .project-card:hover .pc-icon { rotate: -6deg; scale: 1.08; }
+
     .pc-date {
       font-size: 0.75rem; font-weight: 700;
       color: var(--pc-from, #22d3ee);
@@ -691,102 +618,60 @@
     .project-card.v8 { --pc-from: #8b5cf6; --pc-to: #a78bfa; --pc-shadow: rgba(139, 92, 246, 0.55); }
 
     /* ================================================================
-       04  WORK
+       GRIDS
        ================================================================ */
-    .project-grid {
+    .project-grid,
+    .academic-grid,
+    .mini-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 4rem 2.5rem;
       margin-top: 1rem;
     }
-
-    .project-grid .project-card {
+    .project-grid .project-card,
+    .academic-grid .project-card,
+    .mini-grid .project-card {
       display: flex;
       flex-direction: column;
       gap: 1.4rem;
     }
-
-    .project-grid .pc-body {
+    .project-grid .pc-body,
+    .academic-grid .pc-body,
+    .mini-grid .pc-body {
       display: flex;
       flex-direction: column;
       gap: 0.85rem;
     }
-
-    .project-grid .pc-top {
+    .project-grid .pc-top,
+    .academic-grid .pc-top,
+    .mini-grid .pc-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
       flex-wrap: wrap;
     }
-
-    .project-grid h4 {
+    .project-grid h4,
+    .academic-grid h4,
+    .mini-grid h4 {
       font-size: clamp(1.3rem, 2.4vw, 1.65rem);
       line-height: 1.15;
     }
 
     /* ================================================================
-       05  ACADEMIC
-       ================================================================ */
-    .academic-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 4rem 2.5rem;
-      margin-top: 1rem;
-    }
-
-    .academic-grid .project-card {
-      display: flex;
-      flex-direction: column;
-      gap: 1.4rem;
-    }
-
-    .academic-grid .pc-body {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-
-    .academic-grid .pc-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .academic-grid h4 {
-      font-size: clamp(1.3rem, 2.4vw, 1.65rem);
-      line-height: 1.15;
-    }
-
-    /* ================================================================
-       06  HABITS
+       HABITS
        ================================================================ */
     .habit-block + .habit-block { margin-top: 9rem; }
     .habit-block > .section-subtitle { margin-bottom: 3rem; }
-
     .habit-poster {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
       max-width: 100%;
     }
-
-    .habit-poster .pframe {
-      width: 100%;
-    }
-
-    .habit-poster .preview {
-      aspect-ratio: 21 / 9;
-    }
-
-    .habit-poster .pc-body {
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-    }
-
+    .habit-poster .pframe { width: 100%; }
+    .habit-poster .preview { aspect-ratio: 21 / 9; }
+    .habit-poster .pc-body { display: flex; flex-direction: column; gap: 0.9rem; }
     .habit-poster .pc-top {
       display: flex;
       align-items: center;
@@ -794,17 +679,18 @@
       flex-wrap: wrap;
       gap: 1rem;
     }
-
-    .habit-poster h4 {
-      font-size: clamp(1.8rem, 3.6vw, 2.6rem);
-    }
+    .habit-poster h4 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); }
 
     /* ================================================================
-       PHOTO CAROUSEL — BUTTONS MOVED TO TOP OF IMAGE (no overlap)
+       PHOTO CAROUSEL
        ================================================================ */
     .photo-carousel { position: relative; margin: 0; }
     .photo-viewport { overflow: hidden; border-radius: 22px; }
-    .photo-track { display: flex; transition: transform 0.55s cubic-bezier(0.34, 1.05, 0.64, 1); will-change: transform; counter-reset: ph; }
+    .photo-track {
+      display: flex;
+      transition: transform 0.55s cubic-bezier(0.34, 1.05, 0.64, 1);
+      counter-reset: ph;
+    }
     .photo-slide { flex: 0 0 100%; box-sizing: border-box; counter-increment: ph; }
     .photo-card {
       display: grid;
@@ -819,13 +705,11 @@
       border-radius: 22px;
       background: linear-gradient(135deg, rgba(236, 72, 153, 0.12), rgba(139, 92, 246, 0.12));
     }
-    .photo-img .img-placeholder {
-      position: absolute; inset: 0;
-      flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem;
-      color: #ec4899; font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
-      pointer-events: none;
+    .photo-card .photo-img img {
+      width: 100%; height: 100%;
+      object-fit: contain; display: block;
+      background: #060917;
     }
-    .photo-card .photo-img img { width: 100%; height: 100%; object-fit: contain; display: block; background: #060917; }
     .photo-card .photo-count {
       position: absolute; top: 14px; right: 14px; z-index: 2;
       background: rgba(10, 16, 36, 0.8);
@@ -858,10 +742,14 @@
       margin-bottom: 0.5rem;
       display: flex; align-items: flex-start; gap: 0.6rem;
     }
-    .photo-card .photo-info h5 i { color: #ec4899; font-size: 0.8rem; margin-top: 0.45em; filter: drop-shadow(0 0 6px rgba(236, 72, 153, 0.6)); }
+    .photo-card .photo-info h5 i {
+      color: #ec4899;
+      font-size: 0.8rem;
+      margin-top: 0.45em;
+      flex-shrink: 0;
+    }
     .photo-card .photo-info p { font-size: 0.95rem; color: var(--text-body); line-height: 1.6; }
 
-    /* --- Navigation buttons: now placed at top-right of image --- */
     .photo-btn {
       position: absolute;
       top: 14px;
@@ -878,12 +766,8 @@
       font-family: inherit;
     }
     .photo-btn:hover { background: #ec4899; color: #0a1024; scale: 1.08; }
-    .photo-btn i { display: inline-block; transition: translate 0.25s var(--ease-out); }
-    /* shifted right so they don't cover the counter (which sits at right:14px) */
     .photo-btn.photo-prev { right: 68px; }
     .photo-btn.photo-next { right: 14px; }
-    .photo-btn.photo-prev:hover i { translate: -2px 0; }
-    .photo-btn.photo-next:hover i { translate: 2px 0; }
     .photo-dots { display: flex; gap: 0.4rem; margin-top: 1.6rem; flex-wrap: wrap; }
     .photo-dot {
       width: 26px; height: 3px;
@@ -896,10 +780,9 @@
     .photo-dot:hover:not(.active) { background: rgba(236, 72, 153, 0.55); }
 
     /* ================================================================
-       07  CONNECT
+       CONNECT
        ================================================================ */
     .connect-section { display: flex; flex-direction: column; gap: 4rem; }
-
     .contact-card {
       order: 1;
       display: flex;
@@ -919,7 +802,6 @@
       width: 100%; height: 2px;
       background: var(--rule);
     }
-
     .contact-card .contact-icon {
       width: 52px; height: 52px;
       border-radius: 16px;
@@ -928,8 +810,8 @@
       display: inline-flex; align-items: center; justify-content: center;
       color: var(--primary);
       font-size: 1.3rem;
+      transition: scale 0.35s var(--ease-out), box-shadow 0.35s ease;
     }
-
     .contact-card h3 {
       font-family: var(--display);
       font-weight: 800;
@@ -942,22 +824,24 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
     .contact-card p {
       max-width: 60ch;
       font-size: 1.05rem;
       line-height: 1.7;
       color: var(--text-body);
     }
-
+    .contact-card:hover .contact-icon {
+      scale: 1.07;
+      box-shadow: 0 0 24px -4px rgba(34, 211, 238, 0.55);
+    }
     .socials-wrapper { order: 2; display: flex; flex-direction: column; }
     .social-card {
       position: relative;
       display: grid;
-      grid-template-columns: 4rem minmax(0, 1fr) auto;
+      grid-template-columns: 2.5rem minmax(0, 1fr) auto;
       align-items: center;
-      column-gap: 1.2rem;
-      padding: 1.6rem 0.5rem;
+      column-gap: 1rem;
+      padding: 0.9rem 0.4rem;
       border-top: 1px solid var(--border-soft);
       text-decoration: none;
       color: var(--text-dark);
@@ -975,8 +859,14 @@
       transition: scale 0.55s var(--ease-out);
     }
     .social-card:hover::before { scale: 1 1; }
-    .social-card:hover { translate: 0.8rem 0; }
-    .social-card .main-icon { grid-column: 1; justify-self: center; font-size: 2.1rem; display: inline-block; transition: translate 0.4s var(--ease-out), rotate 0.4s var(--ease-out), scale 0.4s var(--ease-out), text-shadow 0.4s ease; }
+    .social-card:hover { translate: 0.6rem 0; }
+    .social-card .main-icon {
+      grid-column: 1;
+      justify-self: center;
+      font-size: 1.35rem;
+      display: inline-block;
+      transition: translate 0.4s var(--ease-out), rotate 0.4s var(--ease-out), scale 0.4s var(--ease-out);
+    }
     .social-card.email .main-icon { color: var(--primary); }
     .social-card.linkedin .main-icon { color: #4aa3ff; }
     .social-card.phone .main-icon { color: #34d399; }
@@ -984,11 +874,20 @@
       grid-column: 2;
       font-family: var(--display);
       font-weight: 800;
-      font-size: clamp(2.1rem, 6.2vw, 4.2rem);
-      letter-spacing: -0.04em;
-      line-height: 1;
+      font-size: clamp(1.15rem, 2.2vw, 1.65rem);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
     }
-    .social-card .handle-tag { grid-column: 3; font-size: 0.98rem; color: var(--text-muted); text-align: right; overflow-wrap: anywhere; }
+    .social-card .handle-tag {
+      grid-column: 3;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+    .social-card.email:hover .main-icon { translate: 0 -3px; rotate: -6deg; scale: 1.08; }
+    .social-card.linkedin:hover .main-icon { scale: 1.12; }
+    .social-card.phone:hover .main-icon { scale: 1.1; }
 
     .footer-note {
       margin-top: 2rem;
@@ -998,7 +897,6 @@
       color: var(--text-muted);
       text-align: center;
     }
-    .footer-note i { color: var(--primary); margin: 0 0.3rem; }
 
     /* ================================================================
        EDITORIAL RAIL
@@ -1012,24 +910,48 @@
       flex-direction: column;
       gap: 1.15rem;
     }
-    .rail::before { content: ""; position: absolute; left: 12px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, transparent, rgba(34, 211, 238, 0.4), transparent); }
-    .rail a { position: relative; display: flex; align-items: center; gap: 0.7rem; text-decoration: none; font-size: 0.68rem; letter-spacing: 0.16em; color: var(--text-muted); }
-    .rail a b { width: 25px; text-align: center; font-weight: 700; background: #060917; padding: 2px 0; transition: color 0.3s ease; }
-    .rail a span { text-transform: uppercase; opacity: 0; translate: -6px 0; transition: opacity 0.3s ease, translate 0.3s var(--ease-out); white-space: nowrap; }
+    .rail::before {
+      content: "";
+      position: absolute;
+      left: 12px; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(34, 211, 238, 0.4), transparent);
+    }
+    .rail a {
+      position: relative;
+      display: flex; align-items: center; gap: 0.7rem;
+      text-decoration: none;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+    .rail a b {
+      width: 25px;
+      text-align: center;
+      font-weight: 700;
+      background: #060917;
+      padding: 2px 0;
+      transition: color 0.3s ease;
+    }
+    .rail a span {
+      text-transform: uppercase;
+      opacity: 0;
+      translate: -6px 0;
+      transition: opacity 0.3s ease, translate 0.3s var(--ease-out);
+      white-space: nowrap;
+    }
     .rail a:hover span { opacity: 1; translate: 0 0; }
     .rail a.on b { color: var(--primary); }
     .rail a:hover b { color: var(--text-dark); }
     @media (min-width: 1280px) { .rail { display: flex; } }
 
     /* ================================================================
-       MODAL / POPUP
+       MODAL / GALLERY
        ================================================================ */
     .modal-backdrop {
       position: fixed;
       inset: 0;
       background: rgba(3, 6, 18, 0.92);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       z-index: 1000;
       opacity: 0;
       visibility: hidden;
@@ -1041,18 +963,11 @@
       padding: 1rem;
       overflow: hidden;
     }
-
-    .modal-backdrop.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
+    .modal-backdrop.open { opacity: 1; visibility: visible; }
     .modal-close {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 48px;
-      height: 48px;
+      top: 20px; right: 20px;
+      width: 48px; height: 48px;
       border-radius: 50%;
       background: rgba(15, 23, 42, 0.95);
       border: 1.5px solid rgba(34, 211, 238, 0.5);
@@ -1063,17 +978,15 @@
       align-items: center;
       justify-content: center;
       z-index: 1100;
-      transition: all 0.3s ease;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
       font-family: inherit;
       flex-shrink: 0;
     }
-
     .modal-close:hover {
       background: var(--primary);
       color: #0a1024;
       transform: rotate(90deg) scale(1.08);
     }
-
     .modal-inner {
       display: flex;
       flex-direction: column;
@@ -1085,7 +998,6 @@
       gap: 1rem;
       padding-top: 3rem;
     }
-
     .modal-header {
       text-align: center;
       max-width: 800px;
@@ -1094,13 +1006,11 @@
       transform: translateY(16px);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
-
     .modal-backdrop.open .modal-header {
       opacity: 1;
       transform: translateY(0);
       transition-delay: 0.1s;
     }
-
     .modal-header .modal-eyebrow {
       display: inline-block;
       font-size: 0.72rem;
@@ -1114,7 +1024,6 @@
       background: rgba(34, 211, 238, 0.1);
       border: 1px solid rgba(34, 211, 238, 0.3);
     }
-
     .modal-header h2 {
       font-size: 2rem;
       font-weight: 800;
@@ -1125,14 +1034,12 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
     .modal-header p {
       font-size: 0.98rem;
       color: var(--text-body);
       max-width: 600px;
       margin: 0 auto;
     }
-
     .carousel-wrap {
       position: relative;
       width: 100%;
@@ -1142,25 +1049,17 @@
       transform: translateY(20px);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
-
     .modal-backdrop.open .carousel-wrap {
       opacity: 1;
       transform: translateY(0);
       transition-delay: 0.2s;
     }
-
-    .carousel-viewport {
-      overflow: hidden;
-      padding: 0.5rem 0;
-    }
-
+    .carousel-viewport { overflow: hidden; padding: 0.5rem 0; }
     .carousel-track {
       display: flex;
       transition: transform 0.5s cubic-bezier(0.34, 1.05, 0.64, 1);
-      will-change: transform;
       align-items: stretch;
     }
-
     .carousel-slide {
       flex: 0 0 70%;
       padding: 0 0.6rem;
@@ -1169,11 +1068,7 @@
       opacity: 0.35;
       transform: scale(0.92);
     }
-
-    .carousel-slide.active {
-      opacity: 1;
-      transform: scale(1);
-    }
+    .carousel-slide.active { opacity: 1; transform: scale(1); }
 
     .carousel-card {
       background: rgba(15, 23, 42, 0.92);
@@ -1185,7 +1080,6 @@
       flex-direction: column;
       height: 100%;
     }
-
     .carousel-card .window-bar {
       display: flex;
       align-items: center;
@@ -1194,18 +1088,14 @@
       background: rgba(10, 16, 36, 0.95);
       border-bottom: 1px solid rgba(34, 211, 238, 0.15);
     }
-
     .carousel-card .window-bar .dot {
-      width: 11px;
-      height: 11px;
+      width: 11px; height: 11px;
       border-radius: 50%;
       flex-shrink: 0;
     }
-
     .carousel-card .window-bar .dot.red { background: #ff5f57; }
     .carousel-card .window-bar .dot.yellow { background: #febc2e; }
     .carousel-card .window-bar .dot.green { background: #28c840; }
-
     .carousel-card .window-bar .window-title {
       font-size: 0.75rem;
       font-weight: 700;
@@ -1215,7 +1105,6 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-
     .carousel-card .window-bar .window-num {
       margin-left: auto;
       font-size: 0.68rem;
@@ -1224,6 +1113,27 @@
       background: rgba(34, 211, 238, 0.15);
       padding: 0.15rem 0.6rem;
       border-radius: 50px;
+    }
+    .carousel-card .window-bar .window-expand {
+      margin-left: 0.4rem;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(34, 211, 238, 0.15);
+      border: 1px solid rgba(34, 211, 238, 0.4);
+      color: var(--primary);
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    .carousel-card .window-bar .window-expand:hover {
+      background: var(--primary);
+      color: #0a1024;
+      transform: scale(1.1);
     }
 
     .carousel-card .window-img {
@@ -1234,14 +1144,15 @@
       position: relative;
       border-bottom: 1px solid rgba(34, 211, 238, 0.12);
     }
-
     .carousel-card .window-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
     }
-
+    .carousel-card .window-img video {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      background: #060917;
+    }
     .carousel-card .window-img .img-placeholder {
       position: absolute;
       inset: 0;
@@ -1257,12 +1168,10 @@
       background: linear-gradient(135deg, rgba(34, 211, 238, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
       pointer-events: none;
     }
-
     .carousel-card .window-text {
       padding: 1.2rem 1.3rem 1.4rem;
       flex: 1;
     }
-
     .carousel-card .window-text h5 {
       font-size: 1.05rem;
       font-weight: 800;
@@ -1273,14 +1182,12 @@
       align-items: flex-start;
       gap: 0.5rem;
     }
-
     .carousel-card .window-text h5 i {
       color: var(--primary);
       font-size: 0.85rem;
       margin-top: 0.25rem;
       flex-shrink: 0;
     }
-
     .carousel-card .window-text p {
       font-size: 0.88rem;
       line-height: 1.6;
@@ -1291,8 +1198,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 46px;
-      height: 46px;
+      width: 46px; height: 46px;
       border-radius: 50%;
       background: rgba(15, 23, 42, 0.9);
       border: 1.5px solid rgba(34, 211, 238, 0.4);
@@ -1303,16 +1209,14 @@
       align-items: center;
       justify-content: center;
       z-index: 10;
-      transition: all 0.3s ease;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
       font-family: inherit;
     }
-
     .carousel-btn:hover {
       background: var(--primary);
       color: #0a1024;
       transform: translateY(-50%) scale(1.1);
     }
-
     .carousel-btn.prev { left: -10px; }
     .carousel-btn.next { right: -10px; }
 
@@ -1324,10 +1228,8 @@
       flex-wrap: wrap;
       flex-shrink: 0;
     }
-
     .carousel-dot {
-      width: 9px;
-      height: 9px;
+      width: 9px; height: 9px;
       border-radius: 50%;
       background: rgba(148, 163, 184, 0.3);
       border: none;
@@ -1335,17 +1237,83 @@
       transition: all 0.3s ease;
       padding: 0;
     }
-
     .carousel-dot.active {
       background: var(--primary);
       transform: scale(1.3);
     }
-
-    .carousel-dot:hover:not(.active) {
-      background: rgba(148, 163, 184, 0.6);
-    }
+    .carousel-dot:hover:not(.active) { background: rgba(148, 163, 184, 0.6); }
 
     body.modal-open { overflow: hidden; }
+
+    /* ================================================================
+       LIGHTBOX
+       ================================================================ */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 4, 12, 0.96);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      cursor: zoom-out;
+    }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.9);
+      transform: scale(0.92);
+      opacity: 0;
+      transition: transform 0.4s var(--ease-out), opacity 0.3s ease;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .lightbox.open img { transform: scale(1); opacity: 1; }
+    .lightbox-close {
+      position: absolute;
+      top: 20px; right: 20px;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1.5px solid rgba(34, 211, 238, 0.5);
+      color: var(--primary);
+      font-size: 1.15rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+      z-index: 2100;
+    }
+    .lightbox-close:hover {
+      background: var(--primary);
+      color: #0a1024;
+      transform: rotate(90deg) scale(1.08);
+    }
+    .lightbox-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      translate: -50% 0;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.85);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      border: 1px solid var(--border-soft);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
 
     /* ================================================================
        MOTION SYSTEM
@@ -1359,7 +1327,6 @@
       from { opacity: 0; clip-path: inset(100% 0 0 0); translate: 0 0.35em; }
       to   { opacity: 1; clip-path: inset(-0.3em -0.2em -0.3em -0.2em); translate: 0 0; }
     }
-
     .rv:not(.in) { opacity: 0; }
     .rv.in { animation: rv-rise var(--dur-reveal) var(--ease-out) var(--rv-delay, 0ms) backwards; }
     .rv-wipe.in { animation: rv-wipe 800ms var(--ease-out) var(--rv-delay, 0ms) backwards; }
@@ -1371,7 +1338,6 @@
     [data-tilt] { --rx: 0deg; --ry: 0deg; }
     [data-tilt].is-tilting {
       transform: perspective(var(--tilt-perspective)) rotateX(var(--rx)) rotateY(var(--ry));
-      will-change: transform;
     }
     [data-spotlight] {
       --spot-a: rgba(34, 211, 238, 0.13);
@@ -1383,7 +1349,6 @@
       --spot-b: color-mix(in srgb, var(--pc-to, #a855f7) 9%, transparent);
       --spot-size: 460px;
     }
-    .photo-img[data-spotlight] { --spot-a: rgba(236, 72, 153, 0.15); --spot-b: rgba(139, 92, 246, 0.08); --spot-size: 420px; }
     .social-card[data-spotlight] { --spot-size: 520px; --spot-a: rgba(34, 211, 238, 0.09); --spot-b: rgba(168, 85, 247, 0.05); }
     [data-spotlight]::after {
       content: "";
@@ -1399,7 +1364,7 @@
     }
     [data-spotlight].is-hot::after { opacity: 1; }
 
-    .pframe { --d-img: 3px; --d-tag: 3px; --d-num: 8px; }
+    .pframe { --d-img: 3px; --d-tag: 3px; }
     [data-depth] .preview img {
       translate: calc(var(--px, 0) * var(--depth, 0) * var(--d-img) * -1) calc(var(--py, 0) * var(--depth, 0) * var(--d-img) * -1);
     }
@@ -1415,24 +1380,12 @@
     .info-block:hover .card-icon .fa-user { translate: 0 -3px; scale: 1.08; }
     .info-block:hover .card-icon .fa-graduation-cap { rotate: -10deg; translate: 0 -2px; }
     .info-block:hover .card-icon .fa-laptop-code { animation: icon-pulse 0.4s var(--ease-out); }
-
     .info-block p i.fas { display: inline-block; }
     .info-block p:hover .fa-map-pin { animation: pin-drop 0.42s var(--ease-out); }
     .info-block p:hover .fa-envelope { animation: mail-nudge 0.4s var(--ease-out); }
     .info-block p:hover .fa-phone-alt { animation: phone-buzz 0.4s ease-in-out; }
-
-    .social-card.email:hover .main-icon { translate: 0 -4px; rotate: -6deg; scale: 1.1; }
-    .social-card.linkedin:hover .main-icon { scale: 1.16; text-shadow: 0 0 22px rgba(74, 163, 255, 0.7); }
-    .social-card.phone:hover .main-icon { scale: 1.1; animation: phone-buzz 0.42s ease-in-out; }
-
-    .contact-card .contact-icon { transition: scale 0.35s var(--ease-out), box-shadow 0.35s ease; }
     .contact-card .contact-icon i { display: inline-block; transition: translate 0.4s var(--ease-out); }
-    .contact-card:hover .contact-icon { scale: 1.07; box-shadow: 0 0 24px -4px rgba(34, 211, 238, 0.55); }
     .contact-card:hover .contact-icon i { translate: 3px -3px; }
-
-    .carousel-btn i { display: inline-block; transition: translate 0.25s var(--ease-out); }
-    .carousel-btn.prev:hover i { translate: -2px 0; }
-    .carousel-btn.next:hover i { translate: 2px 0; }
 
     @keyframes icon-pulse { 40% { scale: 1.18; } }
     @keyframes pin-drop { 35% { translate: 0 -4px; } 65% { translate: 0 0; } 80% { translate: 0 -1.5px; } }
@@ -1441,11 +1394,15 @@
 
     @media (hover: none), (pointer: coarse) {
       [data-spotlight]::after { display: none; }
+      .project-card:hover .preview img { scale: none; }
     }
+
+    /* Mini grid: inherits the same pointer effects as other grids — no overrides needed */
 
     /* ================================================================
        RESPONSIVE
        ================================================================ */
+
     @media (max-width: 1100px) {
       .carousel-slide { flex: 0 0 78%; }
       .carousel-btn.prev { left: 4px; }
@@ -1469,6 +1426,7 @@
         white-space: normal;
         text-align: center;
         justify-content: center;
+        align-self: stretch;
       }
 
       .about-grid {
@@ -1485,37 +1443,70 @@
       .story-lead .company { white-space: normal; font-size: clamp(2rem, 8vw, 3rem); }
 
       .project-grid,
-      .academic-grid {
+      .academic-grid,
+      .mini-grid {
         grid-template-columns: 1fr;
         gap: 3.5rem;
       }
 
       .photo-card { grid-template-columns: 1fr; row-gap: 1.6rem; }
       .photo-card .photo-info { padding: 0 0 0.5rem; }
-      /* buttons stay at top-right of image on smaller screens */
       .photo-btn { top: 12px; width: 40px; height: 40px; }
       .photo-btn.photo-prev { right: 62px; }
       .photo-btn.photo-next { right: 12px; }
       .photo-dots { margin: 1.4rem 0 0 0; }
 
-      .social-card { grid-template-columns: 3rem minmax(0, 1fr); }
-      .social-card .handle-tag { grid-column: 2; grid-row: 2; text-align: left; margin-top: 0.4rem; }
+      .social-card { grid-template-columns: 2.5rem minmax(0, 1fr); column-gap: 0.9rem; }
+      .social-card .handle-tag { grid-column: 2; grid-row: 2; text-align: left; margin-top: 0.15rem; font-size: 0.78rem; }
       .social-card .main-icon { grid-row: 1 / 3; }
     }
 
     @media (max-width: 700px) {
       .page { padding: 1.5rem 1.25rem 3rem; }
+      .section { margin-bottom: 5rem; }
       .bg-orb { opacity: 0.35; }
+
+      .section-title {
+        font-size: clamp(1.6rem, 8vw, 2.4rem);
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .section-title::before { font-size: 0.7rem; }
+      .section-title::after { display: none; }
+
       .hero-name { font-size: clamp(2.4rem, 10vw, 3.5rem); }
       .hero-role { font-size: 0.7rem; }
       .hero-role span { padding: 0.25rem 0.7rem; }
-      .hero-intro { font-size: 1rem; }
+      .hero-intro { font-size: 1rem; padding-left: 1rem; }
+      .hero { margin-bottom: 5rem; }
+
+      .subsection-title { font-size: clamp(1.15rem, 5vw, 1.5rem); gap: 0.75rem; }
+      .subsection-title::before { width: 2rem; }
+
+      .skills { margin-top: 3rem; }
       .skills ul { grid-template-columns: 1fr; }
       .skills li, .skills li:nth-child(2n) { padding-left: 0; border-left: 0; }
+
       .internship-list li { padding-left: 3.2rem; }
       .internship-list .list_text { font-size: 1.12rem; }
+      .story-lead p { font-size: 1rem; }
 
       .contact-card { padding: 1.8rem; }
+      .contact-card h3 { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+      .contact-card p { font-size: 0.98rem; }
+      .connect-section { gap: 2.5rem; }
+      .socials-wrapper { gap: 0; }
+
+      .project-grid,
+      .academic-grid,
+      .mini-grid { gap: 3rem; }
+      .project-grid .project-card,
+      .academic-grid .project-card,
+      .mini-grid .project-card { gap: 1.1rem; }
+      .project-card h4 { font-size: clamp(1.1rem, 5vw, 1.35rem); }
+      .pc-icon { width: 42px; height: 42px; border-radius: 12px; }
+      .pc-icon svg { width: 20px; height: 20px; }
+      .project-card .para { font-size: 0.9rem; }
 
       .modal-backdrop { padding: 0.5rem; }
       .modal-inner { padding-top: 3.5rem; gap: 0.75rem; }
@@ -1531,25 +1522,41 @@
       .carousel-card .window-text { padding: 1rem 1.1rem 1.2rem; }
       .carousel-card .window-text h5 { font-size: 0.95rem; }
       .carousel-card .window-text p { font-size: 0.82rem; }
+      .carousel-card .window-bar { padding: 0.55rem 0.85rem; }
+      .carousel-card .window-bar .window-title { font-size: 0.7rem; margin-left: 0.35rem; }
+      .carousel-card .window-bar .window-num { font-size: 0.62rem; padding: 0.12rem 0.5rem; }
+      .carousel-card .window-bar .window-expand { width: 24px; height: 24px; font-size: 0.65rem; }
 
-      /* photo nav buttons scale down a bit */
       .photo-btn { width: 36px; height: 36px; font-size: 0.8rem; top: 10px; }
       .photo-btn.photo-prev { right: 54px; }
       .photo-btn.photo-next { right: 10px; }
       .photo-card .photo-count { top: 10px; right: 10px; font-size: 0.66rem; padding: 0.25rem 0.6rem; }
+
+      .lightbox-close { width: 40px; height: 40px; top: 12px; right: 12px; font-size: 1rem; }
+      .lightbox-hint { font-size: 0.7rem; padding: 0.4rem 0.85rem; bottom: 14px; }
     }
 
     @media (max-width: 450px) {
+      .page { padding: 1.25rem 1rem 2.5rem; }
+      .section-title { font-size: clamp(1.4rem, 9vw, 2rem); }
+      .hero-name { font-size: clamp(2rem, 11vw, 3rem); }
+      .hero-badge { font-size: 0.75rem; padding: 0.45rem 0.9rem; }
+      .hero-photo { width: min(160px, 55%); }
+
+      .contact-card { padding: 1.4rem; }
       .carousel-slide { flex: 0 0 92%; }
       .carousel-btn { width: 34px; height: 34px; font-size: 0.75rem; }
-      .social-card { padding: 1.3rem 0.25rem; }
+      .social-card { padding: 0.85rem 0.25rem; }
+      .social-card .label { font-size: 1.05rem; }
+      .social-card .handle-tag { font-size: 0.72rem; }
       .photo-card .photo-info::before { font-size: 3.6rem; }
+      .pc-icon { width: 38px; height: 38px; border-radius: 10px; }
+      .pc-icon svg { width: 18px; height: 18px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .bg-orb, .story-lead .company { animation: none !important; }
-
       .rv, .rv:not(.in) { opacity: 1 !important; }
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -1560,11 +1567,9 @@
       }
       .carousel-track, .photo-track { transition: none !important; }
       .internship-list { --tl: 1 !important; }
-
-      [data-tilt].is-tilting { transform: none !important; will-change: auto; }
+      [data-tilt].is-tilting { transform: none !important; }
       [data-spotlight]::after { display: none; }
       [data-depth] .preview img, [data-depth] .preview-tag { translate: none; }
-
       .info-block .card-icon i, .info-block p i, .pc-icon, .pc-link i,
       .social-card .main-icon, .contact-card .contact-icon, .contact-card .contact-icon i,
       .carousel-btn i, .photo-btn i, .skill-icon { translate: none !important; rotate: none !important; scale: none !important; transform: none !important; }
@@ -1584,8 +1589,9 @@
     <a href="#internship"><b>03</b><span>Internship</span></a>
     <a href="#work"><b>04</b><span>Work</span></a>
     <a href="#academic"><b>05</b><span>Academic</span></a>
-    <a href="#habits"><b>06</b><span>Habits</span></a>
-    <a href="#connect"><b>07</b><span>Connect</span></a>
+    <a href="#mini"><b>06</b><span>Mini</span></a>
+    <a href="#habits"><b>07</b><span>Habits</span></a>
+    <a href="#connect"><b>08</b><span>Connect</span></a>
   </nav>
 
   <div class="page">
@@ -1731,7 +1737,7 @@
             <div class="preview">
               <span class="preview-tag">Preview</span>
               <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
-              <img src="Proj1.png" alt="FRS Assessment Page preview" loading="lazy" />
+              <img src="Proj1.png" alt="FRS Assessment Page preview" loading="lazy" decoding="async" />
             </div>
           </div>
           <div class="pc-body" data-rv="140">
@@ -1768,7 +1774,7 @@
             <div class="preview">
               <span class="preview-tag">Preview</span>
               <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
-              <img src="screenshot/ebook-story1.png" alt="Digital Values eBook preview" loading="lazy" />
+              <img src="screenshot/ebook-story1.png" alt="Digital Values eBook preview" loading="lazy" decoding="async" />
             </div>
           </div>
           <div class="pc-body" data-rv="140">
@@ -1802,7 +1808,7 @@
             <div class="preview">
               <span class="preview-tag">Preview</span>
               <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
-              <img src="screenshot/ebook-1.png" alt="Digital Values Assessment preview" loading="lazy" />
+              <img src="screenshot/ebook-1.png" alt="Digital Values Assessment preview" loading="lazy" decoding="async" />
             </div>
           </div>
           <div class="pc-body" data-rv="140">
@@ -1849,7 +1855,7 @@
             <div class="preview">
               <span class="preview-tag">Preview</span>
               <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
-              <img src="screenshot/acad1_game_design.png" alt="Game Design Prototype preview" loading="lazy" />
+              <img src="screenshot/acad1_game_design.png" alt="Game Design Prototype preview" loading="lazy" decoding="async" />
             </div>
           </div>
           <div class="pc-body" data-rv="140">
@@ -1884,7 +1890,7 @@
             <div class="preview">
               <span class="preview-tag">Preview</span>
               <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
-              <img src="screenshot/acad2_food_ordering.png" alt="Food ordering system preview" loading="lazy" />
+              <img src="screenshot/acad2_food_ordering.png" alt="Food ordering system preview" loading="lazy" decoding="async" />
             </div>
           </div>
           <div class="pc-body" data-rv="140">
@@ -1919,7 +1925,7 @@
             <div class="preview">
               <span class="preview-tag">Preview</span>
               <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
-              <img src="screenshot/acad3_blender.png" alt="Blender 3D model preview" loading="lazy" />
+              <img src="screenshot/acad3_blender.png" alt="Blender 3D model preview" loading="lazy" decoding="async" />
             </div>
           </div>
           <div class="pc-body" data-rv="140">
@@ -1953,7 +1959,7 @@
             <div class="preview">
               <span class="preview-tag">Preview</span>
               <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
-              <img src="screenshot/acad4_ai_travel.png" alt="AI travel assistant preview" loading="lazy" />
+              <img src="screenshot/acad4_ai_travel.png" alt="AI travel assistant preview" loading="lazy" decoding="async" />
             </div>
           </div>
           <div class="pc-body" data-rv="140">
@@ -1984,9 +1990,387 @@
       </div>
     </section>
 
-    <!-- 06 HABITS -->
-    <section class="section habits" id="habits" data-reveal-group>
+    <!-- 06 MINI PROJECTS -->
+    <section class="section mini-projects" id="mini" data-reveal-group>
       <div class="section-title" data-no="06">
+        <i class="fas fa-toolbox"></i>
+        <span>Mini Projects</span>
+      </div>
+      <p class="section-subtitle">A collection of smaller creative builds across image editing, 3D modeling, animation, and game prototyping. Click a card to open the gallery.</p>
+
+      <div class="mini-grid">
+        <div class="project-card v1" onclick="openGallery('mini1')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">Preview</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <img src="screenshot/mini_project1.jpg" alt="Product Advertisement Poster preview" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 3H3C1.9 3 1 3.9 1 5V19C1 20.1 1.9 21 3 21H21C22.1 21 23 20.1 23 19V5C23 3.9 22.1 3 21 3ZM5 17L8.5 12.5L11 15.5L14.5 11L19 17H5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2023</span>
+            </div>
+            <h4>Product Advertisement Poster</h4>
+            <p class="para">
+              Designed a simple product advertisement poster using Adobe Photoshop. Focused on layout composition, typography, and image manipulation to create a clean, eye-catching promotional visual.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Image Manipulation</span>
+              <span class="tag">Adobe Photoshop</span>
+              <span class="tag">Graphic Design</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="project-card v2" onclick="openGallery('mini2')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">Preview</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <img src="screenshot/mini_project2.jpg" alt="3D Object Creation in Blender preview" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 3H3C1.9 3 1 3.9 1 5V19C1 20.1 1.9 21 3 21H21C22.1 21 23 20.1 23 19V5C23 3.9 22.1 3 21 3ZM5 17L8.5 12.5L11 15.5L14.5 11L19 17H5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>3D Object Creation in Blender</h4>
+            <p class="para">
+              Modeled a basic 3D object — a pair of headphones — in Blender. Applied materials and textures to give the model a realistic, finished look.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Blender</span>
+              <span class="tag">3D Modeling</span>
+              <span class="tag">Materials &amp; Textures</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="project-card v3" onclick="openGallery('mini3')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">Preview</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <img src="screenshot/mini_project3.jpg" alt="Certificate Design preview" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 3H3C1.9 3 1 3.9 1 5V19C1 20.1 1.9 21 3 21H21C22.1 21 23 20.1 23 19V5C23 3.9 22.1 3 21 3ZM5 17L8.5 12.5L11 15.5L14.5 11L19 17H5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2023</span>
+            </div>
+            <h4>Certificate Design</h4>
+            <p class="para">
+              Created a sample certificate using Adobe Photoshop. Applied design principles such as alignment, hierarchy, and typography to produce a clean and professional layout.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Design</span>
+              <span class="tag">Image Editing</span>
+              <span class="tag">Adobe Photoshop</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="project-card v4" onclick="openGallery('mini4')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">Preview</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <img src="screenshot/mini_project4.png" alt="Blender Scene &amp; Lighting preview" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 3H3C1.9 3 1 3.9 1 5V19C1 20.1 1.9 21 3 21H21C22.1 21 23 20.1 23 19V5C23 3.9 22.1 3 21 3ZM5 17L8.5 12.5L11 15.5L14.5 11L19 17H5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>Blender Scene &amp; Lighting</h4>
+            <p class="para">
+              Built a simple 3D scene in Blender containing a character, an object, and proper lighting. Focused on shading, materials, and light placement to enhance the overall composition.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Blender</span>
+              <span class="tag">3D</span>
+              <span class="tag">Shading</span>
+              <span class="tag">Materials &amp; Textures</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="project-card v5" onclick="openGallery('mini5')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">Preview</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <img src="screenshot/mini_project5.png" alt="Logo Design preview" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 3H3C1.9 3 1 3.9 1 5V19C1 20.1 1.9 21 3 21H21C22.1 21 23 20.1 23 19V5C23 3.9 22.1 3 21 3ZM5 17L8.5 12.5L11 15.5L14.5 11L19 17H5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2024</span>
+            </div>
+            <h4>Logo Design</h4>
+            <p class="para">
+              Designed a simple logo using Adobe Photoshop. Focused on shape, color balance, and visual identity to create a clean and recognizable mark.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Logo Design</span>
+              <span class="tag">Adobe Photoshop</span>
+              <span class="tag">Image Editing</span>
+              <span class="tag">Design</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="project-card v6" onclick="openGallery('mini6')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">Preview</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <img src="screenshot/mini_project6.png" alt="Game Environment Development preview" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 3H3C1.9 3 1 3.9 1 5V19C1 20.1 1.9 21 3 21H21C22.1 21 23 20.1 23 19V5C23 3.9 22.1 3 21 3ZM5 17L8.5 12.5L11 15.5L14.5 11L19 17H5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>Game Environment Development</h4>
+            <p class="para">
+              Created a simple 3D game environment in Unity for a game project. Focused on level layout, asset placement, and scene composition.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Unity</span>
+              <span class="tag">Game Development</span>
+              <span class="tag">3D Design</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="project-card v7" onclick="openGallery('mini7')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">Preview</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <img src="screenshot/mini_project7.png" alt="Furniture Object Modeling preview" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 3H3C1.9 3 1 3.9 1 5V19C1 20.1 1.9 21 3 21H21C22.1 21 23 20.1 23 19V5C23 3.9 22.1 3 21 3ZM5 17L8.5 12.5L11 15.5L14.5 11L19 17H5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>Furniture Object Modeling</h4>
+            <p class="para">
+              Modeled a simple chair in Blender as a furniture asset. Applied materials and textures to achieve a clean, game-ready appearance.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Blender</span>
+              <span class="tag">3D Modeling</span>
+              <span class="tag">Materials &amp; Textures</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="project-card v8" onclick="openGallery('mini8')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">Preview</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <img src="screenshot/mini_project8.png" alt="Object Shading &amp; Texturing preview" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 3H3C1.9 3 1 3.9 1 5V19C1 20.1 1.9 21 3 21H21C22.1 21 23 20.1 23 19V5C23 3.9 22.1 3 21 3ZM5 17L8.5 12.5L11 15.5L14.5 11L19 17H5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>Object Shading &amp; Texturing</h4>
+            <p class="para">
+              Created a 3D cake model in Blender that highlights the use of materials, shading, and texturing techniques to achieve a realistic finish.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Blender</span>
+              <span class="tag">Materials &amp; Textures</span>
+              <span class="tag">Shading</span>
+              <span class="tag">3D</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="project-card v1" onclick="openGallery('mini9')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">Preview</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <img src="screenshot/mini_project9.png" alt="3D Character Creation preview" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 3H3C1.9 3 1 3.9 1 5V19C1 20.1 1.9 21 3 21H21C22.1 21 23 20.1 23 19V5C23 3.9 22.1 3 21 3ZM5 17L8.5 12.5L11 15.5L14.5 11L19 17H5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>3D Character Creation</h4>
+            <p class="para">
+              Modeled a simple 3D character in Blender, complete with materials, textures, and lighting. Focused on form, proportion, and surface detail.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Blender</span>
+              <span class="tag">Materials &amp; Textures</span>
+              <span class="tag">Shading</span>
+              <span class="tag">3D</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="project-card v2" onclick="openGallery('mini10')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">▶ Video</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <video src="screenshot/mini_project10.mp4#t=0.5" muted playsinline preload="metadata" aria-label="Simple 3D Gameplay Simulation preview"></video>
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 4L20 8H17L15 4H13L15 8H12L10 4H8L10 8H7L5 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V4H18ZM10 10.5V17L15.5 13.75L10 10.5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>Simple 3D Gameplay Simulation</h4>
+            <p class="para">
+              Created a simple 3D gameplay simulation in Unity featuring characters, an environment, and basic physics interactions. Demonstrated core game mechanics and real-time rendering.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Unity</span>
+              <span class="tag">3D</span>
+              <span class="tag">Game Development</span>
+              <span class="tag">C#</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="project-card v3" onclick="openGallery('mini11')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">▶ Video</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <video src="screenshot/mini_project11.mp4#t=0.5" muted playsinline preload="metadata" aria-label="Character &amp; Object Interaction Animation preview"></video>
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 4L20 8H17L15 4H13L15 8H12L10 4H8L10 8H7L5 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V4H18ZM10 10.5V17L15.5 13.75L10 10.5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>Character &amp; Object Interaction Animation</h4>
+            <p class="para">
+              Produced a short animation in Adobe Animate showing character and object interaction with simple physics. Focused on timing, motion, and frame-by-frame animation.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Animation</span>
+              <span class="tag">Adobe Animate</span>
+              <span class="tag">Design</span>
+              <span class="tag">Editing</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="project-card v4" onclick="openGallery('mini12')">
+          <div class="pframe" data-tilt="4" data-spotlight data-depth data-rv="0">
+            <div class="preview">
+              <span class="preview-tag">▶ Video</span>
+              <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
+              <video src="screenshot/mini_project12.mp4#t=0.5" muted playsinline preload="metadata" aria-label="Walk Cycle Animation preview"></video>
+            </div>
+          </div>
+          <div class="pc-body" data-rv="140">
+            <div class="pc-top">
+              <div class="pc-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 4L20 8H17L15 4H13L15 8H12L10 4H8L10 8H7L5 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V4H18ZM10 10.5V17L15.5 13.75L10 10.5Z"></path>
+                </svg>
+              </div>
+              <span class="pc-date"><i class="fas fa-calendar-alt"></i> 2025</span>
+            </div>
+            <h4>Walk Cycle Animation</h4>
+            <p class="para">
+              Created a simple walk cycle in Adobe Animate to demonstrate the use of keyframes and frame sequencing in character motion.
+            </p>
+            <div class="tag-list">
+              <span class="tag">Animation</span>
+              <span class="tag">Adobe Animate</span>
+              <span class="tag">Editing</span>
+              <span class="tag">Design</span>
+            </div>
+            <span class="pc-link">Open gallery <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 HABITS -->
+    <section class="section habits" id="habits" data-reveal-group>
+      <div class="section-title" data-no="07">
         <i class="fas fa-heart"></i>
         <span>Habits &amp; Side Projects</span>
       </div>
@@ -2003,7 +2387,7 @@
             <div class="preview">
               <span class="preview-tag">Side Project</span>
               <span class="click-hint"><i class="fas fa-mouse-pointer"></i> Click</span>
-              <img src="screenshot/habit_barkada.png" alt="Barkada Hub preview" loading="lazy" />
+              <img src="screenshot/habit_barkada.png" alt="Barkada Hub preview" loading="lazy" decoding="async" />
             </div>
           </div>
           <div class="pc-body" data-rv="140">
@@ -2055,9 +2439,9 @@
       </div>
     </section>
 
-    <!-- 07 CONNECT -->
+    <!-- 08 CONNECT -->
     <section class="section" id="connect" data-reveal-group>
-      <div class="section-title" data-no="07">
+      <div class="section-title" data-no="08">
         <i class="fas fa-share-alt"></i>
         <span>Connect with me</span>
       </div>
@@ -2102,7 +2486,7 @@
 
   </div>
 
-  <!-- MODAL -->
+  <!-- MODAL / GALLERY -->
   <div class="modal-backdrop" id="projectModal" onclick="closeGalleryOnBackdrop(event)">
     <button class="modal-close" onclick="closeGallery()" aria-label="Close gallery">
       <i class="fas fa-times"></i>
@@ -2129,6 +2513,15 @@
     </div>
   </div>
 
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOnBackdrop(event)" aria-hidden="true">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close full picture">
+      <i class="fas fa-times"></i>
+    </button>
+    <img id="lightboxImg" src="" alt="Full size preview" />
+    <div class="lightbox-hint"><i class="fas fa-search-minus"></i> Click anywhere or press ESC to close</div>
+  </div>
+
   <script>
     (function () {
       'use strict';
@@ -2136,20 +2529,20 @@
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
       const listen = (mq, fn) => (mq.addEventListener ? mq.addEventListener('change', fn) : mq.addListener(fn));
-
       const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
+      /* ============================================================
+         REVEAL ANIMATIONS
+         ============================================================ */
       function tag(el, delay, extraClass) {
         if (!el) return;
         el.classList.add('rv');
         if (extraClass) el.classList.add(extraClass);
         el.dataset.rvDelay = String(delay);
       }
-
       function initializeTextReveal() {
         document.querySelectorAll('[data-reveal-group] .section-title').forEach(el => tag(el, 0, 'rv-title'));
       }
-
       function initializeStaggeredReveal() {
         document.querySelectorAll('[data-reveal-group]').forEach(group => {
           tag(group.querySelector('.section-title + .section-subtitle'), 80);
@@ -2189,6 +2582,9 @@
         items.forEach(el => io.observe(el));
       }
 
+      /* ============================================================
+         TIMELINE
+         ============================================================ */
       function initializeTimeline() {
         const list = document.querySelector('.internship-list');
         if (!list) return;
@@ -2206,6 +2602,9 @@
         update();
       }
 
+      /* ============================================================
+         RAIL
+         ============================================================ */
       function initializeRail() {
         const links = [...document.querySelectorAll('.rail a')];
         if (!links.length || !('IntersectionObserver' in window)) return;
@@ -2221,12 +2620,18 @@
         byId.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
       }
 
+      /* ============================================================
+         POINTER EFFECTS
+         ============================================================ */
       function initializePointerEffects() {
+        if (!finePointer.matches || reduceMotion.matches) return;
+
         const SELECTOR = '[data-tilt], [data-spotlight], [data-depth]';
         const VARS = ['--rx', '--ry', '--mx', '--my', '--px', '--py', '--depth'];
         const states = new Map();
         const running = new Set();
         let active = null, frame = 0, lastTime = 0, enabled = false;
+        let scrolling = false, scrollTimer = 0;
 
         const shape = (n) => Math.sign(n) * Math.pow(Math.abs(n), 1.5);
         const near = (r, x, y, m) => x > r.left - m && x < r.right + m && y > r.top - m && y < r.bottom + m;
@@ -2307,7 +2712,6 @@
             Math.abs(s.tx - s.x) > 0.001 || Math.abs(s.ty - s.y) > 0.001 ||
             Math.abs(s.tmx - s.mx) > 0.1 || Math.abs(s.tmy - s.my) > 0.1 ||
             Math.abs(depthTarget - s.depth) > 0.002;
-
           if (!moving) {
             if (!s.hot) { s.x = s.y = s.depth = 0; clear(s); }
             return false;
@@ -2340,6 +2744,7 @@
 
         function onMove(e) {
           if (e.pointerType === 'touch') return;
+          if (scrolling) return;
           if (document.body.classList.contains('modal-open')) { release(); return; }
           let el = e.target.closest ? e.target.closest(SELECTOR) : null;
           if (!el && active && near(active.rect, e.clientX, e.clientY, 14)) el = active.el;
@@ -2354,12 +2759,19 @@
           }
         }
 
+        function onScroll() {
+          scrolling = true;
+          release();
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(() => { scrolling = false; }, 100);
+        }
+
         function enable() {
           if (enabled) return;
           enabled = true;
           document.addEventListener('pointermove', onMove, { passive: true });
           document.documentElement.addEventListener('pointerleave', release);
-          window.addEventListener('scroll', release, { passive: true });
+          window.addEventListener('scroll', onScroll, { passive: true });
           window.addEventListener('resize', release);
           window.addEventListener('blur', release);
         }
@@ -2369,7 +2781,7 @@
           enabled = false;
           document.removeEventListener('pointermove', onMove);
           document.documentElement.removeEventListener('pointerleave', release);
-          window.removeEventListener('scroll', release);
+          window.removeEventListener('scroll', onScroll);
           window.removeEventListener('resize', release);
           window.removeEventListener('blur', release);
           if (active) { active.el.classList.remove('is-hot'); active = null; }
@@ -2400,103 +2812,78 @@
       });
     })();
 
+    /* ================================================================
+       GALLERY DATA
+       ================================================================ */
     const GALLERY_DATA = {
-      frs: {
-        eyebrow: 'CloudSwyft · Internship Project',
-        title: 'FRS Assessment Page',
-        subtitle: 'A guided assessment that recommends a learning track for CloudSwyft\'s FRS offerings.',
-        windows: [
-          { title: 'Landing & Intro', desc: 'Clean entry page introducing the assessment, explaining the FRS tracks, and setting expectations before the learner begins.', image:"screenshot/frs-1.png"},
-          { title: 'Likert-Style Test', desc: 'A Likert-scale questionnaire where each answer dynamically contributes to the final track recommendation using a weighted scoring system.', image: 'screenshot/frs-2.png' },
-          { title: 'Dynamic Scoring Engine', desc: 'Real-time scoring as the learner answers. Each response updates the recommendation model behind the scenes for instant results.', image: 'screenshot/frs-3.png' },
-          { title: 'Content Protection', desc: 'Built-in safeguards that disable text selection, copying, and screenshot attempts to protect proprietary assessment content.', image: 'screenshot/frs-4.png' },
-          { title: 'Automated Result Logging', desc: 'Results are emailed via EmailJS and simultaneously logged to a Google Sheet using Apps Script for review and reporting.', image: 'screenshot/frs-5.png' }
-        ]
-      },
-      ebook: {
-        eyebrow: 'CloudSwyft · Internship Project',
-        title: 'Digital Values eBook: Discretion',
-        subtitle: 'An animated, bilingual eBook teaching discretion to a young audience.',
-        windows: [
-          { title: 'Cover & Intro Scene', desc: 'An inviting animated cover that introduces the value of discretion through colorful visuals suited for young learners.', image: 'screenshot/ebook-story1.png' },
-          { title: 'Scene-by-Scene Story', desc: 'Story pages that transition smoothly from scene to scene, keeping children engaged throughout the narrative.', image: 'screenshot/ebook-story2.png' },
-          { title: 'English & Tagalog Voiceovers', desc: 'Each scene features clear bilingual narration in both English and Tagalog, making the story accessible to Filipino children.', image: 'screenshot/ebook-story3.png' },
-          { title: 'Interactive Animations', desc: 'Simple interactions and micro-animations that respond to taps and clicks, turning reading into an engaging experience.', image: 'screenshot/ebook-story4.png' },
-          { title: 'Audio Integration', desc: 'Background music and sound effects tied to scene transitions, creating an immersive, storybook-like atmosphere.', image: 'screenshot/ebook-story5.png' }
-        ]
-      },
-      assessment: {
-        eyebrow: 'CloudSwyft · Internship Project',
-        title: 'Digital Values Assessment',
-        subtitle: 'A fun quiz that tests what Grade 1–7 students learned from the Digital Values eBooks.',
-        windows: [
-          { title: 'Welcome Screen', desc: 'A warm, kid-friendly landing page that greets the student and prepares them for the 10-question quiz.', image: 'screenshot/ebook-1.png' },
-          { title: 'Multiple-Choice Questions', desc: '10 interactive multiple-choice questions covering the digital values taught in the eBooks.', image: 'screenshot/ebook-2.png' },
-          { title: 'Dynamic Mascot Animation', desc: 'A friendly animated mascot that reacts to the learner\'s score, celebrating wins and encouraging retries.', image: 'screenshot/ebook-3.png' },
-          { title: 'Message Cutscene', desc: 'A short cutscene that delivers an uplifting message to the student based on their results, reinforcing the value taught.', image: 'screenshot/ebook-4.png' },
-          { title: 'Google Sheets Logging', desc: 'Every completed attempt is automatically logged to a Google Sheet via Apps Script for teacher-side tracking and analytics.', image: 'screenshot/ebook-5.png' }
-        ]
-      },
-      acad1: {
-        eyebrow: 'Academic · Game Design',
-        title: 'Game Design Prototypes',
-        subtitle: 'Hands-on Unity prototypes exploring core game mechanics, UI, and 2D environment design.',
-        windows: [
-          { title: 'Math Platformer Game', desc: 'A simple platformer where players collect coins that trigger math questions — answering correctly is required to collect the coin.', image: 'screenshot/acad1_game_design.png' },
-          { title: 'Game UI Sample', desc: 'A side-scrolling endless runner inspired by Chrome\'s dinosaur game, featuring a whale character in an underwater setting.', image: 'screenshot/acad1_game_design2.png' },
-          { title: 'Game Environment Designing', desc: 'A simple 2D tile-based game environment built in Unity, demonstrating level layout, asset placement, and scene composition.', image: 'screenshot/acad1_game_design3.png' }
-        ]
-      },
-      acad2: {
-        eyebrow: 'Academic · Software Engineering',
-        title: 'Food Ordering System',
-        subtitle: 'A web-based ordering platform with user and admin roles, cart, and sample payment flow.',
-        windows: [
-          { title: 'User Interface', desc: 'Users can browse the menu, view item details, and add available food items to their cart.', image: 'screenshot/acad2_food_ordering.png' },
-          { title: 'Admin Interface Control', desc: 'Admins can adjust product details such as price, stock, and description, and manage user accounts.', image: 'screenshot/acad2_food_ordering2.png' },
-          { title: 'Sample Payment Method', desc: 'A simple sample payment flow that walks the user through checkout for their order.', image: 'screenshot/acad2_food_ordering3.png' },
-          { title: 'Cart Feature', desc: 'An add-to-cart feature that keeps track of items the user is interested in ordering.', image: 'screenshot/acad2_food_ordering4.png' },
-          { title: 'Automated Price Calculation', desc: 'Automatically calculates the total sum of selected food items so the user can review before ordering.', image: 'screenshot/acad2_food_ordering5.png' }
-        ]
-      },
-      acad3: {
-        eyebrow: 'Academic · 3D Modeling',
-        title: 'Blender 3D Modeling Projects',
-        subtitle: 'A compilation of Blender work covering character creation, texturing, animation, and scene building.',
-        windows: [
-          { title: 'Snowman Character Creation', desc: 'A snowman character built from simple primitives like spheres, cylinders, and torus meshes.', image: 'screenshot/acad3_blender.png' },
-          { title: 'Material and Texture', desc: 'Applied textures and materials to mesh objects to give them a more realistic look.', image: 'screenshot/acad3_blender2.png' },
-          { title: 'Simple Game Object Asset', desc: 'A barrel asset created from simple meshes and finished with textures and materials.', image: 'screenshot/acad3_blender3.png' },
-          { title: 'Animation of Character', desc: 'Animated the snowman character using Blender\'s timeline and keyframe tools.', image: 'screenshot/acad3_blender4.png' },
-          { title: 'Create a Scene', desc: 'Composed a simple scene combining objects, environment pieces, and a character.', image: 'screenshot/acad3_blender5.png' }
-        ]
-      },
-      acad4: {
-        eyebrow: 'Academic · AI / Python',
-        title: 'AI Travel & Tour Assistant',
-        subtitle: 'A travel and tour website with an AI assistant that recommends itineraries based on user input.',
-        windows: [
-          { title: 'Website Creation', desc: 'Built the website using an app.py file to serve the travel and tour company\'s pages.', image: 'screenshot/acad4_ai_travel.png' },
-          { title: 'Travel & Tour Itinerary AI Assistant', desc: 'An AI assistant shortcut that simplifies interaction with the website\'s itinerary features.', image: 'screenshot/acad4_ai_travel2.png' },
-          { title: 'Dynamic Results of Recommendation', desc: 'The AI uses an array of data to calculate recommended destinations along with helpful tips for the user.', image: 'screenshot/acad4_ai_travel3.png' },
-          { title: 'Results Log', desc: 'Collects records of the AI assistant\'s recommendations for future reference by users.', image: 'screenshot/acad4_ai_travel4.png' },
-          { title: 'Admin Panel', desc: 'Admins can view AI recommendations for users and process travel requests through an admin-user interaction flow.', image: 'screenshot/acad4_ai_travel5.png' }
-        ]
-      },
-      habit_barkada: {
-        eyebrow: 'Habit · Side Project',
-        title: 'Barkada Hub · Friends-Only Website',
-        subtitle: 'A private, invite-only website built for my high school friend group — a shared space for updates, photos, and plans.',
-        windows: [
-          { title: 'Landing Page', desc: 'The squad\'s home base — featuring member highlights, favorite hangout spots, shared activities, and the full Barkada roster.', image: 'screenshot/habit_barkada.png' },
-          { title: 'Calendar', desc: 'A shared calendar that tracks squad member birthdays and upcoming events, so no celebration is ever missed.', image: 'screenshot/habit_barkada2.png' },
-          { title: 'Squad Profile', desc: 'A dedicated profile section where members can view and edit their personal information and details.', image: 'screenshot/habit_barkada3.png' },
-          { title: 'Dashboard', desc: 'The main hub for users — upload highlights, check member statuses, and jump into group chats, all in one place.', image: 'screenshot/habit_barkada4.png' },
-          { title: 'Activity Log Checker', desc: 'An activity log section that lets members view recent user activity across the site — posts, edits, and engagement.', image: 'screenshot/habit_barkada5.png' },
-          { title: 'Theme Appearance', desc: 'Predefined theme selection so the squad can switch up the look and match the hub to the group\'s personality.', image: 'screenshot/habit_barkada6.png' },
-          { title: 'Admin Panel', desc: 'An admin panel for managing the website, moderating content, and monitoring what goes on inside the hub.', image: 'screenshot/habit_barkada7.png' },
-        ]
-      }
+      mini1: { eyebrow: 'Mini Project · Image Editing', title: 'Product Advertisement Poster', subtitle: 'A clean, eye-catching product advertisement built in Adobe Photoshop.', windows: [{ title: 'Final Output', desc: 'The finished product advertisement poster, created in Adobe Photoshop with a focus on layout composition, typography, and image manipulation.', image: 'screenshot/mini_project1.jpg' }] },
+      mini2: { eyebrow: 'Mini Project · 3D Modeling', title: '3D Object Creation in Blender', subtitle: 'A pair of headphones modeled in Blender with realistic materials and textures.', windows: [{ title: 'Final Render', desc: 'A basic 3D model of a pair of headphones, finished with materials and textures for a realistic look.', image: 'screenshot/mini_project2.jpg' }] },
+      mini3: { eyebrow: 'Mini Project · Image Editing', title: 'Certificate Design', subtitle: 'A sample certificate laid out in Adobe Photoshop.', windows: [{ title: 'Final Output', desc: 'A sample certificate that applies alignment, hierarchy, and typography to achieve a clean, professional layout.', image: 'screenshot/mini_project3.jpg' }] },
+      mini4: { eyebrow: 'Mini Project · 3D Modeling', title: 'Blender Scene & Lighting', subtitle: 'A simple Blender scene with a character, an object, and deliberate lighting.', windows: [{ title: 'Final Scene', desc: 'A simple 3D scene with a character and an object, where shading, materials, and light placement shape the overall composition.', image: 'screenshot/mini_project4.png' }] },
+      mini5: { eyebrow: 'Mini Project · Image Editing', title: 'Logo Design', subtitle: 'A clean, recognizable logo mark designed in Adobe Photoshop.', windows: [{ title: 'Final Logo', desc: 'A simple logo built around shape, color balance, and visual identity to create a clean, recognizable mark.', image: 'screenshot/mini_project5.png' }] },
+      mini6: { eyebrow: 'Mini Project · Game Development', title: 'Game Environment Development', subtitle: 'A simple 3D game environment built in Unity.', windows: [{ title: 'Environment View', desc: 'A simple 3D game environment in Unity, showing level layout, asset placement, and scene composition.', image: 'screenshot/mini_project6.png' }] },
+      mini7: { eyebrow: 'Mini Project · 3D Modeling', title: 'Furniture Object Modeling', subtitle: 'A game-ready chair asset modeled in Blender.', windows: [{ title: 'Final Model', desc: 'A simple chair modeled as a furniture asset, with materials and textures applied for a clean, game-ready appearance.', image: 'screenshot/mini_project7.png' }] },
+      mini8: { eyebrow: 'Mini Project · 3D Modeling', title: 'Object Shading & Texturing', subtitle: 'A 3D cake model that showcases shading and texturing in Blender.', windows: [{ title: 'Final Render', desc: 'A 3D cake model that highlights materials, shading, and texturing techniques to achieve a realistic finish.', image: 'screenshot/mini_project8.png' }] },
+      mini9: { eyebrow: 'Mini Project · 3D Modeling', title: '3D Character Creation', subtitle: 'A simple 3D character modeled in Blender with materials, textures, and lighting.', windows: [{ title: 'Final Render', desc: 'A simple 3D character with materials, textures, and lighting, focused on form, proportion, and surface detail.', image: 'screenshot/mini_project9.png' }] },
+      mini10: { eyebrow: 'Mini Project · Game Development', title: 'Simple 3D Gameplay Simulation', subtitle: 'A simple 3D gameplay simulation built in Unity.', windows: [{ title: 'Gameplay Demo', desc: 'A simple 3D gameplay simulation with characters, an environment, and basic physics interactions, demonstrating core game mechanics and real-time rendering.', video: 'screenshot/mini_project10.mp4' }] },
+      mini11: { eyebrow: 'Mini Project · Animation', title: 'Character & Object Interaction Animation', subtitle: 'A short Adobe Animate piece showing character and object interaction.', windows: [{ title: 'Animation Demo', desc: 'A short animation of a character interacting with an object using simple physics, focused on timing, motion, and frame-by-frame animation.', video: 'screenshot/mini_project11.mp4' }] },
+      mini12: { eyebrow: 'Mini Project · Animation', title: 'Walk Cycle Animation', subtitle: 'A simple walk cycle built in Adobe Animate.', windows: [{ title: 'Walk Cycle Demo', desc: 'A simple walk cycle that demonstrates keyframes and frame sequencing in character motion.', video: 'screenshot/mini_project12.mp4' }] },
+      frs: { eyebrow: 'CloudSwyft · Internship Project', title: 'FRS Assessment Page', subtitle: 'A guided assessment that recommends a learning track for CloudSwyft\'s FRS offerings.', windows: [
+        { title: 'Landing & Intro', desc: 'Clean entry page introducing the assessment, explaining the FRS tracks, and setting expectations before the learner begins.', image: 'screenshot/frs-1.png' },
+        { title: 'Likert-Style Test', desc: 'A Likert-scale questionnaire where each answer dynamically contributes to the final track recommendation using a weighted scoring system.', image: 'screenshot/frs-2.png' },
+        { title: 'Dynamic Scoring Engine', desc: 'Real-time scoring as the learner answers. Each response updates the recommendation model behind the scenes for instant results.', image: 'screenshot/frs-3.png' },
+        { title: 'Content Protection', desc: 'Built-in safeguards that disable text selection, copying, and screenshot attempts to protect proprietary assessment content.', image: 'screenshot/frs-4.png' },
+        { title: 'Automated Result Logging', desc: 'Results are emailed via EmailJS and simultaneously logged to a Google Sheet using Apps Script for review and reporting.', image: 'screenshot/frs-5.png' }
+      ] },
+      ebook: { eyebrow: 'CloudSwyft · Internship Project', title: 'Digital Values eBook: Discretion', subtitle: 'An animated, bilingual eBook teaching discretion to a young audience.', windows: [
+        { title: 'Cover & Intro Scene', desc: 'An inviting animated cover that introduces the value of discretion through colorful visuals suited for young learners.', image: 'screenshot/ebook-story1.png' },
+        { title: 'Scene-by-Scene Story', desc: 'Story pages that transition smoothly from scene to scene, keeping children engaged throughout the narrative.', image: 'screenshot/ebook-story2.png' },
+        { title: 'English & Tagalog Voiceovers', desc: 'Each scene features clear bilingual narration in both English and Tagalog, making the story accessible to Filipino children.', image: 'screenshot/ebook-story3.png' },
+        { title: 'Interactive Animations', desc: 'Simple interactions and micro-animations that respond to taps and clicks, turning reading into an engaging experience.', image: 'screenshot/ebook-story4.png' },
+        { title: 'Audio Integration', desc: 'Background music and sound effects tied to scene transitions, creating an immersive, storybook-like atmosphere.', image: 'screenshot/ebook-story5.png' }
+      ] },
+      assessment: { eyebrow: 'CloudSwyft · Internship Project', title: 'Digital Values Assessment', subtitle: 'A fun quiz that tests what Grade 1–7 students learned from the Digital Values eBooks.', windows: [
+        { title: 'Welcome Screen', desc: 'A warm, kid-friendly landing page that greets the student and prepares them for the 10-question quiz.', image: 'screenshot/ebook-1.png' },
+        { title: 'Multiple-Choice Questions', desc: '10 interactive multiple-choice questions covering the digital values taught in the eBooks.', image: 'screenshot/ebook-2.png' },
+        { title: 'Dynamic Mascot Animation', desc: 'A friendly animated mascot that reacts to the learner\'s score, celebrating wins and encouraging retries.', image: 'screenshot/ebook-3.png' },
+        { title: 'Message Cutscene', desc: 'A short cutscene that delivers an uplifting message to the student based on their results, reinforcing the value taught.', image: 'screenshot/ebook-4.png' },
+        { title: 'Google Sheets Logging', desc: 'Every completed attempt is automatically logged to a Google Sheet via Apps Script for teacher-side tracking and analytics.', image: 'screenshot/ebook-5.png' }
+      ] },
+      acad1: { eyebrow: 'Academic · Game Design', title: 'Game Design Prototypes', subtitle: 'Hands-on Unity prototypes exploring core game mechanics, UI, and 2D environment design.', windows: [
+        { title: 'Math Platformer Game', desc: 'A simple platformer where players collect coins that trigger math questions — answering correctly is required to collect the coin.', image: 'screenshot/acad1_game_design.png' },
+        { title: 'Game UI Sample', desc: 'A side-scrolling endless runner inspired by Chrome\'s dinosaur game, featuring a whale character in an underwater setting.', image: 'screenshot/acad1_game_design2.png' },
+        { title: 'Game Environment Designing', desc: 'A simple 2D tile-based game environment built in Unity, demonstrating level layout, asset placement, and scene composition.', image: 'screenshot/acad1_game_design3.png' }
+      ] },
+      acad2: { eyebrow: 'Academic · Software Engineering', title: 'Food Ordering System', subtitle: 'A web-based ordering platform with user and admin roles, cart, and sample payment flow.', windows: [
+        { title: 'User Interface', desc: 'Users can browse the menu, view item details, and add available food items to their cart.', image: 'screenshot/acad2_food_ordering.png' },
+        { title: 'Admin Interface Control', desc: 'Admins can adjust product details such as price, stock, and description, and manage user accounts.', image: 'screenshot/acad2_food_ordering2.png' },
+        { title: 'Sample Payment Method', desc: 'A simple sample payment flow that walks the user through checkout for their order.', image: 'screenshot/acad2_food_ordering3.png' },
+        { title: 'Cart Feature', desc: 'An add-to-cart feature that keeps track of items the user is interested in ordering.', image: 'screenshot/acad2_food_ordering4.png' },
+        { title: 'Automated Price Calculation', desc: 'Automatically calculates the total sum of selected food items so the user can review before ordering.', image: 'screenshot/acad2_food_ordering5.png' }
+      ] },
+      acad3: { eyebrow: 'Academic · 3D Modeling', title: 'Blender 3D Modeling Projects', subtitle: 'A compilation of Blender work covering character creation, texturing, animation, and scene building.', windows: [
+        { title: 'Snowman Character Creation', desc: 'A snowman character built from simple primitives like spheres, cylinders, and torus meshes.', image: 'screenshot/acad3_blender.png' },
+        { title: 'Material and Texture', desc: 'Applied textures and materials to mesh objects to give them a more realistic look.', image: 'screenshot/acad3_blender2.png' },
+        { title: 'Simple Game Object Asset', desc: 'A barrel asset created from simple meshes and finished with textures and materials.', image: 'screenshot/acad3_blender3.png' },
+        { title: 'Animation of Character', desc: 'Animated the snowman character using Blender\'s timeline and keyframe tools.', image: 'screenshot/acad3_blender4.png' },
+        { title: 'Create a Scene', desc: 'Composed a simple scene combining objects, environment pieces, and a character.', image: 'screenshot/acad3_blender5.png' }
+      ] },
+      acad4: { eyebrow: 'Academic · AI / Python', title: 'AI Travel & Tour Assistant', subtitle: 'A travel and tour website with an AI assistant that recommends itineraries based on user input.', windows: [
+        { title: 'Website Creation', desc: 'Built the website using an app.py file to serve the travel and tour company\'s pages.', image: 'screenshot/acad4_ai_travel.png' },
+        { title: 'Travel & Tour Itinerary AI Assistant', desc: 'An AI assistant shortcut that simplifies interaction with the website\'s itinerary features.', image: 'screenshot/acad4_ai_travel2.png' },
+        { title: 'Dynamic Results of Recommendation', desc: 'The AI uses an array of data to calculate recommended destinations along with helpful tips for the user.', image: 'screenshot/acad4_ai_travel3.png' },
+        { title: 'Results Log', desc: 'Collects records of the AI assistant\'s recommendations for future reference by users.', image: 'screenshot/acad4_ai_travel4.png' },
+        { title: 'Admin Panel', desc: 'Admins can view AI recommendations for users and process travel requests through an admin-user interaction flow.', image: 'screenshot/acad4_ai_travel5.png' }
+      ] },
+      habit_barkada: { eyebrow: 'Habit · Side Project', title: 'Barkada Hub · Friends-Only Website', subtitle: 'A private, invite-only website built for my high school friend group — a shared space for updates, photos, and plans.', windows: [
+        { title: 'Landing Page', desc: 'The squad\'s home base — featuring member highlights, favorite hangout spots, shared activities, and the full Barkada roster.', image: 'screenshot/habit_barkada.png' },
+        { title: 'Calendar', desc: 'A shared calendar that tracks squad member birthdays and upcoming events, so no celebration is ever missed.', image: 'screenshot/habit_barkada2.png' },
+        { title: 'Squad Profile', desc: 'A dedicated profile section where members can view and edit their personal information and details.', image: 'screenshot/habit_barkada3.png' },
+        { title: 'Dashboard', desc: 'The main hub for users — upload highlights, check member statuses, and jump into group chats, all in one place.', image: 'screenshot/habit_barkada4.png' },
+        { title: 'Activity Log Checker', desc: 'An activity log section that lets members view recent user activity across the site — posts, edits, and engagement.', image: 'screenshot/habit_barkada5.png' },
+        { title: 'Theme Appearance', desc: 'Predefined theme selection so the squad can switch up the look and match the hub to the group\'s personality.', image: 'screenshot/habit_barkada6.png' },
+        { title: 'Admin Panel', desc: 'An admin panel for managing the website, moderating content, and monitoring what goes on inside the hub.', image: 'screenshot/habit_barkada7.png' }
+      ] }
     };
 
     const PHOTO_DATA = [
@@ -2512,6 +2899,31 @@
       { title: 'Light-Focused Exposure', desc: 'A well-lit lamp in a restaurant, shot with low exposure to showcase the beauty of its design.', image: 'screenshot/photo10.png' }
     ];
 
+    /* ================================================================
+       LIGHTBOX
+       ================================================================ */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    function openLightbox(src, alt) {
+      if (!src) return;
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || 'Full size preview';
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      setTimeout(() => { lightboxImg.src = ''; }, 300);
+    }
+    function closeLightboxOnBackdrop(event) {
+      if (event.target === lightbox || event.target === lightboxImg) closeLightbox();
+    }
+
+    /* ================================================================
+       MODAL / CAROUSEL
+       ================================================================ */
     let currentSlide = 0;
     let totalSlides = 0;
     let lastFocusedElement = null;
@@ -2524,14 +2936,18 @@
       totalSlides = windows.length;
       currentSlide = 0;
 
+      const frag = document.createDocumentFragment();
+      const dotsFrag = document.createDocumentFragment();
+
       windows.forEach((win, idx) => {
         const slide = document.createElement('div');
         slide.className = 'carousel-slide' + (idx === 0 ? ' active' : '');
+        const windowNum = String(idx + 1).padStart(2, '0');
+        const hasImage = !!win.image;
+        const hasVideo = !!win.video;
 
         const card = document.createElement('div');
         card.className = 'carousel-card';
-        const windowNum = String(idx + 1).padStart(2, '0');
-
         card.innerHTML = `
           <div class="window-bar">
             <span class="dot red"></span>
@@ -2539,12 +2955,15 @@
             <span class="dot green"></span>
             <span class="window-title">${escapeHtml(win.title)}</span>
             <span class="window-num">${windowNum} / ${String(totalSlides).padStart(2, '0')}</span>
+            ${hasImage ? `<button class="window-expand" type="button" aria-label="View full picture" title="View full picture"><i class="fas fa-expand"></i></button>` : ''}
           </div>
           <div class="window-img">
-            ${win.image
-              ? `<img src="${escapeHtml(win.image)}" alt="${escapeHtml(win.title)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />`
-              : ''}
-            <div class="img-placeholder" style="${win.image ? 'display:none;' : ''}">
+            ${hasVideo
+              ? `<video src="${escapeHtml(win.video)}" controls preload="metadata" playsinline></video>`
+              : hasImage
+                ? `<img src="${escapeHtml(win.image)}" alt="${escapeHtml(win.title)}" loading="lazy" decoding="async" />`
+                : ''}
+            <div class="img-placeholder" style="${(hasVideo || hasImage) ? 'display:none;' : ''}">
               <i class="fas fa-image"></i>
               <span>Screenshot</span>
             </div>
@@ -2555,37 +2974,39 @@
           </div>
         `;
 
+        if (hasImage) {
+          const expandBtn = card.querySelector('.window-expand');
+          expandBtn.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            openLightbox(win.image, win.title);
+          });
+        }
+
         slide.appendChild(card);
-        track.appendChild(slide);
+        frag.appendChild(slide);
 
         const dot = document.createElement('button');
         dot.className = 'carousel-dot' + (idx === 0 ? ' active' : '');
         dot.setAttribute('aria-label', `Go to slide ${idx + 1}`);
         dot.addEventListener('click', () => goToSlide(idx));
-        dotsContainer.appendChild(dot);
+        dotsFrag.appendChild(dot);
       });
 
+      track.appendChild(frag);
+      dotsContainer.appendChild(dotsFrag);
       updateCarousel();
     }
 
     function updateCarousel() {
       const track = document.getElementById('carouselTrack');
       const slides = track.querySelectorAll('.carousel-slide');
+      if (!slides.length) return;
       const viewportWidth = track.parentElement.offsetWidth;
       const slideWidth = slides[0].offsetWidth;
-
       const offset = (viewportWidth - slideWidth) / 2 - (currentSlide * slideWidth);
-
       track.style.transform = `translateX(${offset}px)`;
-
-      slides.forEach((slide, idx) => {
-        slide.classList.toggle('active', idx === currentSlide);
-      });
-
-      const dots = document.querySelectorAll('.carousel-dot');
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle('active', idx === currentSlide);
-      });
+      slides.forEach((slide, idx) => slide.classList.toggle('active', idx === currentSlide));
+      document.querySelectorAll('.carousel-dot').forEach((dot, idx) => dot.classList.toggle('active', idx === currentSlide));
     }
 
     function goToSlide(idx) {
@@ -2594,7 +3015,6 @@
       currentSlide = idx;
       updateCarousel();
     }
-
     function carouselPrev() { goToSlide(currentSlide - 1); }
     function carouselNext() { goToSlide(currentSlide + 1); }
 
@@ -2603,9 +3023,7 @@
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         const modal = document.getElementById('projectModal');
-        if (modal && modal.classList.contains('open')) {
-          updateCarousel();
-        }
+        if (modal && modal.classList.contains('open')) updateCarousel();
         updatePhotoCarousel();
       }, 150);
     });
@@ -2613,25 +3031,15 @@
     function openGallery(projectKey) {
       const data = GALLERY_DATA[projectKey];
       if (!data) return;
-
       lastFocusedElement = document.activeElement;
-
       document.getElementById('modalEyebrow').textContent = data.eyebrow;
       document.getElementById('modalTitle').textContent = data.title;
       document.getElementById('modalSubtitle').textContent = data.subtitle;
-
       renderCarousel(data.windows);
-
       const modal = document.getElementById('projectModal');
       modal.classList.add('open');
       document.body.classList.add('modal-open');
-
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          updateCarousel();
-        });
-      });
-
+      requestAnimationFrame(() => requestAnimationFrame(updateCarousel));
       setTimeout(() => {
         const closeBtn = modal.querySelector('.modal-close');
         if (closeBtn) closeBtn.focus();
@@ -2639,15 +3047,14 @@
     }
 
     function closeGallery() {
+      document.querySelectorAll('#carouselTrack video').forEach(v => v.pause());
       const modal = document.getElementById('projectModal');
       modal.classList.remove('open');
       document.body.classList.remove('modal-open');
-
       setTimeout(() => {
         document.getElementById('carouselTrack').innerHTML = '';
         document.getElementById('carouselDots').innerHTML = '';
       }, 400);
-
       if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
         lastFocusedElement.focus();
       }
@@ -2658,18 +3065,20 @@
     }
 
     document.addEventListener('keydown', (e) => {
+      if (lightbox.classList.contains('open')) {
+        if (e.key === 'Escape') closeLightbox();
+        return;
+      }
       const modal = document.getElementById('projectModal');
       if (!modal || !modal.classList.contains('open')) return;
-
-      if (e.key === 'Escape') {
-        closeGallery();
-      } else if (e.key === 'ArrowLeft') {
-        carouselPrev();
-      } else if (e.key === 'ArrowRight') {
-        carouselNext();
-      }
+      if (e.key === 'Escape') closeGallery();
+      else if (e.key === 'ArrowLeft') carouselPrev();
+      else if (e.key === 'ArrowRight') carouselNext();
     });
 
+    /* ================================================================
+       PHOTO CAROUSEL
+       ================================================================ */
     let photoIndex = 0;
 
     function renderPhotoCarousel() {
@@ -2680,6 +3089,9 @@
       dots.innerHTML = '';
       const total = PHOTO_DATA.length;
 
+      const frag = document.createDocumentFragment();
+      const dotFrag = document.createDocumentFragment();
+
       PHOTO_DATA.forEach((photo, idx) => {
         const slide = document.createElement('div');
         slide.className = 'photo-slide';
@@ -2687,14 +3099,8 @@
 
         slide.innerHTML = `
           <div class="photo-card">
-            <div class="photo-img" data-tilt="3" data-spotlight>
-              ${photo.image
-                ? `<img src="${escapeHtml(photo.image)}" alt="${escapeHtml(photo.title)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />`
-                : ''}
-              <div class="img-placeholder" style="${photo.image ? 'display:none;' : ''}; display:${photo.image ? 'none' : 'flex'};">
-                <i class="fas fa-image"></i>
-                <span>Photo</span>
-              </div>
+            <div class="photo-img">
+              <img src="${escapeHtml(photo.image)}" alt="${escapeHtml(photo.title)}" loading="lazy" decoding="async" />
               <span class="photo-count">${num} / ${total}</span>
             </div>
             <div class="photo-info">
@@ -2703,15 +3109,17 @@
             </div>
           </div>
         `;
-        track.appendChild(slide);
+        frag.appendChild(slide);
 
         const dot = document.createElement('button');
         dot.className = 'photo-dot' + (idx === 0 ? ' active' : '');
         dot.setAttribute('aria-label', `Go to photo ${idx + 1}`);
         dot.addEventListener('click', () => photoGoTo(idx));
-        dots.appendChild(dot);
+        dotFrag.appendChild(dot);
       });
 
+      track.appendChild(frag);
+      dots.appendChild(dotFrag);
       photoIndex = 0;
       updatePhotoCarousel();
     }
@@ -2723,9 +3131,7 @@
       if (!slides.length) return;
       const slideWidth = slides[0].offsetWidth;
       track.style.transform = `translateX(${-photoIndex * slideWidth}px)`;
-
-      const dots = document.querySelectorAll('.photo-dot');
-      dots.forEach((dot, idx) => dot.classList.toggle('active', idx === photoIndex));
+      document.querySelectorAll('.photo-dot').forEach((dot, idx) => dot.classList.toggle('active', idx === photoIndex));
     }
 
     function photoGoTo(idx) {
